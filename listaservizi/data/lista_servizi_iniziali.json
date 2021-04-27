@@ -1,0 +1,27 @@
+[
+  {
+    "id": "1",
+    "nome": "",
+    "tipo": "ricovero",
+    "reparto": "oncologia",
+    "posto_letto": "a1",
+    "disponibile": "True"
+  },
+  {
+    "id": "2",
+    "nome": "",
+    "tipo": "ricovero",
+    "reparto": "cardiologia",
+    "posto_letto": "a1",
+    "disponibile": "True"
+  },
+  {
+    "id": "3",
+    "nome": "",
+    "tipo": "ricovero",
+    "reparto": "chirurgia",
+    "posto_letto": "a1",
+    "disponibile": "True"
+  }
+
+]
