@@ -10,10 +10,10 @@ class VistaHome(QWidget):
 
         # ricoveri_bottone.clicked.connect()
 
-        grid_layout.addWidget(self.get_button("Lista Servizi", self.go_lista_servizi()), 0, 0)
-        grid_layout.addWidget(self.get_button("Lista Pazienti", self.go_lista_pazienti()), 0, 1)
-        grid_layout.addWidget(self.get_button("Lista Operatori", self.go_lista_operatori()), 1, 0)
-        grid_layout.addWidget(self.get_button("Lista Ricoveri", self.go_lista_ricoveri()), 1, 1)
+        grid_layout.addWidget(self.get_button("Lista Servizi", self.go_lista_servizi), 0, 0)
+        grid_layout.addWidget(self.get_button("Lista Pazienti", self.go_lista_pazienti), 0, 1)
+        grid_layout.addWidget(self.get_button("Lista Operatori", self.go_lista_operatori), 1, 0)
+        grid_layout.addWidget(self.get_button("Lista Ricoveri", self.go_lista_ricoveri), 1, 1)
 
         self.setLayout(grid_layout)
         self.resize(400, 400)

@@ -1,6 +1,7 @@
 class Servizio():
-    def __init__(self,id,nome,tipo,reparto,posto_letto,disponibile):
-        super(Servizio,self).__init__()
+
+    def __init__(self,id,nome,tipo,reparto,posto_letto):
+        super (Servizio, self).__init__()
         self.id = id
         self.nome = nome
         self.tipo = tipo
