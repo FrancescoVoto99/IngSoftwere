@@ -1,5 +1,7 @@
 from PyQt5.QtWidgets import QWidget, QGridLayout, QPushButton, QSizePolicy
 
+from listaoperatori.views.VistaListaOperatori import VistaListaOperatori
+from listapazienti.views.VistaListaPazienti import VistaListaPazienti
 from listaservizi.views.VistaListaServizi import VistaListaServizi
 
 
@@ -24,10 +26,12 @@ class VistaHome(QWidget):
         self.vista_lista_servizi.show()
 
     def go_lista_pazienti(self):
-        pass
+        self.vista_lista_pazienti = VistaListaPazienti()
+        self.vista_lista_pazienti.show()
 
     def go_lista_operatori(self):
-        pass
+        self.vista_lista_operatori = VistaListaOperatori()
+        self.vista_lista_operatori.show()
 
     def go_lista_ricoveri(self):
         pass
