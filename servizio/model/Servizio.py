@@ -5,12 +5,12 @@ class Servizio():
         self.id = id
         self.nome = nome
         self.tipo = tipo
-        self.reparto= reparto
-        self.posto_letto=posto_letto
+        self.reparto = reparto
+        self.posto_letto = posto_letto
         self.disponibile = True
 
     def is_disponibile(self):
         return self.disponibile
 
     def prenota(self):
-        self.disponibile= False
+        self.disponibile = False

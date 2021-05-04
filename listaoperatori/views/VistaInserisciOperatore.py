@@ -25,7 +25,7 @@ class VistaInserisciOperatore(QWidget):
         self.v_layout.addItem(QSpacerItem(20, 40, QSizePolicy.Minimum, QSizePolicy.Expanding))
 
         btn_ok = QPushButton("OK")
-        btn_ok.clicked.connect(self.add_paziente)
+        btn_ok.clicked.connect(self.add_Operatore)
         self.v_layout.addWidget(btn_ok)
 
         self.setLayout((self.v_layout))
@@ -37,7 +37,7 @@ class VistaInserisciOperatore(QWidget):
         self.v_layout.addWidget(current_text)
         self.info[tipo] = current_text
 
-    def add_paziente(self):
+    def add_Operatore(self):
         id = self.info["Id"].text
         nome = self.info["Nome"].text()
         cognome = self.info["Cognome"].text()
@@ -46,6 +46,7 @@ class VistaInserisciOperatore(QWidget):
         luogonascita = self.info["Luogo di nascita"].text()
         email = self.info["Email"].text()
         ruolo = self.info["Ruolo"].text()
+
 
         if id == "" or nome == "" or cognome == "" or luogonascita == "" or datanascita == "" or cf == "" or ruolo == "" or email == "":
             QMessageBox.critical(self, 'Errore', 'Per favore inserisci tutte le informazioni', QMessageBox.Ok,

@@ -1,26 +1,42 @@
 [
   {
-    "id": "1",
+    "id": "11",
     "nome": "Ricovero in oncologia",
     "tipo": "ricovero",
     "reparto": "Oncologia",
-    "posto_letto": "200",
+    "posto_letto": "a1",
     "disponibile": "True"
   },
   {
-    "id": "2",
+    "id": "12",
+    "nome": "Ricovero in oncologia",
+    "tipo": "ricovero",
+    "reparto": "Oncologia",
+    "posto_letto": "a2",
+    "disponibile": "True"
+  },
+  {
+    "id": "21",
     "nome": "Ricovero in cardiologia",
     "tipo": "ricovero",
     "reparto": "Cardiologia",
-    "posto_letto": "250",
+    "posto_letto": "b1",
     "disponibile": "True"
   },
   {
-    "id": "3",
+    "id": "22",
+    "nome": "Ricovero in cardiologia",
+    "tipo": "ricovero",
+    "reparto": "Cardiologia",
+    "posto_letto": "b2",
+    "disponibile": "True"
+  },
+  {
+    "id": "31",
     "nome": "Ricovero  in chirurgia",
     "tipo": "ricovero",
     "reparto": "Chirurgia",
-    "posto_letto": "300",
+    "posto_letto": "c1",
     "disponibile": "True"
   }
 
