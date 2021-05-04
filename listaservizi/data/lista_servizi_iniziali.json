@@ -1,26 +1,26 @@
 [
   {
     "id": "1",
-    "nome": "Ricovero 1 in oncologia",
+    "nome": "Ricovero in oncologia",
     "tipo": "ricovero",
     "reparto": "Oncologia",
-    "posto_letto": "a1",
+    "posto_letto": "200",
     "disponibile": "True"
   },
   {
     "id": "2",
-    "nome": "Ricovero 1 in cardiologia",
+    "nome": "Ricovero in cardiologia",
     "tipo": "ricovero",
     "reparto": "Cardiologia",
-    "posto_letto": "a1",
+    "posto_letto": "250",
     "disponibile": "True"
   },
   {
     "id": "3",
-    "nome": "Ricovero 1 in chirurgia",
+    "nome": "Ricovero  in chirurgia",
     "tipo": "ricovero",
     "reparto": "Chirurgia",
-    "posto_letto": "a1",
+    "posto_letto": "300",
     "disponibile": "True"
   }
 
