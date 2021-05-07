@@ -5,9 +5,9 @@ from listapazienti.views.VistaListaPazienti import VistaListaPazienti
 from listaservizi.views.VistaListaServizi import VistaListaServizi
 
 
-class VistaHome(QWidget):
+class VistaHomeAccettazione(QWidget):
     def __init__(self, parent=None):
-        super(VistaHome, self).__init__(parent)
+        super(VistaHomeAccettazione, self).__init__(parent)
         grid_layout = QGridLayout()
 
         # ricoveri_bottone.clicked.connect()

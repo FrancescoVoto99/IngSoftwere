@@ -1,0 +1,22 @@
+[
+  {
+    "Username" : "acamm1",
+    "Password": "hospItalyAc",
+    "Professione" : "Amministratore dell'ufficio di accettazione"
+  },
+  {
+    "Username": "psamm2",
+    "Password": "hospItalyPs",
+    "Professione": "Amministratore del pronto soccorso"
+  },
+  {
+    "Username": "inf3",
+    "Password": "hospItalyInf",
+    "Professione": "Infermiere"
+  },
+  {
+    "Username": "med4",
+    "Password": "hospItalyMed",
+    "Professione": "Medico"
+  }
+  ]
