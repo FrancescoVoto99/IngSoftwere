@@ -7,8 +7,8 @@ class ListaOperatori():
     def __init__(self):
         super(ListaOperatori, self).__init__()
         self.lista_operatori = []
-        if os.path.isfile('listaoperatori/data/lista_operatori.pickle'):
-            with open('listaoperatori/data/lista_operatori.pickle', 'rb') as f:
+        if os.path.isfile('listaoperatori/data/lista_operatori_salvata.pickle'):
+            with open('listaoperatori/data/lista_operatori_salvata.pickle', 'rb') as f:
                 self.lista_operatori = pickle.load(f)
 
     def aggiungi_operatore (self, operatore):
@@ -28,5 +28,5 @@ class ListaOperatori():
         return self.lista_operatori
 
     def save_data(self):
-        with open('listaoperatori/data/lista_operatori.pickle', 'wb') as handle:
+        with open('listaoperatori/data/lista_operatori_salvata.pickle', 'wb') as handle:
             pickle.dump(self.lista_operatori, handle, pickle.HIGHEST_PROTOCOL)

@@ -3,6 +3,7 @@ from PyQt5.QtWidgets import QWidget, QHBoxLayout, QListView, QVBoxLayout, QPushB
 
 from listaoperatori.controller.ControlloreListaOperatori import ControlloreListaOperatori
 from listaoperatori.views.VistaInserisciOperatore import VistaInserisciOperatore
+from operatore.views.VistaOperatore import VistaOperatore
 
 
 class VistaListaOperatori(QWidget):
@@ -18,7 +19,7 @@ class VistaListaOperatori(QWidget):
 
         button_layout = QVBoxLayout()
         open_button = QPushButton("Apri")
-        # open_button.clicked.connect()
+        open_button.clicked.connect(self.show_selected_info)
         button_layout.addWidget(open_button)
 
         button_new = QPushButton("Nuovo")
@@ -44,6 +45,12 @@ class VistaListaOperatori(QWidget):
             item.setFont(font)
             self.listview_model.appendRow(item)
         self.list_view.setModel(self.listview_model)
+
+    def show_selected_info(self):
+        selected = self.list_view.selectedIndexes()[0].row()
+        operatore_selezionato = self.controller.get_operatore_by_index(selected)
+        self.vista_operatore = VistaOperatore(operatore_selezionato, self.controller.elimina_operatore_by_id, self.update_ui)
+        self.vista_operatore.show()
 
     def show_new_operatore(self):
         self.vista_inserisci_operatore = VistaInserisciOperatore(self.controller, self.update_ui)
