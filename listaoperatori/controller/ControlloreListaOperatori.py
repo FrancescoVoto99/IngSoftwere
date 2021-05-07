@@ -14,7 +14,7 @@ class ControlloreListaOperatori():
         return self.model.get_lista_operatori()
 
     def get_operatore_by_index(self, index):
-        return self.model.get_operatore_by_index(index)
+        return self.model.get_operatore_by_index (index)
 
     def elimina_operatore_by_id(self, id):
         self.model.rimuovi_operatore_by_id(id)
