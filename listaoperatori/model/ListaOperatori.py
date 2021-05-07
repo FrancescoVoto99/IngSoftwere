@@ -1,6 +1,8 @@
 import os
 import pickle
 
+from operatore.controller.ControlloreOperatore import ControlloreOperatore
+
 
 class ListaOperatori():
 
@@ -19,7 +21,7 @@ class ListaOperatori():
             if operatore.id == id:
                 return True
             return False
-        self.lista_operatori.remove(list(filter(_is_selected_operatore(), self.lista_operatori))[0])
+        self.lista_operatori.remove(list(filter(_is_selected_operatore, self.lista_operatori))[0])
 
     def get_operatore_by_index(self, index):
         return self.lista_operatori[index]
