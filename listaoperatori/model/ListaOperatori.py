@@ -15,11 +15,11 @@ class ListaOperatori():
         self.lista_operatori.append(operatore)
 
     def rimuovi_operatore_by_id (self, id):
-        def _is_selected_operatore(operatore):
+        for operatore in self.lista_operatori:
             if operatore.id == id:
+                self.lista_operatori.remove(operatore)
                 return True
-            return False
-        self.lista_operatori.remove(list(filter(_is_selected_operatore(), self.lista_operatori))[0])
+        return False
 
     def get_operatore_by_index(self, index):
         return self.lista_operatori[index]

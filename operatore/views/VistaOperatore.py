@@ -11,6 +11,7 @@ class VistaOperatore(QWidget):
         self.elimina_operatore = elimina_operatore
         self.elimina_callback = elimina_callback
 
+
         v_layout = QVBoxLayout()
 
         lbl_nome_cognome = QLabel (self.controller.get_nome_operatore() + " " + self.controller.get_cognome_operatore())
