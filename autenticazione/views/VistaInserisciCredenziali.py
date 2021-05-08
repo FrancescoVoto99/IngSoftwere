@@ -1,4 +1,6 @@
 import json
+import os
+import pickle
 
 from PyQt5.QtWidgets import QWidget, QLabel, QSpacerItem, QSizePolicy, QPushButton, QMessageBox, QLineEdit, \
     QGridLayout
@@ -7,6 +9,7 @@ from Home.views.VistaHomeAccettazione import VistaHomeAccettazione
 from Home.views.VistaHomeInfermiere import VistaHomeInfermiere
 from Home.views.VistaHomeMedico import VistaHomeMedico
 from Home.views.VistaHomeProntoSoccorso import VistaHomeProntoSoccorso
+from operatore.controller.ControlloreOperatore import ControlloreOperatore
 
 
 class VistaInserisciCredenziali(QWidget):
@@ -35,7 +38,7 @@ class VistaInserisciCredenziali(QWidget):
 
         self.h_layout.addItem(QSpacerItem(20, 40, QSizePolicy.Minimum, QSizePolicy.Expanding))
 
-        btn_ok = QPushButton("Ok")
+        btn_ok = QPushButton("Accedi")
         btn_ok.clicked.connect(self.openHome)
         self.h_layout.addWidget((btn_ok), 3, 0)
 
@@ -45,11 +48,13 @@ class VistaInserisciCredenziali(QWidget):
     def identity_check(self):
         username = self.line_edit_username.text()
         password = self.line_edit_password.text()
-        with open('autenticazione/data/data_info.json') as f:
-            lista_autenticazioni = json.load(f)
-            for autenticazioni in lista_autenticazioni:
-                if autenticazioni["Username"] == username and autenticazioni["Password"] == password:
-                    return autenticazioni["Professione"]
+        if os.path.isfile('listaoperatori/data/lista_operatori_salvata.pickle'):
+           with open('listaoperatori/data/lista_operatori_salvata.pickle', 'rb') as f:
+                lista_operatori = pickle.load(f)
+                for operatore in lista_operatori:
+                    self.controller = ControlloreOperatore(operatore)
+                    if  self.controller.get_id_operatore() == username and  self.controller.get_password_operatore() == password:
+                        return self.controller.get_ruolo_operatore()
 
     def openHome(self):
         if self.identity_check() == "Amministratore dell'ufficio di accettazione":

@@ -1,8 +1,6 @@
 import os
 import pickle
 
-from operatore.controller.ControlloreOperatore import ControlloreOperatore
-
 
 class ListaOperatori():
 
