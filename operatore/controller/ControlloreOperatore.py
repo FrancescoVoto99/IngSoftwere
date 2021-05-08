@@ -26,3 +26,6 @@ class ControlloreOperatore():
 
     def get_ruolo_operatore(self):
         return self.model.ruolo
+
+    def get_password_operatore(self):
+        return self.model.password

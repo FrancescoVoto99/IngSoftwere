@@ -28,6 +28,7 @@ class VistaOperatore(QWidget):
         v_layout.addWidget(self.get_label_info("Luogo di nascita", self.controller.get_luogo_nascita_operatore()))
         v_layout.addWidget(self.get_label_info("Email", self.controller.get_email_operatore()))
         v_layout.addWidget(self.get_label_info("Ruolo", self.controller.get_ruolo_operatore()))
+        v_layout.addWidget(self.get_label_info("Password", self.controller.get_password_operatore()))
 
         v_layout.addItem(QSpacerItem(20, 40, QSizePolicy.Minimum, QSizePolicy.Expanding))
 

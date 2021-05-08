@@ -19,7 +19,7 @@ class VistaHomeAccettazione(QWidget):
 
         self.setLayout(grid_layout)
         self.resize(400, 400)
-        self.setWindowTitle("HospITALY")
+        self.setWindowTitle("Amministratore dell'ufficio di accettazione")
 
     def go_lista_servizi(self):
         self.vista_lista_servizi = VistaListaServizi()

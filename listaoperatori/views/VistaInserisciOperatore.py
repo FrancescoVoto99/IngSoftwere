@@ -27,6 +27,7 @@ class VistaInserisciOperatore(QWidget):
         self.get_type("Luogo di nascita")
         self.get_type("Email")
         self.get_ruolo("Ruolo")
+        self.get_type("Password")
 
         self.v_layout.addItem(QSpacerItem(20, 40, QSizePolicy.Minimum, QSizePolicy.Expanding))
 
@@ -45,6 +46,12 @@ class VistaInserisciOperatore(QWidget):
 
     def get_ruolo(self, tipo):
         self.v_layout.addWidget(QLabel(tipo))
+        rbtn_accettazione = QRadioButton("Amministratore dell'ufficio di accettazione")
+        self.v_layout.addWidget(rbtn_accettazione)
+        rbtn_accettazione.toggled.connect(self.ruolo_onCliked)
+        rbtn_prontosoccorso = QRadioButton("Amministratore del pronto soccorso")
+        self.v_layout.addWidget(rbtn_prontosoccorso)
+        rbtn_prontosoccorso.toggled.connect(self.ruolo_onCliked)
         rbtn_infermiere = QRadioButton("Infermiere")
         self.v_layout.addWidget(rbtn_infermiere)
         rbtn_infermiere.toggled.connect(self.ruolo_onCliked)
@@ -75,6 +82,7 @@ class VistaInserisciOperatore(QWidget):
         luogonascita = self.info["Luogo di nascita"].text()
         email = self.info["Email"].text()
         ruolo = self.info["Ruolo"].text()
+        password = self.info["Password"].text()
         today = date.today()
         newdate = datetime.strptime(datanascita, '%d/%m/%Y')
         if nome == "" or cognome == "" or luogonascita == "" or datanascita == "" or cf == "" or ruolo == "" or email == "":
@@ -82,7 +90,7 @@ class VistaInserisciOperatore(QWidget):
         elif newdate.date() > today:
             QMessageBox.critical(self, 'Errore', 'Per favore inserisci correttamente la data di nascita', QMessageBox.Ok, QMessageBox.Ok)
         else:
-            self.controller.aggiungi_operatore(Operatore((nome+cognome).lower(), nome, cognome, cf, datanascita, luogonascita, email, ruolo ))
+            self.controller.aggiungi_operatore(Operatore((nome+cognome).lower(), nome, cognome, cf, datanascita, luogonascita, email, ruolo, password))
             self.callback()
             self.close()
 
