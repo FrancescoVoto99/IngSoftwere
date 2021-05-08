@@ -1,12 +1,14 @@
 from PyQt5.QtWidgets import QWidget, QVBoxLayout, QLabel, QSpacerItem, QSizePolicy, QPushButton
 
 from operatore.controller.ControlloreOperatore import ControlloreOperatore
+from operatore.views.ModificaOperatore import ModificaOperatore
 
 
 class VistaOperatore(QWidget):
 
     def __init__(self, operatore, elimina_operatore, elimina_callback, parent = None):
         super(VistaOperatore, self).__init__(parent)
+        self.operatore = operatore
         self.controller = ControlloreOperatore(operatore)
         self.elimina_operatore = elimina_operatore
         self.elimina_callback = elimina_callback
@@ -36,6 +38,10 @@ class VistaOperatore(QWidget):
         btn_elimina.clicked.connect(self.elimina_operatore_click)
         v_layout.addWidget(btn_elimina)
 
+        btn_modifica = QPushButton("Modifica Operatore")
+        btn_modifica.clicked.connect(self.modifica_opertatore_click)
+        v_layout.addWidget(btn_modifica)
+
         self.setLayout(v_layout)
         self.setWindowTitle(self.controller.get_nome_operatore() + ' ' + self.controller.get_cognome_operatore())
 
@@ -49,4 +55,9 @@ class VistaOperatore(QWidget):
     def elimina_operatore_click(self):
         self.elimina_operatore(self.controller.get_id_operatore())
         self.elimina_callback()
+        self.close()
+
+    def modifica_opertatore_click(self):
+        self.vista_modifica_operatore= ModificaOperatore(self.operatore, self.elimina_callback)
+        self.vista_modifica_operatore.show()
         self.close()

@@ -34,6 +34,7 @@ class VistaInserisciCredenziali(QWidget):
         lbl_password = QLabel("Password")
         self.h_layout.addWidget((lbl_password), 2, 0)
         self.line_edit_password = QLineEdit()
+        self.line_edit_password.setEchoMode(QLineEdit.Password)
         self.h_layout.addWidget((self.line_edit_password), 2, 1)
 
         self.h_layout.addItem(QSpacerItem(20, 40, QSizePolicy.Minimum, QSizePolicy.Expanding))
