@@ -4,10 +4,10 @@ from paziente.Controller.ControllorePaziente import ControllorePaziente
 
 
 class VistaPaziente(QWidget):
-    def __init__(self, paziente, elimina_paziente, elimina_callback, parent=None):
+    def __init__(self, paziente, archivia_paziente, elimina_callback, parent=None):
         super(VistaPaziente, self).__init__(parent)
         self.controller = ControllorePaziente(paziente)
-        self.elimina_paziente = elimina_paziente
+        self.archivia_paziente = archivia_paziente
         self.elimina_callback = elimina_callback
 
         v_layout = QVBoxLayout()

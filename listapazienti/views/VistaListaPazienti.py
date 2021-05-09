@@ -3,12 +3,13 @@ from PyQt5.QtWidgets import QWidget, QHBoxLayout, QListView, QVBoxLayout, QPushB
 
 from listapazienti.controller.ControlloreListaPazienti import ControlloreListaPazienti
 from listapazienti.views.VistaInserisciPaziente import VistaInserisciPaziente
+from paziente.view.VistaPaziente import VistaPaziente
 
 
 class VistaListaPazienti(QWidget):
 
-    def __init__(self, parent = None):
-        super(VistaListaPazienti, self).__init__()
+    def __init__(self, parent=None):
+        super(VistaListaPazienti, self).__init__(parent)
 
         self.controller = ControlloreListaPazienti()
 
@@ -19,7 +20,7 @@ class VistaListaPazienti(QWidget):
 
         button_layout = QVBoxLayout()
         open_button = QPushButton("Apri")
-        # open_button.clicked.connect()
+        open_button.clicked.connect(self .show_selected_info)
         button_layout.addWidget(open_button)
 
         button_new = QPushButton("Nuovo")
@@ -45,6 +46,12 @@ class VistaListaPazienti(QWidget):
             item.setFont(font)
             self.listview_model.appendRow(item)
         self.list_view.setModel(self.listview_model)
+
+    def show_selected_info(self):
+        selected = self.list_view.selectedIndexes()[0].row()
+        paziente_selezionato = self.controller.get_paziente_by_index(selected)
+        self.vista_paziente = VistaPaziente(paziente_selezionato, self.controller.archivia_paziente_by_id, self.update_ui)
+        self.vista_paziente.show()
 
     def show_new_paziente(self):
         self.vista_inserisci_paziente = VistaInserisciPaziente(self.controller, self.update_ui)

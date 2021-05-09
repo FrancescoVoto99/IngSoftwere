@@ -10,4 +10,17 @@ class Paziente():
         self.cf = cf
         self.telefono = telefono
         self.email = email
+        self.ricovero = None
+
+    def add_ricovero(self, ricovero):
+        self.ricovero = ricovero
+
+    def get_ricovero(self):
+        if self.ricovero.is_finericovero():
+            self.ricovero = None
+            return None
+        else:
+            return self.ricovero
+
+
 

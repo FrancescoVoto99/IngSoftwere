@@ -19,7 +19,7 @@ class ListaPazienti():
             if paziente.cf == cf:
                 return True
             return False
-        self.lista_pazienti.remove(list(filter(_is_selected_paziente(), self.lista_pazienti))[0])
+        self.lista_pazienti.remove(list(filter(_is_selected_paziente, self.lista_pazienti))[0])
 
     def get_paziente_by_index(self, index):
         return self.lista_pazienti[index]

@@ -39,14 +39,14 @@ class VistaInserisciPaziente(QWidget):
     def add_paziente(self):
         nome = self.info["Nome"].text()
         cognome = self.info["Cognome"].text()
-        luogo_nascita = self.info["Luogo di nascita"].text()
-        data_nascita = self.info["Data di nascita"].text()
+        luogodinascita = self.info["Luogo di nascita"].text()
+        datadinascita = self.info["Data di nascita"].text()
         cf = self.info["Codice fiscale"].text()
         telefono = self.info["Telefono"].text()
         email = self.info["Email"].text()
-        if nome == "" or cognome == "" or luogo_nascita == "" or data_nascita == "" or cf == "" or telefono == "" or email == "":
+        if nome == "" or cognome == "" or luogodinascita == "" or datadinascita == "" or cf == "" or telefono == "" or email == "":
             QMessageBox.critical(self, 'Errore', 'Per favore inserisci tutte le informazioni', QMessageBox.Ok, QMessageBox.Ok)
         else:
-            self.controller.aggiungi_paziente(Paziente((nome+cognome).lower(), nome, cognome, luogo_nascita, data_nascita, cf, telefono, email))
+            self.controller.aggiungi_paziente(Paziente(nome, cognome, luogodinascita, datadinascita, cf, telefono, email))
             self.callback()
             self.close()
