@@ -101,10 +101,10 @@ class ModificaOperatore(QWidget):
         password = self.info["Password"].text()
         today = date.today()
         newdate = datetime.strptime(datanascita, '%d/%m/%Y')
-        if nome == "" or cognome == "" or luogonascita == "" or datanascita == "" or cf == "" or ruolo == "" or email == "":
+        if nome == "" or cognome == "" or luogonascita == "" or datanascita == "" or cf == "" or ruolo == "" or email == "" or email.find('@') == -1:
             QMessageBox.critical(self, 'Errore', 'Per favore inserisci tutte le informazioni', QMessageBox.Ok, QMessageBox.Ok)
-   #     elif newdate.date() > today:
-    #        QMessageBox.critical(self, 'Errore', 'Per favore inserisci correttamente la data di nascita', QMessageBox.Ok, QMessageBox.Ok)
+        elif newdate.date() > today:
+          QMessageBox.critical(self, 'Errore', 'Per favore inserisci correttamente la data di nascita', QMessageBox.Ok, QMessageBox.Ok)
         else:
             self.operatore.nome=nome
             self.operatore.cognome=cognome
