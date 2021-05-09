@@ -15,6 +15,9 @@ class VistaServizio(QWidget):
         label = self.label_generate(self.controller.get_nome_servizio(), 20)
         v_layout.addWidget(label)
 
+        label = self.label_generate("Id: {}".format(self.controller.get_id_servizio()), 17)
+        v_layout.addWidget(label)
+
         label = self.label_generate("Tipo: {}".format(self.controller.get_tipo_servizio()), 17)
         v_layout.addWidget(label)
 

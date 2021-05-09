@@ -13,6 +13,13 @@ class ControlloreListaServizi():
     def get_servizio_by_index(self,index):
         return self.model.get_servizio_by_index(index)
 
+    def get_servizio_by_tipo(self, tipo):
+        return self.model.get_servizio_by_tipo(tipo)
+
     def save_data(self):
         self.model.salva_dati()
+
+    def aggiungi_servizio(self, servizio):
+        self.model.aggiungi_servizio(servizio)
+
 
