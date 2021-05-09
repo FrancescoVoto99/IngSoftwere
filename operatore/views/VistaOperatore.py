@@ -1,4 +1,4 @@
-from PyQt5.QtWidgets import QWidget, QVBoxLayout, QLabel, QSpacerItem, QSizePolicy, QPushButton
+from PyQt5.QtWidgets import QWidget, QVBoxLayout, QLabel, QSpacerItem, QSizePolicy, QPushButton, QMessageBox
 
 from operatore.controller.ControlloreOperatore import ControlloreOperatore
 from operatore.views.ModificaOperatore import ModificaOperatore
@@ -35,7 +35,7 @@ class VistaOperatore(QWidget):
         v_layout.addItem(QSpacerItem(20, 40, QSizePolicy.Minimum, QSizePolicy.Expanding))
 
         btn_elimina = QPushButton("Elimina operatore")
-        btn_elimina.clicked.connect(self.elimina_operatore_click)
+        btn_elimina.clicked.connect(self.conferma_eliminazione)
         v_layout.addWidget(btn_elimina)
 
         btn_modifica = QPushButton("Modifica Operatore")
@@ -51,6 +51,21 @@ class VistaOperatore(QWidget):
         lbl_font.setPointSize(18)
         lbl.setFont(lbl_font)
         return lbl
+
+    def conferma_eliminazione(self):
+        msgbox = QMessageBox()
+        msgbox.setText("sei sicuro di voler eliminare l'operatore selezionato?")
+        msgbox.setWindowTitle("Conferma")
+        msgbox.setStandardButtons(QMessageBox.Yes | QMessageBox.No)
+        msgbox.setDefaultButton(QMessageBox.Yes)
+        ris= msgbox.exec()
+        if(ris== QMessageBox.Yes):
+            self.elimina_operatore_click()
+
+
+
+
+
 
     def elimina_operatore_click(self):
         self.elimina_operatore(self.controller.get_id_operatore())
