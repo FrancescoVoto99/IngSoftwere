@@ -68,7 +68,7 @@ class VistaInserisciCredenziali(QWidget):
             self.go_vista.show()
             self.close()
         elif self.identity_check() == "Infermiere":
-            self.go_vista == VistaHomeInfermiere()
+            self.go_vista = VistaHomeInfermiere()
             self.go_vista.show()
             self.close()
         elif self.identity_check() == "Medico":
