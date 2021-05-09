@@ -17,7 +17,7 @@ class VistaListaServiziEmergenza(QWidget):
         self.listview_model = QStandardItemModel(self.list_view)
 
         for servizio in self.controller.get_lista_servizi():
-            if self.controller.get_servizio_by_tipo == "ricovero di emergenza":
+            if servizio.tipo == "ricovero di emergenza":
                 item = QStandardItem()
                 item.setText(servizio.nome)
                 item.setEditable(False)
