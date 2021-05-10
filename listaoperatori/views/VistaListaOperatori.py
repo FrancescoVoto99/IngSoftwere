@@ -11,7 +11,6 @@ class VistaListaOperatori(QWidget):
     def __init__(self):
         super(VistaListaOperatori, self).__init__()
         self.controller = ControlloreListaOperatori()
-
         h_layout = QHBoxLayout()
         self.list_view = QListView()
         self.update_ui()
@@ -29,13 +28,13 @@ class VistaListaOperatori(QWidget):
         button_new = QPushButton("Cerca")
         lbl_nome = QLabel("Nome")
         lbl_cognome = QLabel("Cognome")
-        lineedit_nome = QLineEdit(self)
-        lineedit_cognome = QLineEdit(self)
-        #button_new.clicked.connect(self.search_operatore(lineedit_nome, lineedit_cognome))
+        self.lineedit_nome = QLineEdit(self)
+        self.lineedit_cognome = QLineEdit(self)
+        button_new.clicked.connect(self.search_operatore)
         button_layout.addWidget(lbl_nome)
-        button_layout.addWidget(lineedit_nome)
+        button_layout.addWidget(self.lineedit_nome)
         button_layout.addWidget(lbl_cognome)
-        button_layout.addWidget(lineedit_cognome)
+        button_layout.addWidget(self.lineedit_cognome)
         button_layout.addWidget(button_new)
 
         button_layout.addStretch()
@@ -46,16 +45,18 @@ class VistaListaOperatori(QWidget):
         self.resize(600, 300)
         self.setWindowTitle("Lista Operatori")
 
-    def update_ui(self):
+    def update_ui(self,nome_search="",cognome_search=""):
         self.listview_model = QStandardItemModel(self.list_view)
         for operatore in self.controller.get_lista_operatori():
-            item = QStandardItem()
-            item.setText(operatore.nome + " " + operatore.cognome)
-            item.setEditable(False)
-            font = item.font()
-            font.setPointSize(18)
-            item.setFont(font)
-            self.listview_model.appendRow(item)
+            if nome_search=="" or operatore.nome==nome_search:
+                if cognome_search=="" or operatore.cognome==cognome_search:
+                    item = QStandardItem()
+                    item.setText(operatore.nome + " " + operatore.cognome)
+                    item.setEditable(False)
+                    font = item.font()
+                    font.setPointSize(18)
+                    item.setFont(font)
+                    self.listview_model.appendRow(item)
         self.list_view.setModel(self.listview_model)
 
     def show_selected_info(self):
@@ -68,10 +69,8 @@ class VistaListaOperatori(QWidget):
         self.vista_inserisci_operatore = VistaInserisciOperatore(self.controller, self.update_ui)
         self.vista_inserisci_operatore.show()
 
-    def search_operatore (self, nome, cognome):
-        operatore_cercato = self.controller.search_operatore_by_nomecognome(nome, cognome)
-        self.cerca_operatore = VistaOperatore(operatore_cercato, self.controller.search_operatore_by_nomecognome, self.update_ui)
-        self.cerca_operatore.show()
+    def search_operatore (self):
+        self.update_ui(self.lineedit_nome.text(),self.lineedit_cognome.text())
 
     def closeEvent(self, event):
         self.controller.save_data()
