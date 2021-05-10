@@ -32,6 +32,11 @@ class ListaOperatori():
     def get_operatore_by_index(self, index):
         return self.lista_operatori[index]
 
+    def get_operatore_by_id(self, id):
+        for operatore in self.lista_operatori:
+            if operatore.id==id:
+                return operatore
+
     def get_lista_operatori(self):
         return self.lista_operatori
 

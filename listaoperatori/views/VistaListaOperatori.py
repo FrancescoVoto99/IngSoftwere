@@ -52,6 +52,7 @@ class VistaListaOperatori(QWidget):
                 if cognome_search=="" or operatore.cognome==cognome_search:
                     item = QStandardItem()
                     item.setText(operatore.nome + " " + operatore.cognome)
+                    item.__setattr__("id", operatore.id)
                     item.setEditable(False)
                     font = item.font()
                     font.setPointSize(18)
@@ -60,8 +61,8 @@ class VistaListaOperatori(QWidget):
         self.list_view.setModel(self.listview_model)
 
     def show_selected_info(self):
-        selected = self.list_view.selectedIndexes()[0].row()
-        operatore_selezionato = self.controller.get_operatore_by_index(selected)
+        selected = self.list_view.selectedIndexes()[0].__getattribute__("id")
+        operatore_selezionato = self.controller.get_operatore_by_id(selected)
         self.vista_operatore = VistaOperatore(operatore_selezionato, self.controller.elimina_operatore_by_id, self.update_ui)
         self.vista_operatore.show()
 

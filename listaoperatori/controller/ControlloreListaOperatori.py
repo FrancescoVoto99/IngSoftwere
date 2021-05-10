@@ -16,6 +16,9 @@ class ControlloreListaOperatori():
     def get_operatore_by_index(self, index):
         return self.model.get_operatore_by_index (index)
 
+    def get_operatore_by_id(self, id):
+        return self.model.get_operatore_by_id (id)
+
     def search_operatore_by_nomecognome(self, nome, cognome):
         return self.model.search_operatore_by_nomecognome(nome, cognome)
 
