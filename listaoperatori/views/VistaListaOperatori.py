@@ -16,6 +16,8 @@ class VistaListaOperatori(QWidget):
         self.update_ui()
         h_layout.addWidget(self.list_view)
 
+
+
         button_layout = QVBoxLayout()
         open_button = QPushButton("Apri")
         open_button.clicked.connect(self.show_selected_info)
@@ -47,22 +49,27 @@ class VistaListaOperatori(QWidget):
 
     def update_ui(self,nome_search="",cognome_search=""):
         self.listview_model = QStandardItemModel(self.list_view)
+
         for operatore in self.controller.get_lista_operatori():
+
             if nome_search=="" or operatore.nome==nome_search:
+
                 if cognome_search=="" or operatore.cognome==cognome_search:
+
                     item = QStandardItem()
                     item.setText(operatore.nome + " " + operatore.cognome)
-                    item.__setattr__("id", operatore.id)
                     item.setEditable(False)
                     font = item.font()
                     font.setPointSize(18)
                     item.setFont(font)
+                    item.__setattr__("id",operatore.id)
                     self.listview_model.appendRow(item)
         self.list_view.setModel(self.listview_model)
 
     def show_selected_info(self):
-        selected = self.list_view.selectedIndexes()[0].__getattribute__("id")
-        operatore_selezionato = self.controller.get_operatore_by_id(selected)
+
+        selected= self.list_view.selectedIndexes()[0].data()
+        operatore_selezionato = self.controller.get_operatore_by_id(selected.replace(" ", ""))
         self.vista_operatore = VistaOperatore(operatore_selezionato, self.controller.elimina_operatore_by_id, self.update_ui)
         self.vista_operatore.show()
 
