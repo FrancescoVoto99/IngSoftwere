@@ -1,5 +1,5 @@
 from PyQt5.QtGui import QStandardItemModel, QStandardItem
-from PyQt5.QtWidgets import QWidget, QHBoxLayout, QListView, QVBoxLayout, QPushButton
+from PyQt5.QtWidgets import QWidget, QHBoxLayout, QListView, QVBoxLayout, QPushButton, QLabel, QLineEdit
 
 from listaoperatori.controller.ControlloreListaOperatori import ControlloreListaOperatori
 from listaoperatori.views.VistaInserisciOperatore import VistaInserisciOperatore
@@ -24,6 +24,18 @@ class VistaListaOperatori(QWidget):
 
         button_new = QPushButton("Nuovo")
         button_new.clicked.connect(self.show_new_operatore)
+        button_layout.addWidget(button_new)
+
+        button_new = QPushButton("Cerca")
+        lbl_nome = QLabel("Nome")
+        lbl_cognome = QLabel("Cognome")
+        lineedit_nome = QLineEdit(self)
+        lineedit_cognome = QLineEdit(self)
+        #button_new.clicked.connect(self.search_operatore(lineedit_nome, lineedit_cognome))
+        button_layout.addWidget(lbl_nome)
+        button_layout.addWidget(lineedit_nome)
+        button_layout.addWidget(lbl_cognome)
+        button_layout.addWidget(lineedit_cognome)
         button_layout.addWidget(button_new)
 
         button_layout.addStretch()
@@ -55,6 +67,11 @@ class VistaListaOperatori(QWidget):
     def show_new_operatore(self):
         self.vista_inserisci_operatore = VistaInserisciOperatore(self.controller, self.update_ui)
         self.vista_inserisci_operatore.show()
+
+    def search_operatore (self, nome, cognome):
+        operatore_cercato = self.controller.search_operatore_by_nomecognome(nome, cognome)
+        self.cerca_operatore = VistaOperatore(operatore_cercato, self.controller.search_operatore_by_nomecognome, self.update_ui)
+        self.cerca_operatore.show()
 
     def closeEvent(self, event):
         self.controller.save_data()

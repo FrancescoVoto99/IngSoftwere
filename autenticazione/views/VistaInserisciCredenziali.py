@@ -50,8 +50,8 @@ class VistaInserisciCredenziali(QWidget):
     def identity_check(self):
         username = self.line_edit_username.text()
         password = self.line_edit_password.text()
-        if os.path.isfile('listaoperatori/data/lista_operatori_salvata.pickle'):
-           with open('listaoperatori/data/lista_operatori_salvata.pickle', 'rb') as f:
+        if os.path.isfile('listaoperatori/data/list_operatori_salvata.pickle'):
+           with open('listaoperatori/data/list_operatori_salvata.pickle', 'rb') as f:
                 lista_operatori = pickle.load(f)
                 for operatore in lista_operatori:
                     self.controller = ControlloreOperatore(operatore)
