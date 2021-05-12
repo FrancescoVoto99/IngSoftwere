@@ -3,6 +3,9 @@ class ControlloreServizio():
     def __init__(self, servizio):
         self.model = servizio
 
+    def get_id_servizio(self):
+        return self.model.id
+
     def get_nome_servizio(self):
         return self.model.nome
 

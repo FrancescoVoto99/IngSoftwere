@@ -2,6 +2,7 @@ from PyQt5.QtWidgets import QWidget, QGridLayout, QPushButton, QSizePolicy
 
 from listaoperatori.views.VistaListaOperatori import VistaListaOperatori
 from listapazienti.views.VistaListaPazienti import VistaListaPazienti
+from listaprenotazioni.views.VistaListaPrenotazioni import VistaListaPrenotazioni
 from listaservizi.views.VistaListaServizi import VistaListaServizi
 
 
@@ -34,7 +35,8 @@ class VistaHomeAccettazione(QWidget):
         self.vista_lista_operatori.show()
 
     def go_lista_ricoveri(self):
-        pass
+        self.vista_lista_prenotazioni = VistaListaPrenotazioni()
+        self.vista_lista_prenotazioni.show()
 
     def get_button(self, titolo, on_click):
         bottone = QPushButton(titolo)

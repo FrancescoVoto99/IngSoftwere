@@ -22,14 +22,15 @@ class ListaServizi():
                 self.aggiungi_servizio(Servizio(servizio["id"], servizio["nome"], servizio["tipo"],
                                                 servizio["reparto"], servizio["posto_letto"]))
 
-
-
-
     def aggiungi_servizio(self,servizio1):
         self.listaservizi.append(servizio1)
 
     def get_servizio_by_index(self,index):
         return self.listaservizi[index]
+
+    def get_servizio_by_tipo(self):
+        for servizio in self.listaservizi:
+            return servizio.__getattribute__("tipo")
 
     def get_lista_servizi(self):
         return self.listaservizi
