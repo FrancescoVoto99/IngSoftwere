@@ -74,6 +74,12 @@ class VistaInserisciOperatore(QWidget):
         self.v_layout.addWidget(dateedit)
         self.info[tipo] = dateedit
 
+    def check_email(self, text):
+        if text.find('@') == -1:
+            return True
+        else:
+            return False
+
     def add_operatore(self):
         nome = self.info["Nome"].text()
         cognome = self.info["Cognome"].text()
@@ -85,10 +91,14 @@ class VistaInserisciOperatore(QWidget):
         password = self.info["Password"].text()
         today = date.today()
         newdate = datetime.strptime(datanascita, '%d/%m/%Y')
-        if nome == "" or cognome == "" or luogonascita == "" or datanascita == "" or cf == "" or ruolo == "" or email == "" or email.find('@') == -1:
-            QMessageBox.critical(self, 'Errore', 'Per favore inserisci tutte le informazioni', QMessageBox.Ok, QMessageBox.Ok)
+        if nome == "" or cognome == "" or luogonascita == "" or datanascita == "" or cf == "" or ruolo == "" or email == "" :
+            QMessageBox.critical(self, 'Errore', 'Per favore, inserisci tutte le informazioni', QMessageBox.Ok, QMessageBox.Ok)
+        elif self.check_email(email):
+            QMessageBox.critical(self, 'Errore', "Per favore, inserisci correttamente l'email", QMessageBox.Ok, QMessageBox.Ok)
         elif newdate.date() > today:
-            QMessageBox.critical(self, 'Errore', 'Per favore inserisci correttamente la data di nascita', QMessageBox.Ok, QMessageBox.Ok)
+            QMessageBox.critical(self, 'Errore', 'Per favore, inserisci correttamente la data di nascita', QMessageBox.Ok, QMessageBox.Ok)
+        elif self.controller.check_cf(cf):
+            QMessageBox.critical(self, 'Errore', "L'operatore è già presente nella lista", QMessageBox.Ok, QMessageBox.Ok)
         else:
             self.controller.aggiungi_operatore(Operatore((nome+cognome).lower(), nome, cognome, cf, datanascita, luogonascita, email, ruolo, password))
             self.callback()

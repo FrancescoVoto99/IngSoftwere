@@ -61,7 +61,8 @@ class VistaListaServizi(QWidget):
 
     def show_selected_info(self):
         selected = self.list_view.selectedIndexes()[0].data()
-        servizio_selezionato = self.controller.get_servizio_by_id(selected.replace(" ", ""))
+        servizio_selezionato = self.controller.get_servizio_by_nome(selected.replace(" ", ""), selected.replace(" ", ""),
+                                                                    selected.replace(" ", ""))
         self.vista_servizio = VistaServizio(servizio_selezionato)
         self.vista_servizio.show()
 
@@ -80,7 +81,7 @@ class VistaListaServizi(QWidget):
                     font = item.font()
                     font.setPointSize(18)
                     item.setFont(font)
-                    item.__setattr__("id", servizio.id)
+                    item.__setattr__("nome", servizio.nome)
                     self.listview_model.appendRow(item)
         self.list_view.setModel(self.listview_model)
 

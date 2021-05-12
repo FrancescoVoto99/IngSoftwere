@@ -33,6 +33,11 @@ class ListaServizi():
             if servizio.id == id:
                 return servizio
 
+    def get_servizio_by_nome(self, tipo, reparto, posto_letto):
+        for servizio in self.listaservizi:
+            if servizio.tipo == tipo and servizio.reparto == reparto and servizio.posto_letto == posto_letto:
+                return servizio
+
     def get_servizio_by_tipo(self):
         for servizio in self.listaservizi:
             return servizio.__getattribute__("tipo")

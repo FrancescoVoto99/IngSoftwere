@@ -60,7 +60,7 @@ class VistaListaOperatori(QWidget):
                     font = item.font()
                     font.setPointSize(18)
                     item.setFont(font)
-                    item.__setattr__("id",operatore.id)
+                    # item.__setattr__("id",operatore.id)
                     self.listview_model.appendRow(item)
         self.list_view.setModel(self.listview_model)
 

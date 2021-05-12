@@ -10,6 +10,12 @@ class ControlloreListaOperatori():
     def aggiungi_operatore(self, operatore):
         self.model.aggiungi_operatore(operatore)
 
+    def check_cf (self, text):
+        for element in self.get_lista_operatori():
+            if element.cf == text:
+                return True
+        return False
+
     def get_lista_operatori(self):
         return self.model.get_lista_operatori()
 

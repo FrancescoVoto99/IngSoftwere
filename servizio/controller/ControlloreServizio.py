@@ -7,7 +7,7 @@ class ControlloreServizio():
         return self.model.id
 
     def get_nome_servizio(self):
-        return self.model.nome
+        return (self.get_tipo_servizio() + " in " + self.get_reparto_servizio() + " (" + self.get_posto_letto_servizio() + ")")
 
     def get_tipo_servizio(self):
         return self.model.tipo
