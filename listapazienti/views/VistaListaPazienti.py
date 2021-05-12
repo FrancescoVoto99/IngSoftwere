@@ -50,7 +50,7 @@ class VistaListaPazienti(QWidget):
     def show_selected_info(self):
         selected = self.list_view.selectedIndexes()[0].row()
         paziente_selezionato = self.controller.get_paziente_by_index(selected)
-        self.vista_paziente = VistaPaziente(paziente_selezionato, self.controller.archivia_paziente_by_id, self.update_ui)
+        self.vista_paziente = VistaPaziente(paziente_selezionato, self.controller.archivia_paziente_by_cf, self.update_ui)
         self.vista_paziente.show()
 
     def show_new_paziente(self):

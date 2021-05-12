@@ -1,6 +1,7 @@
 from PyQt5.QtWidgets import QWidget, QVBoxLayout, QLabel, QSpacerItem, QSizePolicy, QPushButton
 
 from paziente.Controller.ControllorePaziente import ControllorePaziente
+from ricovero.view.VistaRicovero import VistaRicovero
 
 
 class VistaPaziente(QWidget):
@@ -54,9 +55,9 @@ class VistaPaziente(QWidget):
         current_label.setFont(current_font)
         return current_label
 
-    #def check_abbonamento(self):
-        #self.vista_abbonamento = VistaAbbonamento(self.controller.get_abbonamento_cliente(), self.controller.aggiungi_nuovo_abbonamento_cliente)
-        #self.vista_abbonamento.show()
+    def check_ricovero(self):
+        self.vista_ricovero = VistaRicovero(self.controller.get_ricovero_paziente(), self.controller.aggiungi_nuovo_ricovero_paziente)
+        self.vista_ricovero.show()
 
     def archivia_paziente_click(self):
         self.archivia_paziente(self.controller.get_cf_paziente())
