@@ -28,6 +28,11 @@ class ListaServizi():
     def get_servizio_by_index(self,index):
         return self.listaservizi[index]
 
+    def get_servizio_by_id(self,id):
+        for servizio in self.listaservizi:
+            if servizio.id == id:
+                return servizio
+
     def get_servizio_by_tipo(self):
         for servizio in self.listaservizi:
             return servizio.__getattribute__("tipo")

@@ -1,6 +1,6 @@
 from PyQt5 import QtCore
 from PyQt5.QtWidgets import QWidget, QVBoxLayout, QLabel, QLineEdit, QSpacerItem, QSizePolicy, QPushButton, \
-    QRadioButton, QMessageBox, QCheckBox
+    QRadioButton, QMessageBox, QCheckBox, QGridLayout, QComboBox
 
 from servizio.model.Servizio import Servizio
 
@@ -14,13 +14,19 @@ class VistaInserisciServizio(QWidget):
         self.controller = controller
         self.callback = callback
         self.info = {}
+        self.list_nomi = ["Ricovero in oncologia", "Ricovero di emergenza in oncologia", "Ricovero in chirurgia",
+                          "Ricovero di emergenza in chirurgia", "Ricovero in cardiologia",
+                          "Ricovero di emergenza in cardiologia"]
+        self.list_reparti = ["Oncologia", "Chirurgia", "Cardiologia"]
+        self.list_tipi = ["ricovero", "ricovero di emergenza"]
 
         self.lbl_reparto = QLabel()
         self.lbl_disponibile = QLabel()
         self.lbl_tipo = QLabel()
+        self.lbl_nome = QLabel()
 
         self.get_type("Id")
-        self.get_type("Nome")
+        self.get_nome("Nome")
         self.get_tipo("Tipo")
         self.get_reparto("Reparto")
         self.get_type("Posto letto")
@@ -41,37 +47,42 @@ class VistaInserisciServizio(QWidget):
         self.v_layout.addWidget(current_text)
         self.info[tipo] = current_text
 
+    def get_nome(self, tipo):
+        self.v_layout.addWidget(QLabel(tipo))
+        comboBox_nome = QComboBox()
+        for nome in self.list_nomi:
+            comboBox_nome.addItem(nome)
+        self.v_layout.addWidget(comboBox_nome)
+        comboBox_nome.activated[str].connect(self.nome_onClicked)
+        self.v_layout.addWidget(self.lbl_nome)
+        self.info[tipo] = self.lbl_nome
+
+    def nome_onClicked(self, text):
+        self.lbl_nome.setText(text)
+
     def get_tipo(self, tipo):
         self.v_layout.addWidget(QLabel(tipo))
-        radioButton_ricovero = QRadioButton("ricovero")
-        self.v_layout.addWidget(radioButton_ricovero)
-        radioButton_ricovero.toggled.connect(self.tipo_onCliked)
-        radioButton_ricoveroem = QRadioButton("ricovero di emergenza")
-        self.v_layout.addWidget(radioButton_ricoveroem)
-        radioButton_ricoveroem.toggled.connect(self.tipo_onCliked)
+        comboBox_tipo = QComboBox()
+        for element in self.list_tipi:
+            comboBox_tipo.addItem(element)
+        self.v_layout.addWidget(comboBox_tipo)
+        comboBox_tipo.activated[str].connect(self.tipo_onClicked)
         self.v_layout.addWidget(self.lbl_tipo)
         self.info[tipo] = self.lbl_tipo
 
-    def tipo_onCliked (self):
-        rbtn = self.sender()
-        if rbtn.isChecked() == True:
-            self.lbl_tipo.setText(rbtn.text())
+    def tipo_onClicked (self, text):
+        self.lbl_tipo.setText(text)
 
     def get_reparto(self, tipo):
         self.v_layout.addWidget(QLabel(tipo))
-        rbtn_onco = QRadioButton("Oncologia")
-        self.v_layout.addWidget(rbtn_onco)
-        rbtn_onco.toggled.connect(self.reparto_onCliked)
-        rbtn_chirurgia = QRadioButton("Chirurgia")
-        self.v_layout.addWidget(rbtn_chirurgia)
-        rbtn_chirurgia.toggled.connect(self.reparto_onCliked)
-        rbtn_cardio = QRadioButton("Oncologia")
-        self.v_layout.addWidget(rbtn_cardio)
-        rbtn_cardio.toggled.connect(self.reparto_onCliked)
+        for reparto in self.list_reparti:
+            rbtn = QRadioButton(reparto)
+            self.v_layout.addWidget(rbtn)
+            rbtn.toggled.connect(self.reparto_onClicked)
         self.v_layout.addWidget(self.lbl_reparto)
         self.info[tipo] = self.lbl_reparto
 
-    def reparto_onCliked (self):
+    def reparto_onClicked (self):
         rbtn = self.sender()
         if rbtn.isChecked() == True:
             self.lbl_reparto.setText(rbtn.text())

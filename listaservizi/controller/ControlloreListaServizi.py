@@ -13,6 +13,9 @@ class ControlloreListaServizi():
     def get_servizio_by_index(self,index):
         return self.model.get_servizio_by_index(index)
 
+    def get_servizio_by_id(self, id):
+        return self.model.get_servizio_by_id(id)
+
     def get_servizio_by_tipo(self, tipo):
         return self.model.get_servizio_by_tipo(tipo)
 

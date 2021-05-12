@@ -38,7 +38,7 @@ class VistaServizio(QWidget):
         label = self.label_generate(self.controller.get_servizio_disponibile(), 25)
         v_layout2.addWidget(label)
 
-        h_layout.addLayout((v_layout2))
+        h_layout.addLayout(v_layout2)
 
         self.setLayout(h_layout)
         self.setWindowTitle(servizio.nome)

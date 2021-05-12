@@ -16,8 +16,6 @@ class VistaListaOperatori(QWidget):
         self.update_ui()
         h_layout.addWidget(self.list_view)
 
-
-
         button_layout = QVBoxLayout()
         open_button = QPushButton("Apri")
         open_button.clicked.connect(self.show_selected_info)
@@ -67,7 +65,6 @@ class VistaListaOperatori(QWidget):
         self.list_view.setModel(self.listview_model)
 
     def show_selected_info(self):
-
         selected= self.list_view.selectedIndexes()[0].data()
         operatore_selezionato = self.controller.get_operatore_by_id(selected.replace(" ", ""))
         self.vista_operatore = VistaOperatore(operatore_selezionato, self.controller.elimina_operatore_by_id, self.update_ui)
