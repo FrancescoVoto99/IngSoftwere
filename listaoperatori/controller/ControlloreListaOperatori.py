@@ -11,10 +11,7 @@ class ControlloreListaOperatori():
         self.model.aggiungi_operatore(operatore)
 
     def check_cf (self, text):
-        for element in self.get_lista_operatori():
-            if element.cf == text:
-                return True
-        return False
+        self.model.check_cf(text)
 
     def get_lista_operatori(self):
         return self.model.get_lista_operatori()
@@ -22,7 +19,7 @@ class ControlloreListaOperatori():
     def get_operatore_by_index(self, index):
         return self.model.get_operatore_by_index (index)
 
-    def get_operatore_numeber(self, index):
+    def get_operatore_number(self):
         return self.model.get_operatore_number
 
     def get_operatore_by_id(self, id):

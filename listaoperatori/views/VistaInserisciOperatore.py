@@ -54,14 +54,14 @@ class VistaInserisciOperatore(QWidget):
         rbtn_prontosoccorso.toggled.connect(self.ruolo_onCliked)
         rbtn_infermiere = QRadioButton("Infermiere")
         self.v_layout.addWidget(rbtn_infermiere)
-        rbtn_infermiere.toggled.connect(self.ruolo_onCliked)
+        rbtn_infermiere.toggled.connect(self.ruolo_onClicked)
         rbtn_medico = QRadioButton("Medico")
         self.v_layout.addWidget(rbtn_medico)
-        rbtn_medico.toggled.connect(self.ruolo_onCliked)
+        rbtn_medico.toggled.connect(self.ruolo_onClicked)
         self.v_layout.addWidget(self.lbl_ruolo)
         self.info[tipo] = self.lbl_ruolo
 
-    def ruolo_onCliked(self):
+    def ruolo_onClicked(self):
         rbtn = self.sender()
         if rbtn.isChecked() == True:
             self.lbl_ruolo.setText(rbtn.text())

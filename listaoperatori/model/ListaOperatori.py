@@ -23,6 +23,12 @@ class ListaOperatori():
                 return True
         return False
 
+    def check_cf (self, text):
+        for element in self.get_lista_operatori():
+            if element.cf == text:
+                return True
+        return False
+
     def search_operatore_by_nomecognome(self, nome, cognome):
         for operatore in self.lista_operatori:
             controller = ControlloreOperatore(operatore)

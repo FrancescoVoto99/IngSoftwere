@@ -13,11 +13,11 @@ class VistaHomeInfermiere(QWidget):
         layout = QGridLayout()
 
         layout.addWidget(self.get_button("Lista Servizi", self.go_lista_servizi), 0, 0)
-        layout.addWidget(self.get_button("Lista Pazienti", self.go_lista_pazienti), 1, 0)
-        layout.addWidget(self.get_button("Lista Ricoveri", self.go_lista_ricoveri), 0, 1)
+        layout.addWidget(self.get_button("Lista Pazienti", self.go_lista_pazienti), 0, 1)
+        layout.addWidget(self.get_button("Lista Ricoveri", self.go_lista_ricoveri), 0, 2)
 
         self.setLayout(layout)
-        self.resize(400, 400)
+        self.resize(600, 200)
         self.setWindowTitle("Infermiere")
 
     def go_lista_servizi(self):

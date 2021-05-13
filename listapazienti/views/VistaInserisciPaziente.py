@@ -55,6 +55,8 @@ class VistaInserisciPaziente(QWidget):
         email = self.info["Email"].text()
         if nome == "" or cognome == "" or luogodinascita == "" or datadinascita == "" or cf == "" or telefono == "" or email == "":
             QMessageBox.critical(self, 'Errore', 'Per favore inserisci tutte le informazioni', QMessageBox.Ok, QMessageBox.Ok)
+        elif self.controller.check_cf(cf):
+            QMessageBox.critical(self, 'Errore', "Il paziente è già stato inserito nella lista", QMessageBox.Ok, QMessageBox.Ok)
         else:
             self.controller.aggiungi_paziente(Paziente(nome, cognome, luogodinascita, datadinascita, cf, telefono, email))
             self.callback()

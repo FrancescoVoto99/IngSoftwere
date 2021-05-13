@@ -1,5 +1,6 @@
 from PyQt5.QtGui import QStandardItemModel, QStandardItem
-from PyQt5.QtWidgets import QWidget, QBoxLayout, QListView, QHBoxLayout, QVBoxLayout, QPushButton, QLabel, QLineEdit
+from PyQt5.QtWidgets import QWidget, QBoxLayout, QListView, QHBoxLayout, QVBoxLayout, QPushButton, QLabel, QLineEdit, \
+    QMessageBox
 
 from listaservizi.controller.ControlloreListaServizi import ControlloreListaServizi
 from listaservizi.views.VistaInserisciServizio import VistaInserisciServizio
@@ -39,20 +40,20 @@ class VistaListaServizi(QWidget):
 
         button_new = QPushButton("Cerca")
         lbl_reparto = QLabel("Reparto")
-        lbl_tipo = QLabel("Tipo")
+        lbl_posto_letto = QLabel("Posto letto")
         self.lineedit_reparto = QLineEdit(self)
-        self.lineedit_tipo = QLineEdit(self)
+        self.lineedit_posto_letto = QLineEdit(self)
         button_new.clicked.connect(self.search_servizio)
         button_layout.addWidget(lbl_reparto)
         button_layout.addWidget(self.lineedit_reparto)
-        button_layout.addWidget(lbl_tipo)
-        button_layout.addWidget(self.lineedit_tipo)
+        button_layout.addWidget(lbl_posto_letto)
+        button_layout.addWidget(self.lineedit_posto_letto)
         button_layout.addWidget(button_new)
 
         button_layout.addStretch()
 
         self.setLayout(h_layout)
-        self.resize(600,300)
+        self.resize(800,500)
         self.setWindowTitle("Lista Servizi")
 
     def closeEvent(self, event):
@@ -60,21 +61,24 @@ class VistaListaServizi(QWidget):
         event.accept()
 
     def show_selected_info(self):
-        selected = self.list_view.selectedIndexes()[0].data()
-        stringa = selected.split()
-        servizio_selezionato = self.controller.get_servizio_by_nome(stringa[len(stringa)-1].replace('(', '').replace(')', ''))
-        self.vista_servizio = VistaServizio(servizio_selezionato)
-        self.vista_servizio.show()
+        if (len(self.list_view.selectedIndexes())>0):
+            selected = self.list_view.selectedIndexes()[0].data()
+            stringa = selected.split()
+            servizio_selezionato = self.controller.get_servizio_by_nome(stringa[len(stringa)-1].replace('(', '').replace(')', ''))
+            self.vista_servizio = VistaServizio(servizio_selezionato)
+            self.vista_servizio.show()
+        else:
+            QMessageBox.critical(self, 'Errore', "Selezionare un servizio", QMessageBox.Ok, QMessageBox.Ok)
 
     def show_new_servizio(self):
         self.vista_inserisci_servizio = VistaInserisciServizio(self.controller, self.update_ui)
         self.vista_inserisci_servizio.show()
 
-    def update_ui(self, reparto_search = "", tipo_search = ""):
+    def update_ui(self, reparto_search = "", posto_letto_search = ""):
         self.listview_model = QStandardItemModel(self.list_view)
         for servizio in self.controller.get_lista_servizi():
             if reparto_search == "" or servizio.reparto.lower() == reparto_search.lower():
-                if tipo_search == "" or servizio.tipo.lower() == tipo_search.lower():
+                if posto_letto_search == "" or servizio.posto_letto.lower() == posto_letto_search.lower():
                     item = QStandardItem()
                     item.setText(servizio.nome)
                     item.setEditable(False)
@@ -86,7 +90,7 @@ class VistaListaServizi(QWidget):
         self.list_view.setModel(self.listview_model)
 
     def search_servizio (self):
-        self.update_ui(self.lineedit_reparto.text(),self.lineedit_tipo.text())
+        self.update_ui(self.lineedit_reparto.text(),self.lineedit_posto_letto.text())
 
 
 

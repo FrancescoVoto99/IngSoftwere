@@ -1,5 +1,5 @@
 from PyQt5.QtGui import QStandardItemModel, QStandardItem
-from PyQt5.QtWidgets import QWidget, QHBoxLayout, QListView, QVBoxLayout, QPushButton, QLabel, QLineEdit
+from PyQt5.QtWidgets import QWidget, QHBoxLayout, QListView, QVBoxLayout, QPushButton, QLabel, QLineEdit, QMessageBox
 
 from listaoperatori.controller.ControlloreListaOperatori import ControlloreListaOperatori
 from listaoperatori.views.VistaInserisciOperatore import VistaInserisciOperatore
@@ -47,28 +47,26 @@ class VistaListaOperatori(QWidget):
 
     def update_ui(self,nome_search="",cognome_search=""):
         self.listview_model = QStandardItemModel(self.list_view)
-
         for operatore in self.controller.get_lista_operatori():
-
-            if nome_search=="" or operatore.nome==nome_search:
-
-                if cognome_search=="" or operatore.cognome==cognome_search:
-
+            if nome_search=="" or operatore.nome.lower() == nome_search.lower() :
+                if cognome_search=="" or operatore.cognome.lower() == cognome_search.lower() :
                     item = QStandardItem()
                     item.setText(operatore.nome + " " + operatore.cognome)
                     item.setEditable(False)
                     font = item.font()
                     font.setPointSize(18)
                     item.setFont(font)
-                    # item.__setattr__("id",operatore.id)
                     self.listview_model.appendRow(item)
         self.list_view.setModel(self.listview_model)
 
     def show_selected_info(self):
-        selected= self.list_view.selectedIndexes()[0].data()
-        operatore_selezionato = self.controller.get_operatore_by_id(selected.replace(" ", ""))
-        self.vista_operatore = VistaOperatore(operatore_selezionato, self.controller.elimina_operatore_by_id, self.update_ui)
-        self.vista_operatore.show()
+        if (len(self.list_view.selectedIndexes()) > 0):
+            selected= self.list_view.selectedIndexes()[0].data()
+            operatore_selezionato = self.controller.get_operatore_by_id(selected.replace(" ", ""))
+            self.vista_operatore = VistaOperatore(operatore_selezionato, self.controller.elimina_operatore_by_id, self.update_ui)
+            self.vista_operatore.show()
+        else:
+            QMessageBox.critical(self, 'Errore', "Selezionare un operatore", QMessageBox.Ok, QMessageBox.Ok)
 
     def show_new_operatore(self):
         self.vista_inserisci_operatore = VistaInserisciOperatore(self.controller, self.update_ui)
