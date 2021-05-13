@@ -59,6 +59,9 @@ class VistaPaziente(QWidget):
         self.vista_ricovero = VistaRicovero(self.controller.get_ricovero_paziente(), self.controller.aggiungi_nuovo_ricovero_paziente)
         self.vista_ricovero.show()
 
+    def check_reparto(self):
+            pass
+
     def archivia_paziente_click(self):
         self.archivia_paziente(self.controller.get_cf_paziente())
         self.archivia_callback()

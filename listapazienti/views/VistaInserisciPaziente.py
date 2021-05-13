@@ -1,5 +1,6 @@
-from PyQt5.QtWidgets import QWidget, QVBoxLayout, QLabel, QLineEdit, QMessageBox, QSpacerItem, QSizePolicy, QPushButton
-
+from PyQt5.QtWidgets import QWidget, QVBoxLayout, QLabel, QLineEdit, QMessageBox, QSpacerItem, QSizePolicy, QPushButton, \
+    QDateEdit
+from PyQt5 import QtCore
 from paziente.model.Paziente import Paziente
 
 
@@ -16,7 +17,7 @@ class VistaInserisciPaziente(QWidget):
         self.get_type("Nome")
         self.get_type("Cognome")
         self.get_type("Luogo di nascita")
-        self.get_type("Data di nascita")
+        self.get_datanascita("Data di nascita")
         self.get_type("Codice fiscale")
         self.get_type("Telefono")
         self.get_type("Email")
@@ -35,6 +36,14 @@ class VistaInserisciPaziente(QWidget):
         current_text = QLineEdit(self)
         self.v_layout.addWidget(current_text)
         self.info[tipo] = current_text
+
+    def get_datanascita(self, tipo):
+        self.v_layout.addWidget(QLabel(tipo))
+        dateedit = QDateEdit(calendarPopup = True)
+        dateedit.setDateTime(QtCore.QDateTime.currentDateTime())
+        dateedit.setDisplayFormat('dd/MM/yyyy')
+        self.v_layout.addWidget(dateedit)
+        self.info[tipo] = dateedit
 
     def add_paziente(self):
         nome = self.info["Nome"].text()

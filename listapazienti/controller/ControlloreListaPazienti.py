@@ -14,7 +14,7 @@ class ControlloreListaPazienti():
         return self.model.get_lista_pazienti()
 
     def get_paziente_by_index(self, index):
-        self.model.get_paziente_by_index(index)
+        return self.model.get_paziente_by_index(index)
 
     def archivia_paziente_by_cf(self, cf):
         self.model.rimuovi_paziente_by_cf(cf)
