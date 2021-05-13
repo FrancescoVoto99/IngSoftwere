@@ -61,8 +61,8 @@ class VistaListaServizi(QWidget):
 
     def show_selected_info(self):
         selected = self.list_view.selectedIndexes()[0].data()
-        servizio_selezionato = self.controller.get_servizio_by_nome(selected.replace(" ", ""), selected.replace(" ", ""),
-                                                                    selected.replace(" ", ""))
+        stringa = selected.split()
+        servizio_selezionato = self.controller.get_servizio_by_nome(stringa[len(stringa)-1].replace('(', '').replace(')', ''))
         self.vista_servizio = VistaServizio(servizio_selezionato)
         self.vista_servizio.show()
 
@@ -73,8 +73,8 @@ class VistaListaServizi(QWidget):
     def update_ui(self, reparto_search = "", tipo_search = ""):
         self.listview_model = QStandardItemModel(self.list_view)
         for servizio in self.controller.get_lista_servizi():
-            if reparto_search == "" or servizio.reparto == reparto_search:
-                if tipo_search == "" or servizio.tipo == tipo_search:
+            if reparto_search == "" or servizio.reparto.lower() == reparto_search.lower():
+                if tipo_search == "" or servizio.tipo.lower() == tipo_search.lower():
                     item = QStandardItem()
                     item.setText(servizio.nome)
                     item.setEditable(False)

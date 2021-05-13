@@ -16,8 +16,8 @@ class ControlloreListaServizi():
     def get_servizio_by_id(self, id):
         return self.model.get_servizio_by_id(id)
 
-    def get_servizio_by_nome(self, tipo, reparto, posto_letto):
-        return self.model.get_servizio_by_nome(tipo, reparto, posto_letto)
+    def get_servizio_by_nome(self, posto_letto):
+        return self.model.get_servizio_by_nome(posto_letto)
 
     def get_servizio_by_tipo(self, tipo):
         return self.model.get_servizio_by_tipo(tipo)

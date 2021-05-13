@@ -41,6 +41,8 @@ class VistaInserisciCredenziali(QWidget):
 
         btn_ok = QPushButton("Accedi")
         btn_ok.setDefault(True)
+
+
         btn_ok.clicked.connect(self.openHome)
         self.h_layout.addWidget((btn_ok), 3, 0)
 
