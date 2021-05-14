@@ -16,7 +16,7 @@ class ListaPazienti():
 
     def get_paziente_by_cf(self, cf):
         for paziente in self.get_lista_pazienti():
-            if paziente.cf == cf:
+            if paziente.cf.upper() == cf:
                 return paziente
 
     def rimuovi_paziente_by_cf (self, cf):

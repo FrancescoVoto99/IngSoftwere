@@ -30,13 +30,17 @@ class VistaListaPazienti(QWidget):
         button_new = QPushButton("Cerca")
         lbl_nome = QLabel("Nome")
         lbl_cognome = QLabel("Cognome")
+        lbl_cf = QLabel("Codice Fiscale")
         self.lineedit_nome = QLineEdit(self)
         self.lineedit_cognome = QLineEdit(self)
+        self.lineedit_cf = QLineEdit(self)
         button_new.clicked.connect(self.search_operatore)
         button_layout.addWidget(lbl_nome)
         button_layout.addWidget(self.lineedit_nome)
         button_layout.addWidget(lbl_cognome)
         button_layout.addWidget(self.lineedit_cognome)
+        button_layout.addWidget(lbl_cf)
+        button_layout.addWidget(self.lineedit_cf)
         button_layout.addWidget(button_new)
 
         button_layout.addStretch()
@@ -44,28 +48,29 @@ class VistaListaPazienti(QWidget):
         h_layout.addLayout(button_layout)
 
         self.setLayout(h_layout)
-        self.resize(600,300)
+        self.resize(800,300)
         self.setWindowTitle("Lista Pazienti")
 
-    def update_ui(self, nome_search = "", cognome_search = ""):
+    def update_ui(self, nome_search = "", cognome_search = "", cf_search=""):
         self.listview_model = QStandardItemModel(self.list_view)
         for paziente in self.controller.get_lista_pazienti():
-            if nome_search == "" or paziente.nome.lower() == nome_search.lower():
-                if cognome_search == "" or paziente.cognome.lower() == cognome_search.lower():
-                    item = QStandardItem()
-                    item.setText(paziente.nome + " " + paziente.cognome)
-                    item.setEditable(False)
-                    font = item.font()
-                    font.setPointSize(18)
-                    item.setFont(font)
-                    item.__setattr__("cf", paziente.cf)
-                    self.listview_model.appendRow(item)
+            if nome_search == "" or ( nome_search.lower() in paziente.nome.lower()):
+                if cognome_search == "" or ( cognome_search.lower() in paziente.cognome.lower() ):
+                    if cf_search == "" or paziente.cf.lower() == cf_search.lower():
+                        item = QStandardItem()
+                        item.setText(paziente.nome + " " + paziente.cognome + " (" + paziente.cf.upper() + ")")
+                        item.setEditable(False)
+                        font = item.font()
+                        font.setPointSize(18)
+                        item.setFont(font)
+                        self.listview_model.appendRow(item)
         self.list_view.setModel(self.listview_model)
 
     def show_selected_info(self):
         if (len(self.list_view.selectedIndexes()) > 0):
             selected = self.list_view.selectedIndexes()[0].data()
-            paziente_selezionato = self.controller.get_paziente_by_cf(selected.replace(" ", ""))
+            stringa = selected.split()
+            paziente_selezionato = self.controller.get_paziente_by_cf(stringa[len(stringa)-1].replace('(', '').replace(')', ''))
             self.vista_paziente = VistaPaziente(paziente_selezionato, self.controller.archivia_paziente_by_cf, self.update_ui)
             self.vista_paziente.show()
         else:
@@ -76,7 +81,7 @@ class VistaListaPazienti(QWidget):
         self.vista_inserisci_paziente.show()
 
     def search_operatore (self):
-        self.update_ui(self.lineedit_nome.text(),self.lineedit_cognome.text())
+        self.update_ui(self.lineedit_nome.text(),self.lineedit_cognome.text(), self.lineedit_cf.text())
 
     def closeEvent(self, event):
         self.controller.save_data()
