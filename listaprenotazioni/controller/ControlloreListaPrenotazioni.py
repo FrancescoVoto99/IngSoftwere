@@ -11,13 +11,11 @@ class ControlloreListaPrenotazioni():
         if os.path.isfile('listaprenotazioni/data/lista_prenotazioni_salvata.pickle'):
             with open('listaprenotazioni/data/lista_prenotazioni_salvata.pickle', 'rb') as f:
                 lista_prenotazioni_salvata = pickle.load(f)
-            self.model = lista_prenotazioni_salvata
+            self.model.lista_prenotazioni = lista_prenotazioni_salvata
 
 
     def aggiungi_prenotazione(self, prenotazione):
         self.model.aggiungi_prenotazione(prenotazione)
-        with open('listaprenotazioni/data/lista_prenotazioni_salvata.pickle', 'wb') as handle:
-            pickle.dumb(self.model, handle, pickle.HIGHEST_PROTOCOL)
 
     def get_prenotazione_by_index(self, index):
         return self.model.get_prenotazione_by_index(index)
@@ -32,5 +30,4 @@ class ControlloreListaPrenotazioni():
         return self.model.get_lista_prenotazioni()
 
     def save_data(self):
-        with open('listaprenotazioni/data/lista_prenotazioni_salvata.pickle', 'wb') as handle:
-            pickle.dump(self.model, handle, pickle.HIGHEST_PROTOCOL)
+        self.model.save_data()

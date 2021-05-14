@@ -9,6 +9,7 @@ from PyQt5 import QtCore
 from listapazienti.controller.ControlloreListaPazienti import ControlloreListaPazienti
 from listapazienti.views.VistaInserisciPaziente import VistaInserisciPaziente
 from listaprenotazioni.controller.ControlloreListaPrenotazioni import ControlloreListaPrenotazioni
+from listaservizi.controller.ControlloreListaServizi import ControlloreListaServizi
 from prenotazione.model.Prenotazione import Prenotazione
 
 
@@ -46,7 +47,7 @@ class VistaInserisciPrenotazione(QWidget):
         self.v_layout.addWidget(QLabel(titolo))
         combo_pazienti = QComboBox()
         for paziente in self.controller_pazienti.get_lista_pazienti():
-            combo_pazienti.addItem(paziente)
+            combo_pazienti.addItem(paziente.cf)
         self.v_layout.addWidget(combo_pazienti)
         combo_pazienti.activated[str].connect(self.tipo_onClicked)
         self.v_layout.addWidget(self.label_paziente)
@@ -83,15 +84,17 @@ class VistaInserisciPrenotazione(QWidget):
             self.label_reparto.setText(rbtn.text())
 
     def add_prenotazione(self):
+
+        controller_servizi=ControlloreListaServizi()
         data = self.info["Data di inizio ricovero"].text()
-        paziente = self.info["Paziente"].text()
-        servizio = self.info["Reparto"].text()
+        paziente = self.controller_pazienti.get_paziente_by_cf(self.info["Paziente"].text())
+        stringa_servizio=self.info["Reparto"].text().split()
+        servizio = controller_servizi.get_servizio_by_reparto(stringa_servizio[len(stringa_servizio)-1])
         if data == "" or paziente == "" or servizio == "":
             QMessageBox.critical(self, 'Errore', 'Per favore, inserisci tutte le informazioni richieste', QMessageBox.Ok, QMessageBox.Ok)
         else:
             self.controller.aggiungi_prenotazione(Prenotazione((paziente.cognome+paziente.nome).lower(), paziente, servizio, data))
             servizio.prenota()
-            with open('listaservizi/data/lista_servizi_salvata.pickle', 'wb') as handle:
-                pickle.dump(self.lista_servizi, handle, pickle.HIGHEST_PROTOCOL)
+            controller_servizi.save_data()
             self.callback()
             self.close()

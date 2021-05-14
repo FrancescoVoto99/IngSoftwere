@@ -34,8 +34,13 @@ class VistaServizio(QWidget):
         h_layout.addItem(QSpacerItem(50, 10, QSizePolicy.Minimum, QSizePolicy.Expanding))
 
         v_layout2 = QVBoxLayout()
-
         label = self.label_generate(self.controller.get_servizio_disponibile(), 25)
+        if(self.controller.get_servizio_disponibile()=="Non disponibile"):
+            label.setStyleSheet("background-color: red")
+        else:
+            label.setStyleSheet("background-color: green")
+
+
         v_layout2.addWidget(label)
 
         h_layout.addLayout(v_layout2)

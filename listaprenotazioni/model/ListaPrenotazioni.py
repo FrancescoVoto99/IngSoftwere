@@ -32,3 +32,7 @@ class ListaPrenotazioni():
 
     def get_lista_prenotazioni(self):
         return self.lista_prenotazioni
+
+    def save_data(self):
+        with open('listaprenotazioni/data/lista_prenotazioni_salvata.pickle', 'wb') as handle:
+            pickle.dump(self.lista_prenotazioni, handle, pickle.HIGHEST_PROTOCOL)

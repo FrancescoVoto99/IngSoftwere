@@ -36,6 +36,13 @@ class ListaServizi():
         for servizio in self.listaservizi:
             return servizio.__getattribute__("tipo")
 
+    def get_servizio_by_reparto(self, reparto):
+        for servizio in self.listaservizi:
+            if (servizio.reparto.lower() == reparto.lower() and servizio.disponibile):
+                return servizio
+            else:
+                return False
+
     def get_lista_servizi(self):
         return self.listaservizi
 
