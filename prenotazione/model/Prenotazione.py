@@ -10,3 +10,5 @@ class Prenotazione():
         self.servizio = servizio
         self.data = data
 
+    def libera_posto_letto(self):
+        self.servizio.disponibile=True

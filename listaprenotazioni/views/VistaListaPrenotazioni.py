@@ -18,7 +18,7 @@ class VistaListaPrenotazioni(QWidget):
 
         buttons_layout = QVBoxLayout()
         open_button = QPushButton("Apri")
-        #open_button.clicked.connect(self.get_info_prenotazioni)
+        open_button.clicked.connect(self.get_info_prenotazioni)
         buttons_layout.addWidget(open_button)
         new_button = QPushButton("Nuova")
         new_button.clicked.connect(self.show_new_prenotazione)
@@ -30,11 +30,11 @@ class VistaListaPrenotazioni(QWidget):
         self.resize(600, 300)
         self.setWindowTitle('Lista Prenotazioni')
 
-    #def get_info_prenotazioni(self):
-        #selected = self.list_view.selectedIndexes()[0].row()
-        #prenotazione_selezionato = self.controller.get_prenotazione_by_index(selected)
-        #self.vista_prenotazione = VistaPrenotazione(prenotazione_selezionato, self.controller.elimina_prenotazione_by_id, self.update_ui)
-        #self.vista_prenotazione.show()
+    def get_info_prenotazioni(self):
+        selected = self.list_view.selectedIndexes()[0].row()
+        prenotazione_selezionato = self.controller.get_prenotazione_by_index(selected)
+        self.vista_prenotazione = VistaPrenotazione(prenotazione_selezionato, self.controller.elimina_prenotazione_by_id, self.update_ui)
+        self.vista_prenotazione.show()
 
     def show_new_prenotazione(self):
         self.vista_inserisci_prenotazione = VistaInserisciPrenotazione(self.controller, self.update_ui)

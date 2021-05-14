@@ -5,12 +5,12 @@ from prenotazione.controller.ControllorePrenotazione import ControllorePrenotazi
 
 class VistaPrenotazione(QWidget):
 
-    def __init__(self, prenotazione,disdici_prenotazione, elimina_callback, libera_posto_letto, parent = None):
+    def __init__(self, prenotazione,disdici_prenotazione, elimina_callback,  parent = None):
         super(VistaPrenotazione, self).__init__(parent)
         self.controller = ControllorePrenotazione(prenotazione)
         self.disdici_prenotazione = disdici_prenotazione
         self.elimina_callback = elimina_callback
-        self.libera_posto_letto = libera_posto_letto
+        self.libera_posto_letto = self.controller.libera_posto_letto()
 
         v_layout = QVBoxLayout()
 
