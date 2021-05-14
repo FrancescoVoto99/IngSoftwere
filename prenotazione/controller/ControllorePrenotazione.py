@@ -14,14 +14,8 @@ class ControllorePrenotazione():
     def get_servizio_prenotazione(self):
         return self.model.servizio
 
-    def set_servizio_prenotazione(self, servizio):
-        self.model = servizio
-
     def get_data_prenotazione(self):
         return self.model.data
-
-    def set_data_prenotazione(self, data):
-        self.model = data
 
 
 

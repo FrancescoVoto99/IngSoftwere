@@ -2,9 +2,11 @@ import os
 import pickle
 
 from PyQt5.QtGui import QStandardItemModel, QStandardItem
-from PyQt5.QtWidgets import QVBoxLayout, QLabel, QLineEdit, QComboBox, QSpacerItem, QSizePolicy, QPushButton, \
-    QMessageBox, QTextEdit, QWidget
+from PyQt5.QtWidgets import QVBoxLayout, QLabel, QLineEdit, QComboBox, QSpacerItem, QSizePolicy, QPushButton, QWidget, \
+    QDateEdit, QRadioButton, QMessageBox
+from PyQt5 import QtCore
 
+from listapazienti.controller.ControlloreListaPazienti import ControlloreListaPazienti
 from listapazienti.views.VistaInserisciPaziente import VistaInserisciPaziente
 from listaprenotazioni.controller.ControlloreListaPrenotazioni import ControlloreListaPrenotazioni
 from prenotazione.model.Prenotazione import Prenotazione
@@ -14,56 +16,80 @@ class VistaInserisciPrenotazione(QWidget):
     def __init__(self, controller, callback):
         super(VistaInserisciPrenotazione, self).__init__()
         self.controller = controller
+        self.controller_pazienti = ControlloreListaPazienti()
         self.callback = callback
+        self.info = {}
+        #self.lista_pazienti = []
+        #if os.path.isfile('listapazienti/data/lista_pazienti.pickle'):
+        #    with open('listapazienti/data/lista_pazienti.pickle', 'rb') as f:
+         #        self.lista_pazienti = pickle.load(f)
 
-        #self.controller = ControlloreListaPrenotazioni()
+        self.label_reparto = QLabel()
+        self.label_paziente = QLabel()
 
-        v_layout = QVBoxLayout()
+        self.v_layout = QVBoxLayout()
 
-        v_layout.addWidget(QLabel("Data (dd/MM/yyyy)"))
-        self.text_data = QLineEdit(self)
-        v_layout.addWidget(self.text_data)
+        self.get_data("Data di inizio ricovero")
+        self.get_paziente("Paziente")
+        self.get_reparto("Reparto")
 
-        v_layout.addWidget(QLabel("paziente"))
-        self.text_paziente = QLineEdit(self)
-        v_layout.addWidget(self.text_paziente)
-
-
-        self.combo_servizi = QComboBox()
-        self.comboservizi_model = QStandardItemModel(self.combo_servizi)
-        if os.path.isfile('listaservizi/data/lista_servizi_salvata.pickle'):
-            with open('listaservizi/data/lista_servizi_salvata.pickle', 'rb') as f:
-                self.lista_servizi = pickle.load(f)
-            self.lista_servizi_disponibili = [s for s in self.lista_servizi.get_lista_servizi() if s.is_disponibile()]
-            for servizio in self.lista_servizi_disponibili:
-                item = QStandardItem()
-                item.setText(servizio.nome)
-                item.setEditable(False)
-                font = item.font()
-                font.setPointSize(18)
-                item.setFont(font)
-                self.comboservizi_model.appendRow(item)
-            self.combo_servizi.setModel(self.comboservizi_model)
-        v_layout.addWidget(QLabel("Servizio"))
-        v_layout.addWidget(self.combo_servizi)
-
-        v_layout.addItem(QSpacerItem(20, 40, QSizePolicy.Minimum, QSizePolicy.Expanding))
+        self.v_layout.addItem(QSpacerItem(20, 40, QSizePolicy.Minimum, QSizePolicy.Expanding))
 
         btn_ok = QPushButton("OK")
         btn_ok.clicked.connect(self.add_prenotazione)
-        v_layout.addWidget(btn_ok)
+        self.v_layout.addWidget(btn_ok)
 
-        self.setLayout(v_layout)
+        self.setLayout(self.v_layout)
         self.setWindowTitle('Nuova Prenotazione')
 
+    def get_paziente(self, titolo):
+        self.v_layout.addWidget(QLabel(titolo))
+        combo_pazienti = QComboBox()
+        for paziente in self.controller_pazienti.get_lista_pazienti():
+            combo_pazienti.addItem(paziente)
+        self.v_layout.addWidget(combo_pazienti)
+        combo_pazienti.activated[str].connect(self.tipo_onClicked)
+        self.v_layout.addWidget(self.label_paziente)
+        self.info[titolo] = self.label_paziente
+
+    def tipo_onClicked(self, text):
+        self.label_paziente.setText(text)
+
+    def get_data(self,tipo):
+        self.v_layout.addWidget(QLabel(tipo))
+        dateedit = QDateEdit(calendarPopup=True)
+        dateedit.setDateTime(QtCore.QDateTime.currentDateTime())
+        dateedit.setDisplayFormat('dd/MM/yyyy')
+        self.v_layout.addWidget(dateedit)
+        self.info[tipo] = dateedit
+
+    def get_reparto(self, tipo):
+        self.v_layout.addWidget(QLabel(tipo))
+        rbtn_oncologia = QRadioButton("Reparto di oncologia")
+        self.v_layout.addWidget(rbtn_oncologia)
+        rbtn_oncologia.toggled.connect(self.reparto_onClicked)
+        rbtn_chirurgia = QRadioButton("Reparto di chirurgia")
+        self.v_layout.addWidget(rbtn_chirurgia)
+        rbtn_chirurgia.toggled.connect(self.reparto_onClicked)
+        rbtn_cardiologia = QRadioButton("Reparto di cardiologia")
+        self.v_layout.addWidget(rbtn_cardiologia)
+        rbtn_cardiologia.toggled.connect(self.reparto_onClicked)
+        self.v_layout.addWidget(self.label_reparto)
+        self.info[tipo] = self.label_reparto
+
+    def reparto_onClicked(self):
+        rbtn = self.sender()
+        if rbtn.isChecked() == True:
+            self.label_reparto.setText(rbtn.text())
+
     def add_prenotazione(self):
-        data = self.text_data.text()
-        paziente = self.text_paziente.text()
-        servizio = self.lista_servizi_disponibili[self.combo_servizi.currentIndex()]
-        if data == "" or paziente == "" or not servizio:
-            QMessageBox.critical(self, 'Errore', "Per favore, inserisci tutte le informazioni richieste", QMessageBox.Ok, QMessageBox.Ok)
+        data = self.info["Data di inizio ricovero"].text()
+        paziente = self.info["Paziente"].text()
+        servizio = self.info["Reparto"].text()
+        if data == "" or paziente == "" or servizio == "":
+            QMessageBox.critical(self, 'Errore', 'Per favore, inserisci tutte le informazioni richieste', QMessageBox.Ok, QMessageBox.Ok)
         else:
-            self.controller.aggiungi_prenotazione(Prenotazione((servizio.nome).lower(), paziente, servizio, data))
+            self.controller.aggiungi_prenotazione(Prenotazione((paziente.cognome+paziente.nome).lower(), paziente, servizio, data))
             servizio.prenota()
             with open('listaservizi/data/lista_servizi_salvata.pickle', 'wb') as handle:
                 pickle.dump(self.lista_servizi, handle, pickle.HIGHEST_PROTOCOL)
