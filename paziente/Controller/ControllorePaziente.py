@@ -8,6 +8,9 @@ class ControllorePaziente():
    def get_cognome_paziente(self):
        return self.model.cognome
 
+   def get_sesso_paziente(self):
+       return self.model.sesso
+
    def get_luogodinascita_paziente(self):
        return self.model.luogodinascita
 

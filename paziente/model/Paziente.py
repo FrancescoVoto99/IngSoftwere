@@ -1,10 +1,11 @@
 class Paziente():
 
-    def __init__(self, nome, cognome, luogodinascita, datadinascita,
+    def __init__(self, nome, cognome, sesso, luogodinascita, datadinascita,
                  cf, telefono, email):
         super(Paziente, self).__init__()
         self.nome = nome
         self.cognome = cognome
+        self.sesso = sesso
         self.luogodinascita = luogodinascita
         self.datadinascita = datadinascita
         self.cf = cf

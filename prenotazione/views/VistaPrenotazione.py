@@ -1,6 +1,9 @@
 from PyQt5.QtWidgets import QWidget, QHBoxLayout, QVBoxLayout, QLabel, QSizePolicy, QSpacerItem, QPushButton
 
+from listapazienti.controller.ControlloreListaPazienti import ControlloreListaPazienti
+from paziente.view.VistaPaziente import VistaPaziente
 from prenotazione.controller.ControllorePrenotazione import ControllorePrenotazione
+from servizio.views.VistaServizio import VistaServizio
 
 
 class VistaPrenotazione(QWidget):
@@ -11,6 +14,7 @@ class VistaPrenotazione(QWidget):
         self.disdici_prenotazione = disdici_prenotazione
         self.elimina_callback = elimina_callback
         self.libera_posto_letto = self.controller.libera_posto_letto()
+        self.controller_paziente = ControlloreListaPazienti()
 
         v_layout = QVBoxLayout()
 
@@ -32,6 +36,18 @@ class VistaPrenotazione(QWidget):
 
         self.setLayout(v_layout)
 
+        button_visualizza_paziente = QPushButton("Visualizza paziente")
+        button_visualizza_paziente.clicked.connect(self.visualizza_paziente_click)
+        v_layout.addWidget(button_visualizza_paziente)
+
+        self.setLayout(v_layout)
+
+        button_visualizza_servizio = QPushButton("Visualizza servizio")
+        button_visualizza_servizio.clicked.connect(self.visualizza_servizio_click)
+        v_layout.addWidget(button_visualizza_servizio)
+
+        self.setLayout(v_layout)
+
     def get_label_info(self, testo, valore):
         current_label = QLabel("{}: {}".format(testo, valore))
         current_font = current_label.font()
@@ -48,6 +64,16 @@ class VistaPrenotazione(QWidget):
         self.libera_posto_letto(self.controller.get_servizio_prenotazione())
         self.elimina_callback()
         self.close()
+
+    def visualizza_paziente_click(self):
+       self.visualizza_paziente = VistaPaziente(self.controller.get_paziente_prenotazione, self.controller_paziente.archivia_paziente_by_cf , self.elimina_callback)
+       self.visualizza_paziente.show()
+       self.close()
+
+    def visualizza_servizio_click(self):
+       self.visualizza_servizio = VistaServizio(self.controller.get_servizio_prenotazione)
+       self.visualizza_servizio.show()
+       self.close()
 
     def get_generic_label(self, titolo):
         label = QLabel(titolo)

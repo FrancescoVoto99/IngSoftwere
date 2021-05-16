@@ -9,7 +9,7 @@ from PyQt5 import QtCore
 from listapazienti.controller.ControlloreListaPazienti import ControlloreListaPazienti
 from listapazienti.views.VistaInserisciPaziente import VistaInserisciPaziente
 from listaprenotazioni.controller.ControlloreListaPrenotazioni import ControlloreListaPrenotazioni
-from listaricoveri.controller.ControlloreListaRicoveri import ControlloreListaRicoveri
+#from listaricoveri.controller.ControlloreListaRicoveri import ControlloreListaRicoveri
 from listaservizi.controller.ControlloreListaServizi import ControlloreListaServizi
 from prenotazione.model.Prenotazione import Prenotazione
 

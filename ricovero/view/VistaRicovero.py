@@ -2,7 +2,7 @@ from datetime import datetime
 
 from PyQt5.QtWidgets import QWidget, QVBoxLayout, QLabel, QLineEdit, QPushButton, QMessageBox
 
-from listaricoveri.controller.ControlloreListaRicoveri import ControlloreListaRicoveri
+#from listaricoveri.controller.ControlloreListaRicoveri import ControlloreListaRicoveri
 from ricovero.controller.ControlloreRicovero import ControlloreRicovero
 from ricovero.model.Ricovero import Ricovero
 
@@ -29,9 +29,9 @@ class VistaRicovero(QWidget):
 
         self.setLayout(v_layout)
 
-    def add_to_lista_ricoveri(self, ricovero):
-        controller_lista = ControlloreListaRicoveri()
-        controller_lista.aggiungi_ricovero(ricovero)
+   # def add_to_lista_ricoveri(self, ricovero):
+    #    controller_lista = ControlloreListaRicoveri()
+       # controller_lista.aggiungi_ricovero(ricovero)
 
     def add_ricovero_click(self):
         try:
