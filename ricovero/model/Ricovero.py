@@ -1,6 +1,7 @@
 import time
 
 class Ricovero():
+
     def __init__(self, finericovero):
         self.finericovero = finericovero
 

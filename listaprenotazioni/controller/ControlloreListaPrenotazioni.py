@@ -13,7 +13,6 @@ class ControlloreListaPrenotazioni():
                 lista_prenotazioni_salvata = pickle.load(f)
             self.model.lista_prenotazioni = lista_prenotazioni_salvata
 
-
     def aggiungi_prenotazione(self, prenotazione):
         self.model.aggiungi_prenotazione(prenotazione)
 

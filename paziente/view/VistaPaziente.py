@@ -45,6 +45,8 @@ class VistaPaziente(QWidget):
         btn_archivia.clicked.connect(self.archivia_paziente_click)
         v_layout.addWidget(btn_archivia)
 
+        v_layout.addItem(QSpacerItem(20, 20, QSizePolicy.Minimum, QSizePolicy.Expanding))
+
         self.setLayout(v_layout)
         self.setWindowTitle(self.controller.get_nome_paziente() + " " + self.controller.get_cognome_paziente())
 
@@ -56,7 +58,7 @@ class VistaPaziente(QWidget):
         return current_label
 
     def check_ricovero(self):
-        self.vista_ricovero = VistaRicovero(self.controller.get_ricovero_paziente(), self.controller.aggiungi_nuovo_ricovero_paziente)
+        self.vista_ricovero = VistaRicovero(self.controller.get_ricovero_paziente(), self.controller.aggiungi_nuovo_ricovero_paziente, self.controller.get_cf_paziente())
         self.vista_ricovero.show()
 
     def check_reparto(self):

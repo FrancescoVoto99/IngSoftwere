@@ -13,6 +13,7 @@ class ControllorePrenotazione():
 
     def get_servizio_prenotazione(self):
         return self.model.servizio
+
     def libera_posto_letto(self):
         return  self.model.libera_posto_letto
 

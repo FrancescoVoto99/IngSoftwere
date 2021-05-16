@@ -14,13 +14,10 @@ class VistaPrenotazione(QWidget):
 
         v_layout = QVBoxLayout()
 
-        v_layout.addWidget(self.get_generic_label("Id {}".format(self.controller.get_id_prenotazione())))
-        v_layout.addItem(QSpacerItem(20, 40, QSizePolicy.Minimum, QSizePolicy.Expanding))
-        v_layout.addWidget(self.get_generic_label("Paziente {}".format(self.controller.get_paziente_prenotazione())))
-        v_layout.addItem(QSpacerItem(20, 40, QSizePolicy.Minimum, QSizePolicy.Expanding))
-        v_layout.addWidget(self.get_generic_label("Servizio {}".format(self.controller.get_servizio_prenotazione())))
-        v_layout.addItem(QSpacerItem(20, 40, QSizePolicy.Minimum, QSizePolicy.Expanding))
-        v_layout.addWidget(self.get_generic_label("Data {}".format(self.controller.get_data_prenotazione())))
+        v_layout.addWidget(self.get_label_info("Id", self.controller.get_id_prenotazione()))
+        v_layout.addWidget(self.get_label_info("Paziente", self.controller.get_paziente_prenotazione()))
+        v_layout.addWidget(self.get_label_info("Servizio", self.controller.get_servizio_prenotazione()))
+        v_layout.addWidget(self.get_label_info("Data di inizio ricovero", self.controller.get_data_prenotazione()))
         v_layout.addItem(QSpacerItem(20, 40, QSizePolicy.Minimum, QSizePolicy.Expanding))
 
         button_disdici = QPushButton("Disdici")
@@ -34,6 +31,13 @@ class VistaPrenotazione(QWidget):
         v_layout.addWidget(button_libera_posto_letto)
 
         self.setLayout(v_layout)
+
+    def get_label_info(self, testo, valore):
+        current_label = QLabel("{}: {}".format(testo, valore))
+        current_font = current_label.font()
+        current_font.setPointSize(20)
+        current_label.setFont(current_font)
+        return current_label
 
     def disdici_prenotazione_click(self):
         self.disdici_prenotazione(self.controller.get_id_prenotazione())

@@ -1,14 +1,15 @@
 from PyQt5.QtGui import QStandardItemModel, QStandardItem
-from PyQt5.QtWidgets import QWidget, QHBoxLayout, QListView, QVBoxLayout, QPushButton, QMessageBox
+from PyQt5.QtWidgets import QWidget, QHBoxLayout, QListView, QVBoxLayout, QPushButton
 
 from listaprenotazioni.controller.ControlloreListaPrenotazioni import ControlloreListaPrenotazioni
-from listaprenotazioni.views.VistaInserisciPrenotazione import VistaInserisciPrenotazione
+from listaprenotazioni.views.VistaInserisciPrenotazioneEmergenza import VistaInserisciPrenotazioneEmergenza
 from prenotazione.views.VistaPrenotazione import VistaPrenotazione
 
 
-class VistaListaPrenotazioni(QWidget):
+class VistaListaPrenotazioniEmergenza(QWidget):
+
     def __init__(self):
-        super(VistaListaPrenotazioni, self).__init__()
+        super(VistaListaPrenotazioniEmergenza, self).__init__()
 
         h_layout = QHBoxLayout()
         self.controller = ControlloreListaPrenotazioni()
@@ -31,16 +32,13 @@ class VistaListaPrenotazioni(QWidget):
         self.setWindowTitle('Lista Prenotazioni')
 
     def get_info_prenotazioni(self):
-        if (len(self.list_view.selectedIndexes()) > 0):
-            selected = self.list_view.selectedIndexes()[0].row()
-            prenotazione_selezionato = self.controller.get_prenotazione_by_index(selected)
-            self.vista_prenotazione = VistaPrenotazione(prenotazione_selezionato, self.controller.elimina_prenotazione_by_id, self.update_ui)
-            self.vista_prenotazione.show()
-        else:
-            QMessageBox.critical(self, 'Errore', "Selezionare una prenotazione", QMessageBox.Ok, QMessageBox.Ok)
+        selected = self.list_view.selectedIndexes()[0].row()
+        prenotazione_selezionato = self.controller.get_prenotazione_by_index(selected)
+        self.vista_prenotazione = VistaPrenotazione(prenotazione_selezionato, self.controller.elimina_prenotazione_by_id, self.update_ui)
+        self.vista_prenotazione.show()
 
     def show_new_prenotazione(self):
-        self.vista_inserisci_prenotazione = VistaInserisciPrenotazione(self.controller, self.update_ui)
+        self.vista_inserisci_prenotazione = VistaInserisciPrenotazioneEmergenza(self.controller, self.update_ui)
         self.vista_inserisci_prenotazione.show()
 
     def update_ui(self):
