@@ -6,6 +6,7 @@ from PyQt5.QtWidgets import QWidget, QHBoxLayout, QListView, QVBoxLayout, QPushB
 from listaricoveri.controller.ControlloreListaRicoveri import ControlloreListaRicoveri
 from ricovero.controller.ControlloreRicovero import ControlloreRicovero
 from ricovero.model.Ricovero import Ricovero
+from ricovero.view.VistaModificaRicovero import VistaModificaRicovero
 from ricovero.view.VistaRicovero import VistaRicovero
 
 
@@ -35,16 +36,17 @@ class VistaListaRicoveri(QWidget):
         if (len(self.list_view.selectedIndexes()) > 0):
             selected = self.list_view.selectedIndexes()[0].row()
             ricovero_selezionato = self.controller.get_ricovero_by_index(selected)
-            self.vista_ricovero = VistaRicovero(ricovero_selezionato, self.add_ricovero_click, self.update_ui)
+            self.vista_ricovero = VistaModificaRicovero(ricovero_selezionato, self.update_ui)
             self.vista_ricovero.show()
         else:
             QMessageBox.critical(self, 'Errore', "Selezionare un paziente", QMessageBox.Ok, QMessageBox.Ok)
 
     def update_ui(self):
         self.listview_model = QStandardItemModel(self.list_view)
-        for ricovero in self.controller.get_lista_dei_ricoveri():
+        self.controller.aggiungi_ricovero()
+        for paziente_ricoverato in self.controller.get_lista_dei_ricoveri():
             item = QStandardItem()
-            item.setText(ricovero)
+            item.setText(paziente_ricoverato.nome + ' ' + paziente_ricoverato.cognome)
             item.setEditable(False)
             font = item.font()
             font.setPointSize(18)
@@ -52,18 +54,6 @@ class VistaListaRicoveri(QWidget):
             self.listview_model.appendRow(item)
         self.list_view.setModel(self.listview_model)
 
-    def add_ricovero(self):
-        controller = ControlloreRicovero()
-        controller.aggiungi_ricovero()
-        self.close()
-
-    def add_ricovero_click(self):
-        try:
-            date = datetime.strptime(self.text_finericovero.text(), '%d/%m/%Y')
-            self.callback_inserisci_ricovero(Ricovero(date.timestamp()))
-            self.close()
-        except:
-            QMessageBox.critical(self, 'Errore', 'Inserisci la data nel formato richiesto: dd/MM/yyyy', QMessageBox.Ok, QMessageBox.Ok)
 
     def closeEvent(self, event):
         self.controller.save_data()
