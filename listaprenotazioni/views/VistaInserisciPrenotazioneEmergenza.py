@@ -73,8 +73,7 @@ class VistaInserisciPrenotazioneEmergenza(QWidget):
         controller_servizi = ControlloreListaServizi()
         data = self.info["Data di inizio ricovero"].text()
         paziente = self.controller_pazienti.get_paziente_by_cf(self.info["Paziente"].text())
-        stringa_servizio = self.info["Reparto"].text().split()
-        servizio = controller_servizi.get_servizio_by_reparto(stringa_servizio[len(stringa_servizio)-1])
+        servizio = controller_servizi.get_servizio_by_reparto(self.info["Reparto"].text())
         if data == "" or paziente == "" or servizio == "":
             QMessageBox.critical(self, 'Errore', 'Per favore, inserisci tutte le informazioni richieste', QMessageBox.Ok, QMessageBox.Ok)
         else:

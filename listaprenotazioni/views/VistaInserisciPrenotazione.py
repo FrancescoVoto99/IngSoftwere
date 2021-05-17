@@ -22,10 +22,10 @@ class VistaInserisciPrenotazione(QWidget):
         self.callback = callback
         self.info = {}
 
+        self.v_layout = QVBoxLayout()
+
         self.label_reparto = QLabel()
         self.label_paziente = QLabel()
-
-        self.v_layout = QVBoxLayout()
 
         self.get_data("Data di inizio ricovero")
         self.get_paziente("Paziente")
@@ -85,7 +85,7 @@ class VistaInserisciPrenotazione(QWidget):
         # controller_ricoveri = ControlloreListaRicoveri()
         data = self.info["Data di inizio ricovero"].text()
         paziente = self.controller_pazienti.get_paziente_by_cf(self.info["Paziente"].text())
-        stringa_servizio=self.info["Reparto"].text().split()
+        stringa_servizio = self.info["Reparto"].text().split()
         servizio = controller_servizi.get_servizio_by_reparto(stringa_servizio[len(stringa_servizio)-1])
         if data == "" or paziente == "" or servizio == "":
             QMessageBox.critical(self, 'Errore', 'Per favore, inserisci tutte le informazioni richieste', QMessageBox.Ok, QMessageBox.Ok)

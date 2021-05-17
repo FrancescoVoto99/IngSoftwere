@@ -33,13 +33,10 @@ class VistaListaPrenotazioni(QWidget):
         self.setWindowTitle('Lista Prenotazioni')
 
     def get_info_prenotazioni(self):
-        if (len(self.list_view.selectedIndexes()) > 0):
-            selected = self.list_view.selectedIndexes()[0].row()
-            prenotazione_selezionato = self.controller.get_prenotazione_by_index(selected)
-            self.vista_prenotazione = VistaPrenotazione(prenotazione_selezionato, self.controller.elimina_prenotazione_by_id, self.update_ui)
-            self.vista_prenotazione.show()
-        else:
-            QMessageBox.critical(self, 'Errore', "Selezionare una prenotazione", QMessageBox.Ok, QMessageBox.Ok)
+        selected = self.list_view.selectedIndexes()[0].row()
+        prenotazione_selezionato = self.controller.get_prenotazione_by_index(selected)
+        self.vista_prenotazione = VistaPrenotazione(prenotazione_selezionato, self.controller.elimina_prenotazione_by_id, self.update_ui)
+        self.vista_prenotazione.show()
 
     def show_new_prenotazione(self):
         self.vista_inserisci_prenotazione = VistaInserisciPrenotazione(self.controller, self.update_ui)
