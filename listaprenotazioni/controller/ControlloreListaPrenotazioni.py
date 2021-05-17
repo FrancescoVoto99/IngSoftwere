@@ -21,9 +21,6 @@ class ControlloreListaPrenotazioni():
 
     def elimina_prenotazione_by_id(self, id):
         self.model.rimuovi_prenotazione_by_id(id)
-        self.model.disdici_by_id(id)
-        with open('listaprenotazioni/data/lista_prenotazioni_salvata.pickle', 'wb') as handle:
-            pickle.dump(self.model, handle, pickle.HIGHEST_PROTOCOL)
 
     def get_lista_delle_prenotazioni(self):
         return self.model.get_lista_prenotazioni()

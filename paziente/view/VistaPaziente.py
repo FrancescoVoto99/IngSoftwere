@@ -1,11 +1,12 @@
-from PyQt5.QtWidgets import QWidget, QVBoxLayout, QLabel, QSpacerItem, QSizePolicy, QPushButton
+from PyQt5.QtWidgets import QWidget, QVBoxLayout, QLabel, QSpacerItem, QSizePolicy, QPushButton, QMessageBox
 
 from paziente.Controller.ControllorePaziente import ControllorePaziente
+from listaricoveri.controller.ControlloreListaRicoveri import ControlloreListaPrenotazioni
 from ricovero.view.VistaRicovero import VistaRicovero
 
 
 class VistaPaziente(QWidget):
-    def __init__(self, paziente, archivia_paziente, elimina_callback, parent=None):
+    def __init__(self, paziente, archivia_paziente= None, elimina_callback= None, parent=None):
         super(VistaPaziente, self).__init__(parent)
         self.controller = ControllorePaziente(paziente)
         self.archivia_paziente = archivia_paziente
@@ -29,6 +30,7 @@ class VistaPaziente(QWidget):
 
         v_layout.addItem(QSpacerItem(20, 40, QSizePolicy.Minimum, QSizePolicy.Expanding))
 
+
         btn_ricovero = QPushButton("Ricovero")
         btn_ricovero.clicked.connect(self.check_ricovero)
         v_layout.addWidget(btn_ricovero)
@@ -41,9 +43,10 @@ class VistaPaziente(QWidget):
 
         v_layout.addItem(QSpacerItem(20, 20, QSizePolicy.Minimum, QSizePolicy.Expanding))
 
-        btn_archivia = QPushButton("Archivia")
-        btn_archivia.clicked.connect(self.archivia_paziente_click)
-        v_layout.addWidget(btn_archivia)
+        if self.archivia_paziente != None:
+            btn_archivia = QPushButton("Archivia")
+            btn_archivia.clicked.connect(self.archivia_paziente_click)
+            v_layout.addWidget(btn_archivia)
 
         v_layout.addItem(QSpacerItem(20, 20, QSizePolicy.Minimum, QSizePolicy.Expanding))
 
@@ -62,7 +65,22 @@ class VistaPaziente(QWidget):
         self.vista_ricovero.show()
 
     def check_reparto(self):
-            pass
+        controller_ricoveri = ControlloreListaPrenotazioni()
+        reparto=None
+        for prenotazione in controller_ricoveri.get_lista_delle_prenotazioni():
+            if prenotazione.paziente.cf==self.controller.get_cf_paziente():
+                reparto=prenotazione.servizio.reparto
+        if(reparto!=None):
+             QMessageBox.about(self, "Reparto" , "Il paziente selezionato è ricoverato nel reparto di "+ reparto.upper() )
+
+
+        else:
+            QMessageBox.about (self, "Reparto" , "Il paziente selezionato non è ricoverato" )
+
+
+
+
+
 
     def archivia_paziente_click(self):
         self.archivia_paziente(self.controller.get_cf_paziente())

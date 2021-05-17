@@ -45,13 +45,14 @@ class VistaListaPrenotazioni(QWidget):
     def update_ui(self):
         self.listview_model = QStandardItemModel(self.list_view)
         for prenotazione in self.controller.get_lista_delle_prenotazioni():
-            item = QStandardItem()
-            item.setText(prenotazione.servizio.nome)
-            item.setEditable(False)
-            font = item.font()
-            font.setPointSize(18)
-            item.setFont(font)
-            self.listview_model.appendRow(item)
+            if prenotazione.servizio.disponibile==False:
+                item = QStandardItem()
+                item.setText(prenotazione.servizio.nome)
+                item.setEditable(False)
+                font = item.font()
+                font.setPointSize(18)
+                item.setFont(font)
+                self.listview_model.appendRow(item)
         self.list_view.setModel(self.listview_model)
 
     def closeEvent(self, event):

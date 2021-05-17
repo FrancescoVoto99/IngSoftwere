@@ -13,14 +13,13 @@ class VistaPrenotazione(QWidget):
         self.controller = ControllorePrenotazione(prenotazione)
         self.disdici_prenotazione = disdici_prenotazione
         self.elimina_callback = elimina_callback
-        self.libera_posto_letto = self.controller.libera_posto_letto()
         self.controller_paziente = ControlloreListaPazienti()
 
         v_layout = QVBoxLayout()
 
         v_layout.addWidget(self.get_label_info("Id", self.controller.get_id_prenotazione()))
-        v_layout.addWidget(self.get_label_info("Paziente", self.controller.get_paziente_prenotazione()))
-        v_layout.addWidget(self.get_label_info("Servizio", self.controller.get_servizio_prenotazione()))
+        v_layout.addWidget(self.get_label_info("Paziente", self.controller.get_paziente_prenotazione().nome+" "+self.controller.get_paziente_prenotazione().cognome))
+        v_layout.addWidget(self.get_label_info("Servizio", self.controller.get_servizio_prenotazione().nome))
         v_layout.addWidget(self.get_label_info("Data di inizio ricovero", self.controller.get_data_prenotazione()))
         v_layout.addItem(QSpacerItem(20, 40, QSizePolicy.Minimum, QSizePolicy.Expanding))
 
@@ -61,17 +60,17 @@ class VistaPrenotazione(QWidget):
         self.close()
 
     def libera_posto_letto_click(self):
-        self.libera_posto_letto(self.controller.get_servizio_prenotazione())
+        self.controller.libera_posto_letto()
         self.elimina_callback()
         self.close()
 
     def visualizza_paziente_click(self):
-       self.visualizza_paziente = VistaPaziente(self.controller.get_paziente_prenotazione, self.controller_paziente.archivia_paziente_by_cf , self.elimina_callback)
+       self.visualizza_paziente = VistaPaziente(self.controller.get_paziente_prenotazione())
        self.visualizza_paziente.show()
        self.close()
 
     def visualizza_servizio_click(self):
-       self.visualizza_servizio = VistaServizio(self.controller.get_servizio_prenotazione)
+       self.visualizza_servizio = VistaServizio(self.controller.get_servizio_prenotazione())
        self.visualizza_servizio.show()
        self.close()
 

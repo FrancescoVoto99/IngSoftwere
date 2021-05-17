@@ -89,6 +89,9 @@ class VistaInserisciPrenotazione(QWidget):
         servizio = controller_servizi.get_servizio_by_reparto(stringa_servizio[len(stringa_servizio)-1])
         if data == "" or paziente == "" or servizio == "":
             QMessageBox.critical(self, 'Errore', 'Per favore, inserisci tutte le informazioni richieste', QMessageBox.Ok, QMessageBox.Ok)
+        if servizio==None:
+            QMessageBox.critical(self, 'Errore', 'Posti in ' + servizio.reparto + ' terminati, richiedere posti emergenza ',
+                                 QMessageBox.Ok, QMessageBox.Ok)
         else:
             self.controller.aggiungi_prenotazione(Prenotazione((paziente.cognome+paziente.nome).lower(), paziente, servizio, data))
             servizio.prenota()
