@@ -14,3 +14,8 @@ class Servizio():
 
     def prenota(self):
         self.disponibile = False
+
+    def set_disponibile(self):
+        self.disponibile=True
+
+

@@ -20,6 +20,9 @@ class ControllorePrenotazione():
     def get_data_prenotazione(self):
         return self.model.data
 
+    def set_data_fine(self, datafine):
+        self.model.set_data_fine(datafine)
+
 
 
 

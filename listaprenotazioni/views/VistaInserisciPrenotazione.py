@@ -28,8 +28,10 @@ class VistaInserisciPrenotazione(QWidget):
         self.label_paziente = QLabel()
 
         self.get_data("Data di inizio ricovero")
+        self.get_data_fine("Data di fine ricovero")
         self.get_paziente("Paziente")
         self.get_reparto("Reparto")
+
 
         self.v_layout.addItem(QSpacerItem(20, 40, QSizePolicy.Minimum, QSizePolicy.Expanding))
 
@@ -52,6 +54,14 @@ class VistaInserisciPrenotazione(QWidget):
 
     def tipo_onClicked(self, text):
         self.label_paziente.setText(text)
+
+    def get_data_fine(self,tipo):
+
+        self.v_layout.addWidget(QLabel(tipo+" (opzionale)"))
+        dateedit = QDateEdit(calendarPopup=True)
+        dateedit.setDisplayFormat('dd/MM/yyyy')
+        self.v_layout.addWidget(dateedit)
+        self.info[tipo] = dateedit
 
     def get_data(self,tipo):
         self.v_layout.addWidget(QLabel(tipo))
@@ -84,16 +94,17 @@ class VistaInserisciPrenotazione(QWidget):
         controller_servizi = ControlloreListaServizi()
         # controller_ricoveri = ControlloreListaRicoveri()
         data = self.info["Data di inizio ricovero"].text()
+        datafine=self.info["Data di fine ricovero"].text()
         paziente = self.controller_pazienti.get_paziente_by_cf(self.info["Paziente"].text())
         stringa_servizio = self.info["Reparto"].text().split()
         servizio = controller_servizi.get_servizio_by_reparto(stringa_servizio[len(stringa_servizio)-1])
-        if data == "" or paziente == "" or servizio == "":
+        if data == "" or paziente == "":
             QMessageBox.critical(self, 'Errore', 'Per favore, inserisci tutte le informazioni richieste', QMessageBox.Ok, QMessageBox.Ok)
         if servizio==None:
             QMessageBox.critical(self, 'Errore', 'Posti in ' + servizio.reparto + ' terminati, richiedere posti emergenza ',
                                  QMessageBox.Ok, QMessageBox.Ok)
         else:
-            self.controller.aggiungi_prenotazione(Prenotazione((paziente.cognome+paziente.nome).lower(), paziente, servizio, data))
+            self.controller.aggiungi_prenotazione(Prenotazione((paziente.cognome+paziente.nome).lower(), paziente, servizio, data, datafine))
             servizio.prenota()
             controller_servizi.save_data()
            # controller_ricoveri.aggiungi_ricovero()

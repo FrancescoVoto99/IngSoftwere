@@ -1,6 +1,10 @@
+from datetime import date
+
 from PyQt5.QtWidgets import QWidget, QHBoxLayout, QVBoxLayout, QLabel, QSizePolicy, QSpacerItem, QPushButton
 
 from listapazienti.controller.ControlloreListaPazienti import ControlloreListaPazienti
+from listaprenotazioni.controller.ControlloreListaPrenotazioni import ControlloreListaPrenotazioni
+from listaprenotazioni.controller.ControlloreListaPrenotazioniArchiviate import ControlloreListaPrenotazioniArchiviate
 from paziente.view.VistaPaziente import VistaPaziente
 from prenotazione.controller.ControllorePrenotazione import ControllorePrenotazione
 from servizio.views.VistaServizio import VistaServizio
@@ -10,6 +14,7 @@ class VistaPrenotazione(QWidget):
 
     def __init__(self, prenotazione,disdici_prenotazione, elimina_callback,  parent = None):
         super(VistaPrenotazione, self).__init__(parent)
+        self.prenotazione=prenotazione
         self.controller = ControllorePrenotazione(prenotazione)
         self.disdici_prenotazione = disdici_prenotazione
         self.elimina_callback = elimina_callback
@@ -60,9 +65,11 @@ class VistaPrenotazione(QWidget):
         self.close()
 
     def libera_posto_letto_click(self):
-        self.controller.libera_posto_letto()
-        self.elimina_callback()
-        self.close()
+        self.controller.set_data_fine(date.today())
+        archivio=ControlloreListaPrenotazioniArchiviate()
+        archivio.aggiungi_prenotazione(self.prenotazione)
+        archivio.save_data()
+        self.disdici_prenotazione_click()
 
     def visualizza_paziente_click(self):
        self.visualizza_paziente = VistaPaziente(self.controller.get_paziente_prenotazione())

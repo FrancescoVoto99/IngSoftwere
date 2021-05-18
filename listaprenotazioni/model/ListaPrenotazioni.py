@@ -2,6 +2,7 @@ import json
 import os
 import pickle
 
+from listaservizi.controller.ControlloreListaServizi import ControlloreListaServizi
 from prenotazione.model.Prenotazione import Prenotazione
 
 
@@ -16,8 +17,12 @@ class ListaPrenotazioni():
     def rimuovi_prenotazione_by_id(self, id):
         for prenotazione in self.lista_prenotazioni:
             if prenotazione.id == id:
-                prenotazione.servizio.disponibile=True
+                prenotazione.servizio.set_disponibile()
                 self.lista_prenotazioni.remove(prenotazione)
+                controller=ControlloreListaServizi()
+                disp=controller.get_servizio_by_id(prenotazione.servizio.id)
+                disp.set_disponibile()
+                controller.save_data()
                 return True
         return False
 

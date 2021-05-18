@@ -31,4 +31,6 @@ class ControlloreListaServizi():
     def aggiungi_servizio(self, servizio):
         self.model.aggiungi_servizio(servizio)
 
+    def all_disponible(self):
+        self.model.all_disponibile()
 
