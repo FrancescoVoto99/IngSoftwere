@@ -26,6 +26,7 @@ class VistaPrenotazione(QWidget):
         v_layout.addWidget(self.get_label_info("Paziente", self.controller.get_paziente_prenotazione().nome+" "+self.controller.get_paziente_prenotazione().cognome))
         v_layout.addWidget(self.get_label_info("Servizio", self.controller.get_servizio_prenotazione().nome))
         v_layout.addWidget(self.get_label_info("Data di inizio ricovero", self.controller.get_data_prenotazione()))
+        v_layout.addWidget(self.get_label_info("Data di fine ricovero", self.controller.get_datafine_prenotazione()))
         v_layout.addItem(QSpacerItem(20, 40, QSizePolicy.Minimum, QSizePolicy.Expanding))
 
         button_disdici = QPushButton("Disdici")

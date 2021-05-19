@@ -15,7 +15,7 @@ class VistaInserisciServizio(QWidget):
         self.callback = callback
         self.info = {}
         self.list_reparti = ["Oncologia", "Chirurgia", "Cardiologia"]
-        self.list_tipi = ["ricovero", "ricovero di emergenza"]
+        self.list_tipi = ["ricovero", "ricovero di emergenza", "ricovero day hospital"]
 
         self.lbl_reparto = QLabel()
         self.lbl_disponibile = QLabel()

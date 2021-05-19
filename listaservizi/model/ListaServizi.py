@@ -45,6 +45,16 @@ class ListaServizi():
         if(valido):
             return None
 
+    def get_servizio_by_reparto_and_tipo(self, reparto, tipo):
+        valido = True
+        for servizio in self.listaservizi:
+            if servizio.reparto.lower() == reparto.lower() and servizio.tipo.lower() == tipo.lower() and servizio.disponibile:
+                valido = False
+                return servizio
+        if(valido):
+            return None
+
+
     def get_lista_servizi(self):
         return self.listaservizi
 
