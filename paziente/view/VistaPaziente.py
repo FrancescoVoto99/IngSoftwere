@@ -22,6 +22,7 @@ class VistaPaziente(QWidget):
 
         v_layout.addItem(QSpacerItem(20, 40, QSizePolicy.Minimum, QSizePolicy.Expanding))
 
+        v_layout.addWidget(self.get_label_info("Sesso", self.controller.get_sesso_paziente()))
         v_layout.addWidget(self.get_label_info("Luogo di nascita", self.controller.get_luogodinascita_paziente()))
         v_layout.addWidget(self.get_label_info("Data di nascita", self.controller.get_datadinascita_paziente()))
         v_layout.addWidget(self.get_label_info("Codice Fiscale", self.controller.get_cf_paziente()))
@@ -76,11 +77,6 @@ class VistaPaziente(QWidget):
 
         else:
             QMessageBox.about (self, "Reparto" , "Il paziente selezionato non è ricoverato" )
-
-
-
-
-
 
     def archivia_paziente_click(self):
         self.archivia_paziente(self.controller.get_cf_paziente())

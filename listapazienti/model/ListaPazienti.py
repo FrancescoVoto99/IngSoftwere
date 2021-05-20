@@ -7,8 +7,8 @@ class ListaPazienti():
     def __init__(self):
         super(ListaPazienti, self).__init__()
         self.lista_pazienti = []
-        if os.path.isfile('listapazienti/data/lista_pazienti_salvata.pickle'):
-            with open('listapazienti/data/lista_pazienti_salvata.pickle', 'rb') as f:
+        if os.path.isfile('listapazienti/data/lista_pazienti.pickle'):
+            with open('listapazienti/data/lista_pazienti.pickle', 'rb') as f:
                 self.lista_pazienti = pickle.load(f)
 
     def aggiungi_paziente (self, paziente):
@@ -39,5 +39,5 @@ class ListaPazienti():
         return False
 
     def save_data(self):
-        with open('listapazienti/data/lista_pazienti_salvata.pickle', 'wb') as handle:
+        with open('listapazienti/data/lista_pazienti.pickle', 'wb') as handle:
             pickle.dump(self.lista_pazienti, handle, pickle.HIGHEST_PROTOCOL)
