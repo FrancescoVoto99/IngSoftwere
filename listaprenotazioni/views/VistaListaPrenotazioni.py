@@ -3,9 +3,7 @@ from PyQt5.QtWidgets import QWidget, QHBoxLayout, QListView, QVBoxLayout, QPushB
 
 from listaprenotazioni.controller.ControlloreListaPrenotazioni import ControlloreListaPrenotazioni
 from listaprenotazioni.views.VistaInserisciPrenotazione import VistaInserisciPrenotazione
-from paziente.view.VistaPaziente import VistaPaziente
 from prenotazione.views.VistaPrenotazione import VistaPrenotazione
-from servizio.views.VistaServizio import VistaServizio
 
 
 class VistaListaPrenotazioni(QWidget):
