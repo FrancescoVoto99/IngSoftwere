@@ -29,7 +29,10 @@ class ListaPrenotazioni():
     def get_prenotazione_by_index(self, index):
         return self.lista_prenotazioni[index]
 
-
+    def get_prenotazione_by_id(self, id):
+        for prenotazione in self.lista_prenotazioni:
+            if prenotazione.id == id:
+                return prenotazione
 
     def get_lista_prenotazioni(self):
         return self.lista_prenotazioni

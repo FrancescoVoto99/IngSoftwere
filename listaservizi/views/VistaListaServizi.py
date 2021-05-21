@@ -65,7 +65,7 @@ class VistaListaServizi(QWidget):
             selected = self.list_view.selectedIndexes()[0].data()
             stringa = selected.split()
             servizio_selezionato = self.controller.get_servizio_by_nome(stringa[len(stringa)-1].replace('(', '').replace(')', ''))
-            self.vista_servizio = VistaServizio(servizio_selezionato)
+            self.vista_servizio = VistaServizio(servizio_selezionato, self.controller.elimina_servizio_by_nome, self.update_ui)
             self.vista_servizio.show()
         else:
             QMessageBox.critical(self, 'Errore', "Selezionare un servizio", QMessageBox.Ok, QMessageBox.Ok)

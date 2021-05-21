@@ -54,10 +54,16 @@ class ListaServizi():
         if(valido):
             return None
 
-
     def get_lista_servizi(self):
         return self.listaservizi
 
     def salva_dati(self):
         with open('listaservizi/data/lista_servizi.pickle','wb') as handle:
             pickle.dump(self.listaservizi,handle,pickle.HIGHEST_PROTOCOL)
+
+    def rimuovi_servizio_by_nome (self, nome):
+        for servizio in self.listaservizi:
+            if servizio.nome == nome and servizio.disponibile == True:
+                self.listaservizi.remove(servizio)
+                return True
+        return False

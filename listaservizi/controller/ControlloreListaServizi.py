@@ -37,3 +37,6 @@ class ControlloreListaServizi():
     def all_disponible(self):
         self.model.all_disponibile()
 
+    def elimina_servizio_by_nome(self, nome):
+        self.model.rimuovi_servizio_by_nome(nome)
+

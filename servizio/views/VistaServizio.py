@@ -1,13 +1,16 @@
-from PyQt5.QtWidgets import QWidget, QHBoxLayout, QVBoxLayout, QLabel, QSpacerItem, QSizePolicy
+from PyQt5.QtWidgets import QWidget, QHBoxLayout, QVBoxLayout, QLabel, QSpacerItem, QSizePolicy, QPushButton, \
+    QMessageBox
 
 from servizio.controller.ControlloreServizio import ControlloreServizio
 
 
 class VistaServizio(QWidget):
 
-    def __init__(self, servizio, parent=None):
+    def __init__(self, servizio, elimina_servizio, elimina_callback, parent=None):
         super(VistaServizio, self).__init__(parent)
         self.controller = ControlloreServizio(servizio)
+        self.elimina_servizio = elimina_servizio
+        self.elimina_callback = elimina_callback
 
         h_layout = QHBoxLayout()
 
@@ -40,6 +43,9 @@ class VistaServizio(QWidget):
         else:
             label.setStyleSheet("background-color: green")
 
+        btn_elimina = QPushButton("Elimina servizio")
+        btn_elimina.clicked.connect(self.conferma_eliminazione)
+        v_layout.addWidget(btn_elimina)
 
         v_layout2.addWidget(label)
 
@@ -54,3 +60,18 @@ class VistaServizio(QWidget):
         font.setPointSize(dimensione)
         label.setFont(font)
         return label
+
+    def conferma_eliminazione(self):
+        msgbox = QMessageBox()
+        msgbox.setText("Sei sicuro di voler eliminare il servizio selezionato?")
+        msgbox.setWindowTitle("Conferma")
+        msgbox.setStandardButtons(QMessageBox.Yes | QMessageBox.No)
+        msgbox.setDefaultButton(QMessageBox.Yes)
+        ris= msgbox.exec()
+        if(ris== QMessageBox.Yes):
+            self.elimina_servizio_click()
+
+    def elimina_servizio_click(self):
+        self.elimina_servizio(self.controller.get_nome_servizio())
+        self.elimina_callback()
+        self.close()

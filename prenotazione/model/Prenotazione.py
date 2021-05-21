@@ -1,6 +1,3 @@
-from paziente.model.Paziente import Paziente
-from servizio.model.Servizio import Servizio
-
 
 class Prenotazione():
     def __init__(self, id, paziente, servizio, data, datafine=None):

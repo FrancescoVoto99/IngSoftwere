@@ -58,7 +58,7 @@ class VistaModificaPaziente(QWidget):
         self.v_layout.addWidget(rbtn_femmina)
         self.v_layout.addWidget(self.label_sesso)
 
-    def sesso_onCliked(self):
+    def sesso_onClicked(self):
         rbtn = self.sender()
         if rbtn.isChecked() == True:
             self.label_sesso.setText(rbtn.text())

@@ -33,14 +33,7 @@ class VistaPaziente(QWidget):
 
         v_layout.addItem(QSpacerItem(20, 40, QSizePolicy.Minimum, QSizePolicy.Expanding))
 
-
-        btn_ricovero = QPushButton("Ricovero")
-        btn_ricovero.clicked.connect(self.check_ricovero)
-        v_layout.addWidget(btn_ricovero)
-
-        v_layout.addItem(QSpacerItem(20, 40, QSizePolicy.Minimum, QSizePolicy.Expanding))
-
-        btn_reparto = QPushButton("Reparto")
+        btn_reparto = QPushButton("Ricovero")
         btn_reparto.clicked.connect(self.check_reparto)
         v_layout.addWidget(btn_reparto)
 
@@ -52,12 +45,12 @@ class VistaPaziente(QWidget):
 
         v_layout.addItem(QSpacerItem(20, 40, QSizePolicy.Minimum, QSizePolicy.Expanding))
 
-        if self.archivia_paziente != None:
-            btn_archivia = QPushButton("Archivia")
-            btn_archivia.clicked.connect(self.archivia_paziente_click)
-            v_layout.addWidget(btn_archivia)
+        #if self.archivia_paziente != None:
+            #btn_archivia = QPushButton("Archivia")
+            #btn_archivia.clicked.connect(self.archivia_paziente_click)
+            #v_layout.addWidget(btn_archivia)
 
-        v_layout.addItem(QSpacerItem(20, 20, QSizePolicy.Minimum, QSizePolicy.Expanding))
+        #v_layout.addItem(QSpacerItem(20, 20, QSizePolicy.Minimum, QSizePolicy.Expanding))
 
         self.setLayout(v_layout)
         self.setWindowTitle(self.controller.get_nome_paziente() + " " + self.controller.get_cognome_paziente())
@@ -69,10 +62,6 @@ class VistaPaziente(QWidget):
         current_label.setFont(current_font)
         return current_label
 
-    def check_ricovero(self):
-        self.vista_ricovero = VistaRicovero(self.controller.get_ricovero_paziente(), self.controller.aggiungi_nuovo_ricovero_paziente, self.controller.get_cf_paziente())
-        self.vista_ricovero.show()
-
     def check_reparto(self):
         controller_ricoveri = ControlloreListaPrenotazioni()
         reparto=None
@@ -81,8 +70,6 @@ class VistaPaziente(QWidget):
                 reparto=prenotazione.servizio.reparto
         if(reparto!=None):
              QMessageBox.about(self, "Reparto" , "Il paziente selezionato è ricoverato nel reparto di "+ reparto.upper() )
-
-
         else:
             QMessageBox.about (self, "Reparto" , "Il paziente selezionato non è ricoverato" )
 
