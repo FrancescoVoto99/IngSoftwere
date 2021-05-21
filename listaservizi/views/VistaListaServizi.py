@@ -78,8 +78,8 @@ class VistaListaServizi(QWidget):
         self.listview_model = QStandardItemModel(self.list_view)
         self.controller.get_lista_servizi().sort(key=lambda x: x.nome.lower(), reverse=False)
         for servizio in self.controller.get_lista_servizi():
-            if reparto_search == "" or servizio.reparto.lower() == reparto_search.lower():
-                if posto_letto_search == "" or servizio.posto_letto.lower() == posto_letto_search.lower():
+            if reparto_search == "" or ((servizio.reparto.lower()).find(reparto_search.lower())) == 0:
+                if posto_letto_search == "" or ((servizio.posto_letto.lower()).find(posto_letto_search.lower())) == 0:
                     item = QStandardItem()
                     item.setText(servizio.nome)
                     item.setEditable(False)

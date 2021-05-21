@@ -1,9 +1,10 @@
 from PyQt5.QtGui import QStandardItemModel, QStandardItem
-from PyQt5.QtWidgets import QWidget, QHBoxLayout, QGridLayout, QPushButton, QListView, QVBoxLayout
+from PyQt5.QtWidgets import QWidget, QHBoxLayout, QGridLayout, QPushButton, QListView, QVBoxLayout, QMessageBox
 
 from listapazienti.controller.ControlloreListaPazienti import ControlloreListaPazienti
 from listaprenotazioni.controller.ControlloreListaPrenotazioni import ControlloreListaPrenotazioni
 from paziente.view.VistaPaziente import VistaPaziente
+from prenotazione.views.VistaPrenotazione import VistaPrenotazione
 
 
 class VistaListaPrenotazioniReparto(QWidget):
@@ -12,6 +13,7 @@ class VistaListaPrenotazioniReparto(QWidget):
         super(VistaListaPrenotazioniReparto, self).__init__()
 
         self.reparto = reparto
+        self.controller = ControlloreListaPrenotazioni()
 
         self.h_layout = QHBoxLayout()
         self.list_view = QListView()
@@ -44,8 +46,11 @@ class VistaListaPrenotazioniReparto(QWidget):
         self.list_view.setModel(self.listview_model)
 
     def get_info_paziente(self):
-        controller = ControlloreListaPazienti()
-        selected = self.list_view.selectedIndexes()[0].row()
-        paziente_selezionato = controller.get_paziente_by_index(selected)
-        self.vista_paziente = VistaPaziente(paziente_selezionato, None, self.update_ui)
-        self.vista_paziente.show()
+        if (len(self.list_view.selectedIndexes()) > 0):
+            selected = self.list_view.selectedIndexes()[0].data()
+            prenotazione_selezionata = self.controller.get_prenotazione_by_id(selected)
+            self.vista_prenotazione = VistaPrenotazione(prenotazione_selezionata,
+                                                        self.controller.elimina_prenotazione_by_id, self.update_ui)
+            self.vista_prenotazione.show()
+        else:
+            QMessageBox.critical(self, 'Errore', "Selezionare una prenotazione", QMessageBox.Ok, QMessageBox.Ok)

@@ -115,24 +115,29 @@ class VistaInserisciPrenotazione(QWidget):
         datafine = self.info["Data di fine ricovero"].text()
         date_required = date.today() + timedelta(days=7)
         newdate = datetime.strptime(data, '%d/%m/%Y')
+        finedata = datetime.strptime(datafine, '%d/%m/%Y')
         paziente = self.controller_pazienti.get_paziente_by_cf(self.info["Paziente"].text())
         stringa_servizio = self.info["Reparto"].text().split()
         servizio = controller_servizi.get_servizio_by_reparto(stringa_servizio[len(stringa_servizio)-1])
         tipo_ricovero = self.info["Tipo di ricovero"].text()
         if data == "" or paziente == "":
             QMessageBox.critical(self, 'Errore', 'Per favore, inserisci tutte le informazioni richieste', QMessageBox.Ok, QMessageBox.Ok)
-        if servizio==None:
+        elif servizio==None:
             QMessageBox.critical(self, 'Errore', 'Posti in ' + servizio.reparto + ' terminati, richiedere posti emergenza ',
                                  QMessageBox.Ok, QMessageBox.Ok)
-        if newdate.date() <= date_required and tipo_ricovero != "ricovero di emergenza":
+        elif newdate.date() <= date_required and tipo_ricovero != "ricovero di emergenza":
             QMessageBox.critical(self, 'Errore', "Bisogna prenotare almeno una settimana prima", QMessageBox.Ok, QMessageBox.Ok)
+        elif newdate.date() > finedata.date():
+            QMessageBox.critical(self, 'Errore', "Inserire correttamente le date", QMessageBox.Ok, QMessageBox.Ok)
         else:
             if tipo_ricovero == "ricovero day hospital":
                 datafine = data
                 servizio = controller_servizi.get_servizio_by_reparto_and_tipo(stringa_servizio[len(stringa_servizio)-1],tipo_ricovero)
-            self.controller.aggiungi_prenotazione(Prenotazione((paziente.cognome+paziente.nome).lower(), paziente, servizio, data, datafine))
-            servizio.prenota()
-            controller_servizi.save_data()
-           # controller_ricoveri.aggiungi_ricovero()
-            self.callback()
-            self.close()
+            if servizio.is_disponibile():
+               self.controller.aggiungi_prenotazione(Prenotazione((paziente.cognome+paziente.nome).lower(), paziente, servizio, data, datafine))
+               servizio.prenota()
+               controller_servizi.save_data()
+               self.callback()
+               self.close()
+            else:
+                QMessageBox.critical(self, 'Errore', "Non ci sono posti disponibili", QMessageBox.Ok, QMessageBox.Ok)
