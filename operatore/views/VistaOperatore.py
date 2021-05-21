@@ -1,7 +1,7 @@
 from PyQt5.QtWidgets import QWidget, QVBoxLayout, QLabel, QSpacerItem, QSizePolicy, QPushButton, QMessageBox
 
 from operatore.controller.ControlloreOperatore import ControlloreOperatore
-from operatore.views.ModificaOperatore import ModificaOperatore
+from operatore.views.VistaModificaOperatore import VistaModificaOperatore
 
 
 class VistaOperatore(QWidget):
@@ -68,6 +68,6 @@ class VistaOperatore(QWidget):
         self.close()
 
     def modifica_operatore_click(self):
-        self.vista_modifica_operatore= ModificaOperatore(self.operatore, self.elimina_callback)
+        self.vista_modifica_operatore= VistaModificaOperatore(self.operatore, self.elimina_callback)
         self.vista_modifica_operatore.show()
         self.close()

@@ -76,6 +76,8 @@ class VistaInserisciPaziente(QWidget):
             QMessageBox.critical(self, 'Errore', 'Per favore inserisci tutte le informazioni', QMessageBox.Ok, QMessageBox.Ok)
         elif self.controller.check_cf(cf):
             QMessageBox.critical(self, 'Errore', "Il paziente è già stato inserito nella lista", QMessageBox.Ok, QMessageBox.Ok)
+        elif len(telefono) < 8 or len(telefono) > 10:
+            QMessageBox.critical(self, 'Errore', "Numero di telefono sbagliato", QMessageBox.Ok, QMessageBox.Ok)
         else:
             self.controller.aggiungi_paziente(Paziente(nome, cognome, sesso, luogodinascita, datadinascita, cf, telefono, email))
             self.callback()

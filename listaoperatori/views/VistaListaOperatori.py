@@ -47,6 +47,7 @@ class VistaListaOperatori(QWidget):
 
     def update_ui(self,nome_search="",cognome_search=""):
         self.listview_model = QStandardItemModel(self.list_view)
+        self.controller.get_lista_operatori().sort(key=lambda x: x.cognome.lower(), reverse=False)
         for operatore in self.controller.get_lista_operatori():
             if nome_search=="" or operatore.nome.lower() == nome_search.lower() :
                 if cognome_search=="" or operatore.cognome.lower() == cognome_search.lower() :

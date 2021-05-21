@@ -3,7 +3,9 @@ from PyQt5.QtWidgets import QWidget, QHBoxLayout, QListView, QVBoxLayout, QPushB
 
 from listaprenotazioni.controller.ControlloreListaPrenotazioni import ControlloreListaPrenotazioni
 from listaprenotazioni.views.VistaInserisciPrenotazione import VistaInserisciPrenotazione
+from listaservizi.controller.ControlloreListaServizi import ControlloreListaServizi
 from prenotazione.views.VistaPrenotazione import VistaPrenotazione
+from servizio.controller.ControlloreServizio import ControlloreServizio
 
 
 class VistaListaPrenotazioni(QWidget):
@@ -23,6 +25,9 @@ class VistaListaPrenotazioni(QWidget):
         new_button = QPushButton("Nuova")
         new_button.clicked.connect(self.show_new_prenotazione)
         buttons_layout.addWidget(new_button)
+        button_disponibilita = QPushButton("Visualizza posti disponibili")
+        button_disponibilita.clicked.connect(self.show_disponibilita)
+        buttons_layout.addWidget(button_disponibilita)
         buttons_layout.addStretch()
         h_layout.addLayout(buttons_layout)
 
@@ -39,6 +44,18 @@ class VistaListaPrenotazioni(QWidget):
     def show_new_prenotazione(self):
         self.vista_inserisci_prenotazione = VistaInserisciPrenotazione(self.controller, self.update_ui)
         self.vista_inserisci_prenotazione.show()
+
+    def show_disponibilita(self):
+        contatore_posti_disponibili = 0
+        contatore_posti_occupati = 0
+        controller_servizi = ControlloreListaServizi()
+        for servizio in controller_servizi.get_lista_servizi():
+            if (servizio.is_disponibile()):
+                contatore_posti_disponibili += 1
+            else:
+                contatore_posti_occupati += 1
+        QMessageBox.about(self, "Posti disponibili", "I posti disponibili sono:" + contatore_posti_disponibili +
+                                "I posti occupati sono:" + contatore_posti_occupati)
 
     def update_ui(self):
         self.listview_model = QStandardItemModel(self.list_view)

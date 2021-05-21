@@ -74,11 +74,11 @@ class VistaInserisciServizio(QWidget):
         tipo = self.info["Tipo"].text()
         reparto = self.info["Reparto"].text()
         posto_letto = self.info["Posto letto"].text()
-        disponibile = "Disponibile"
+        #disponibile = "Disponibile"
         if id == "" or tipo == "" or reparto == "" or posto_letto == "" :
             QMessageBox.critical(self, 'Errore', 'Per favore inserisci tutte le informazioni', QMessageBox.Ok, QMessageBox.Ok)
         else:
             nome = (tipo + " in " + reparto + " (" + posto_letto + ")")
-            self.controller.aggiungi_servizio(Servizio(id, nome, tipo, reparto, posto_letto, disponibile))
+            self.controller.aggiungi_servizio(Servizio(id, nome, tipo, reparto, posto_letto))
             self.callback()
             self.close()

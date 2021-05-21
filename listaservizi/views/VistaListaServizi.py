@@ -76,6 +76,7 @@ class VistaListaServizi(QWidget):
 
     def update_ui(self, reparto_search = "", posto_letto_search = ""):
         self.listview_model = QStandardItemModel(self.list_view)
+        self.controller.get_lista_servizi().sort(key=lambda x: x.nome.lower(), reverse=False)
         for servizio in self.controller.get_lista_servizi():
             if reparto_search == "" or servizio.reparto.lower() == reparto_search.lower():
                 if posto_letto_search == "" or servizio.posto_letto.lower() == posto_letto_search.lower():

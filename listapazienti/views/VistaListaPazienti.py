@@ -53,7 +53,7 @@ class VistaListaPazienti(QWidget):
 
     def update_ui(self, nome_search = "", cognome_search = "", cf_search=""):
         self.listview_model = QStandardItemModel(self.list_view)
-        self.controller.get_lista_pazienti().sort(key=lambda x: x.cognome, reverse=False)
+        self.controller.get_lista_pazienti().sort(key=lambda x: x.cognome.lower(), reverse=False)
         for paziente in self.controller.get_lista_pazienti():
             if nome_search == "" or ((paziente.nome.lower()).find(nome_search.lower())) == 0:
                 if cognome_search == "" or ((paziente.cognome.lower()).find(cognome_search.lower())) == 0:

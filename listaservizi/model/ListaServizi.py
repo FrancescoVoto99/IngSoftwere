@@ -12,8 +12,8 @@ class ListaServizi():
 
         self.listaservizi = []
 
-        if os.path.isfile('listaservizi/data/lista_servizi_salvata.pickle'):
-            with open('listaservizi/data/lista_servizi_salvata.pickle', 'rb') as f:
+        if os.path.isfile('listaservizi/data/lista_servizi.pickle'):
+            with open('listaservizi/data/lista_servizi.pickle', 'rb') as f:
                 self.listaservizi = pickle.load(f)
 
     def aggiungi_servizio(self,servizio1):
@@ -59,5 +59,5 @@ class ListaServizi():
         return self.listaservizi
 
     def salva_dati(self):
-        with open('listaservizi/data/lista_servizi_salvata.pickle','wb') as handle:
+        with open('listaservizi/data/lista_servizi.pickle','wb') as handle:
             pickle.dump(self.listaservizi,handle,pickle.HIGHEST_PROTOCOL)

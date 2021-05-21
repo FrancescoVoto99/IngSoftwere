@@ -2,12 +2,14 @@ from PyQt5.QtWidgets import QWidget, QVBoxLayout, QLabel, QSpacerItem, QSizePoli
 
 from paziente.Controller.ControllorePaziente import ControllorePaziente
 from listaricoveri.controller.ControlloreListaRicoveri import ControlloreListaPrenotazioni
+from paziente.view.VistaModificaPaziente import VistaModificaPaziente
 from ricovero.view.VistaRicovero import VistaRicovero
 
 
 class VistaPaziente(QWidget):
-    def __init__(self, paziente, archivia_paziente= None, elimina_callback= None, parent=None):
+    def __init__(self, paziente, archivia_paziente, elimina_callback, parent=None):
         super(VistaPaziente, self).__init__(parent)
+        self.paziente = paziente
         self.controller = ControllorePaziente(paziente)
         self.archivia_paziente = archivia_paziente
         self.elimina_callback = elimina_callback
@@ -43,6 +45,12 @@ class VistaPaziente(QWidget):
         v_layout.addWidget(btn_reparto)
 
         v_layout.addItem(QSpacerItem(20, 20, QSizePolicy.Minimum, QSizePolicy.Expanding))
+
+        btn_modifica = QPushButton("Modifica Paziente")
+        btn_modifica.clicked.connect(self.modifica_paziente_click)
+        v_layout.addWidget(btn_modifica)
+
+        v_layout.addItem(QSpacerItem(20, 40, QSizePolicy.Minimum, QSizePolicy.Expanding))
 
         if self.archivia_paziente != None:
             btn_archivia = QPushButton("Archivia")
@@ -81,4 +89,9 @@ class VistaPaziente(QWidget):
     def archivia_paziente_click(self):
         self.archivia_paziente(self.controller.get_cf_paziente())
         self.archivia_callback()
+        self.close()
+
+    def modifica_paziente_click(self):
+        self.vista_modifica_paziente = VistaModificaPaziente(self.paziente, self.elimina_callback)
+        self.vista_modifica_paziente.show()
         self.close()

@@ -8,10 +8,9 @@ from PyQt5 import QtCore
 
 from operatore.model.Operatore import Operatore
 
-class ModificaOperatore(QWidget):
-
+class VistaModificaOperatore(QWidget):
     def __init__(self, operatore, callback):
-        super(ModificaOperatore, self).__init__()
+        super(VistaModificaOperatore, self).__init__()
         self.operatore = operatore
         self.callback = callback
         self.info = {}

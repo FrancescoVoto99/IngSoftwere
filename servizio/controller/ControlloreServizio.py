@@ -19,7 +19,7 @@ class ControlloreServizio():
         return self.model.posto_letto
 
     def get_servizio_disponibile(self):
-        if self.model.is_disponibile() :
+        if (self.model.is_disponibile()):
             return "Disponibile"
         else:
             return "Non disponibile"
