@@ -7,7 +7,7 @@ from ricovero.view.VistaRicovero import VistaRicovero
 
 
 class VistaPaziente(QWidget):
-    def __init__(self, paziente, archivia_paziente, elimina_callback, parent=None):
+    def __init__(self, paziente, archivia_paziente=None, elimina_callback=None, parent=None):
         super(VistaPaziente, self).__init__(parent)
         self.paziente = paziente
         self.controller = ControllorePaziente(paziente)

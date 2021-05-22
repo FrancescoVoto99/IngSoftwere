@@ -6,7 +6,7 @@ from servizio.controller.ControlloreServizio import ControlloreServizio
 
 class VistaServizio(QWidget):
 
-    def __init__(self, servizio, elimina_servizio, elimina_callback, parent=None):
+    def __init__(self, servizio, elimina_servizio=False, elimina_callback=None, parent=None):
         super(VistaServizio, self).__init__(parent)
         self.controller = ControlloreServizio(servizio)
         self.elimina_servizio = elimina_servizio
@@ -42,10 +42,10 @@ class VistaServizio(QWidget):
             label.setStyleSheet("background-color: red")
         else:
             label.setStyleSheet("background-color: green")
-
-        btn_elimina = QPushButton("Elimina servizio")
-        btn_elimina.clicked.connect(self.conferma_eliminazione)
-        v_layout.addWidget(btn_elimina)
+        if self.elimina_servizio:
+            btn_elimina = QPushButton("Elimina servizio")
+            btn_elimina.clicked.connect(self.conferma_eliminazione)
+            v_layout.addWidget(btn_elimina)
 
         v_layout2.addWidget(label)
 
@@ -72,6 +72,10 @@ class VistaServizio(QWidget):
             self.elimina_servizio_click()
 
     def elimina_servizio_click(self):
-        self.elimina_servizio(self.controller.get_nome_servizio())
+        if (self.controller.is_disponibile()):
+            self.elimina_servizio(self.controller.get_nome_servizio())
+        else:
+            QMessageBox.critical(self, 'Errore', 'Il servizio selezionato è utilizzato in questo momento',
+                                 QMessageBox.Ok, QMessageBox.Ok)
         self.elimina_callback()
         self.close()

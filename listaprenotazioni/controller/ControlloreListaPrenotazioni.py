@@ -22,6 +22,9 @@ class ControlloreListaPrenotazioni():
     def get_prenotazione_by_id(self, id):
         return self.model.get_prenotazione_by_id(id)
 
+    def get_prenotazione_by_posto_letto(self, posto_letto):
+        return self.model.get_prenotazione_by_posto_letto(posto_letto)
+
     def elimina_prenotazione_by_id(self, id):
         self.model.rimuovi_prenotazione_by_id(id)
 

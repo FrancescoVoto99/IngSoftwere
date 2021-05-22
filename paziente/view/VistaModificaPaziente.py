@@ -96,5 +96,6 @@ class VistaModificaPaziente(QWidget):
             self.paziente.cf = cf
             self.paziente.telefono = telefono
             self.paziente.email = email
-            self.callback()
+            if self.callback!=None:
+                self.callback()
             self.close()

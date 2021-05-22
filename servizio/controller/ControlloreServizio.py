@@ -18,6 +18,9 @@ class ControlloreServizio():
     def get_posto_letto_servizio(self):
         return self.model.posto_letto
 
+    def is_disponibile(self):
+        return self.model.is_disponibile
+
     def get_servizio_disponibile(self):
         if self.model.is_disponibile():
             return "Disponibile"

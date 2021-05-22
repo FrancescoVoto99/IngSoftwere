@@ -3,7 +3,7 @@ import pickle
 import os.path
 
 from servizio.model.Servizio import Servizio
-
+from PyQt5.QtWidgets import QMessageBox
 
 class ListaServizi():
 
@@ -37,13 +37,10 @@ class ListaServizi():
             return servizio.__getattribute__("tipo")
 
     def get_servizio_by_reparto(self, reparto):
-        valido=True
         for servizio in self.listaservizi:
-            if servizio.reparto.lower() == reparto.lower() and servizio.disponibile:
-                valido=False
+            if servizio.reparto.lower() == reparto.lower() and servizio.disponibile and servizio.tipo != "ricovero di emergenza":
                 return servizio
-        if(valido):
-            return None
+        return None
 
     def get_servizio_by_reparto_and_tipo(self, reparto, tipo):
         valido = True
@@ -63,7 +60,11 @@ class ListaServizi():
 
     def rimuovi_servizio_by_nome (self, nome):
         for servizio in self.listaservizi:
-            if servizio.nome == nome and servizio.disponibile == True:
-                self.listaservizi.remove(servizio)
-                return True
-        return False
+            if servizio.nome == nome :
+                if servizio.disponibile == False:
+                    return True
+                else:
+                    self.listaservizi.remove(servizio)
+                    return False
+
+

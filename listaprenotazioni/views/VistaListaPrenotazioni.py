@@ -57,7 +57,8 @@ class VistaListaPrenotazioni(QWidget):
     def get_info_prenotazioni(self):
         if (len(self.list_view.selectedIndexes()) > 0):
             selected = self.list_view.selectedIndexes()[0].data()
-            prenotazione_selezionata = self.controller.get_prenotazione_by_id(selected)
+            stringa = selected.split()
+            prenotazione_selezionata = self.controller.get_prenotazione_by_posto_letto(stringa[len(stringa) - 1].replace('(', '').replace(')', ''))
             self.vista_prenotazione = VistaPrenotazione(prenotazione_selezionata, self.controller.elimina_prenotazione_by_id, self.update_ui)
             self.vista_prenotazione.show()
         else:

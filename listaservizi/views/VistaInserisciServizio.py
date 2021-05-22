@@ -74,7 +74,7 @@ class VistaInserisciServizio(QWidget):
         tipo = self.info["Tipo"].text()
         reparto = self.info["Reparto"].text()
         posto_letto = self.info["Posto letto"].text()
-        disponibile = "Disponibile"
+        disponibile = True
         if id == "" or tipo == "" or reparto == "" or posto_letto == "" :
             QMessageBox.critical(self, 'Errore', 'Per favore inserisci tutte le informazioni', QMessageBox.Ok, QMessageBox.Ok)
         else:

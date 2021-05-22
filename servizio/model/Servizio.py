@@ -10,7 +10,7 @@ class Servizio():
         self.disponibile = disponibile
 
     def is_disponibile(self):
-        self.disponibile = True
+        return self.disponibile
 
     def prenota(self):
         self.disponibile = False
