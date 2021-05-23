@@ -15,7 +15,7 @@ class VistaInserisciPrenotazioneEmergenza(QWidget):
         self.controller_pazienti = ControlloreListaPazienti()
         self.callback = callback
         self.info = {}
-        self.list_reparti = ["Oncologia", "Chirurgia", "Cardiologia"]
+        self.list_reparti = ["Oncologia", "Chirurgia", "Cardiologia", "Medicina", "Riabilitazione"]
 
         self.label_reparto = QLabel()
         self.label_paziente = QLabel()
@@ -78,7 +78,7 @@ class VistaInserisciPrenotazioneEmergenza(QWidget):
             QMessageBox.critical(self, 'Errore', 'Per favore, inserisci tutte le informazioni richieste', QMessageBox.Ok, QMessageBox.Ok)
         else:
             self.controller.aggiungi_prenotazione(Prenotazione((paziente.cognome+paziente.nome).lower(), paziente, servizio, data))
-            servizio.prenota()
+            servizio.prenota(data)
             controller_servizi.save_data()
             self.callback()
             self.close()

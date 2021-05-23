@@ -38,18 +38,15 @@ class ListaServizi():
 
     def get_servizio_by_reparto(self, reparto):
         for servizio in self.listaservizi:
-            if servizio.reparto.lower() == reparto.lower() and servizio.disponibile and servizio.tipo != "ricovero di emergenza":
+            if servizio.reparto.lower() == reparto.lower() and servizio.is_disponibile() and servizio.tipo != "ricovero di emergenza":
                 return servizio
         return None
 
     def get_servizio_by_reparto_and_tipo(self, reparto, tipo):
-        valido = True
         for servizio in self.listaservizi:
-            if servizio.reparto.lower() == reparto.lower() and servizio.tipo.lower() == tipo.lower() and servizio.disponibile:
-                valido = False
+            if servizio.reparto.lower() == reparto.lower() and servizio.tipo.lower() == tipo.lower() and servizio.is_disponibile():
                 return servizio
-        if(valido):
-            return None
+        return None
 
     def get_lista_servizi(self):
         return self.listaservizi

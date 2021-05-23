@@ -1,3 +1,6 @@
+from datetime import date
+
+
 class Servizio():
 
     def __init__(self, id, nome, tipo, reparto, posto_letto, disponibile):
@@ -12,8 +15,11 @@ class Servizio():
     def is_disponibile(self):
         return self.disponibile
 
-    def prenota(self):
-        self.disponibile = False
+    def prenota(self, data):
+        if data <= date.today().strftime('%d/%m/%Y'):
+            self.disponibile = False
+        else:
+            self.disponibile = True
 
     def set_disponibile(self):
         self.disponibile=True

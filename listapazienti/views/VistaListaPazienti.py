@@ -59,7 +59,7 @@ class VistaListaPazienti(QWidget):
                 if cognome_search == "" or ((paziente.cognome.lower()).find(cognome_search.lower())) == 0:
                     if cf_search == "" or paziente.cf.lower() == cf_search.lower():
                         item = QStandardItem()
-                        item.setText(paziente.nome + " " + paziente.cognome + " (" + paziente.cf.upper() + ")")
+                        item.setText(paziente.cognome + " " + paziente.nome + " (" + paziente.cf.upper() + ")")
                         item.setEditable(False)
                         font = item.font()
                         font.setPointSize(18)

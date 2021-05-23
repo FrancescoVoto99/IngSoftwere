@@ -29,6 +29,13 @@ class ControllorePaziente():
    def get_ricovero_paziente(self):
         return self.model.ricovero
 
+   def get_referto_paziente(self):
+       return self.model.get_referto()
+
+   def aggiungi_nuovo_referto_paziente(self, referto):
+       self.model.add_referto(referto)
+
    def aggiungi_nuovo_ricovero_paziente(self, ricovero):
         self.model.add_ricovero(ricovero)
+
 

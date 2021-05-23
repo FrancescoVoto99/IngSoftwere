@@ -4,6 +4,7 @@ from PyQt5.QtWidgets import QWidget, QHBoxLayout, QGridLayout, QPushButton, QLis
 from listapazienti.controller.ControlloreListaPazienti import ControlloreListaPazienti
 from listaprenotazioni.controller.ControlloreListaPrenotazioni import ControlloreListaPrenotazioni
 from paziente.view.VistaPaziente import VistaPaziente
+from paziente.view.VistaRefertoPaziente import VistaRefertoPaziente
 
 
 class VistaListaPrenotazioniReparto(QWidget):
@@ -23,6 +24,9 @@ class VistaListaPrenotazioniReparto(QWidget):
         open_button = QPushButton("Apri")
         open_button.clicked.connect(self.get_info_paziente)
         buttons_layout.addWidget(open_button)
+        referto_button = QPushButton("Nuovo referto")
+        referto_button.clicked.connect(self.get_referto_paziente)
+        buttons_layout.addWidget(referto_button)
         buttons_layout.addStretch()
         self.h_layout.addLayout(buttons_layout)
 
@@ -52,4 +56,15 @@ class VistaListaPrenotazioniReparto(QWidget):
             self.vista_paziente = VistaPaziente(paziente_selezionato, self.controller.archivia_paziente_by_cf, self.update_ui)
             self.vista_paziente.show()
         else:
-            QMessageBox.critical(self, 'Errore', "Selezionare una prenotazione", QMessageBox.Ok, QMessageBox.Ok)
+            QMessageBox.critical(self, 'Errore', "Selezionare una paziente", QMessageBox.Ok, QMessageBox.Ok)
+
+    def get_referto_paziente(self):
+        if (len(self.list_view.selectedIndexes()) > 0):
+            selected = self.list_view.selectedIndexes()[0].data()
+            stringa = selected.split()
+            paziente_selezionato = self.controller.get_paziente_by_cf(stringa[len(stringa) - 1].replace('(', '').replace(')', ''))
+            self.vista_paziente = VistaRefertoPaziente(paziente_selezionato)
+            self.vista_paziente.show()
+        else:
+            QMessageBox.critical(self, 'Errore', "Selezionare un paziente", QMessageBox.Ok, QMessageBox.Ok)
+

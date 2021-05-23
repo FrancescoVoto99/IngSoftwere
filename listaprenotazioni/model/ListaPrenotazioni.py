@@ -33,8 +33,6 @@ class ListaPrenotazioni():
         for prenotazione in self.lista_prenotazioni:
             if prenotazione.servizio.posto_letto == posto_letto:
                 return prenotazione
-            else:
-                return False
 
     def get_prenotazione_by_id(self, id):
         for prenotazione in self.lista_prenotazioni:

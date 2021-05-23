@@ -14,8 +14,8 @@ class VistaInserisciServizio(QWidget):
         self.controller = controller
         self.callback = callback
         self.info = {}
-        self.list_reparti = ["Oncologia", "Chirurgia", "Cardiologia"]
-        self.list_tipi = ["ricovero", "ricovero di emergenza", "ricovero day hospital"]
+        self.list_reparti = ["Oncologia", "Chirurgia", "Cardiologia", "Medicina", "Riabilitazione"]
+        self.list_tipi = ["ricovero", "ricovero di emergenza"]
 
         self.lbl_reparto = QLabel()
         self.lbl_disponibile = QLabel()

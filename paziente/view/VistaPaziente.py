@@ -7,11 +7,11 @@ from ricovero.view.VistaRicovero import VistaRicovero
 
 
 class VistaPaziente(QWidget):
-    def __init__(self, paziente, archivia_paziente=None, elimina_callback=None, parent=None):
+    def __init__(self, paziente, modifica_paziente = None, elimina_callback = None, parent=None):
         super(VistaPaziente, self).__init__(parent)
         self.paziente = paziente
+        self.modifica_paziente = modifica_paziente
         self.controller = ControllorePaziente(paziente)
-        self.archivia_paziente = archivia_paziente
         self.elimina_callback = elimina_callback
 
         v_layout = QVBoxLayout()
@@ -30,12 +30,19 @@ class VistaPaziente(QWidget):
         v_layout.addWidget(self.get_label_info("Codice Fiscale", self.controller.get_cf_paziente()))
         v_layout.addWidget(self.get_label_info("Telefono", self.controller.get_telefono_paziente()))
         v_layout.addWidget(self.get_label_info("Email", self.controller.get_email_paziente()))
+        # v_layout.addWidget(self.get_label_info("Referto", self.controller.get_referto_paziente()))
 
         v_layout.addItem(QSpacerItem(20, 40, QSizePolicy.Minimum, QSizePolicy.Expanding))
 
         btn_reparto = QPushButton("Ricovero")
         btn_reparto.clicked.connect(self.check_reparto)
         v_layout.addWidget(btn_reparto)
+
+        v_layout.addItem(QSpacerItem(20, 20, QSizePolicy.Minimum, QSizePolicy.Expanding))
+
+        btn_referto = QPushButton("Referto")
+        btn_referto.clicked.connect(self.check_referto)
+        v_layout.addWidget(btn_referto)
 
         v_layout.addItem(QSpacerItem(20, 20, QSizePolicy.Minimum, QSizePolicy.Expanding))
 
@@ -66,12 +73,18 @@ class VistaPaziente(QWidget):
         controller_ricoveri = ControlloreListaPrenotazioni()
         reparto=None
         for prenotazione in controller_ricoveri.get_lista_delle_prenotazioni():
-            if prenotazione.paziente.cf==self.controller.get_cf_paziente():
+            if prenotazione.paziente.cf == self.controller.get_cf_paziente():
                 reparto=prenotazione.servizio.reparto
         if(reparto!=None):
              QMessageBox.about(self, "Reparto" , "Il paziente selezionato è ricoverato nel reparto di "+ reparto.upper() )
         else:
             QMessageBox.about (self, "Reparto" , "Il paziente selezionato non è ricoverato" )
+
+    def check_referto(self):
+        if self.controller.get_referto_paziente() == None:
+            QMessageBox.about(self, "Referto", "Non è stato inserito alcun referto per il paziente selezionato")
+        else:
+            QMessageBox.about(self, "Referto", "Il referto inserito dal medico è :" + self.controller.get_referto_paziente())
 
     def archivia_paziente_click(self):
         self.archivia_paziente(self.controller.get_cf_paziente())
@@ -82,3 +95,4 @@ class VistaPaziente(QWidget):
         self.vista_modifica_paziente = VistaModificaPaziente(self.paziente, self.elimina_callback)
         self.vista_modifica_paziente.show()
         self.close()
+

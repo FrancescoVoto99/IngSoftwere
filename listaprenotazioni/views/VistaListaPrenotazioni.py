@@ -86,14 +86,13 @@ class VistaListaPrenotazioni(QWidget):
             if reparto_search == "" or ((prenotazione.servizio.reparto.lower()).find(reparto_search.lower())) == 0:
                 if nome_search == "" or ((prenotazione.paziente.nome.lower()).find(nome_search.lower())) == 0:
                     if cognome_search == "" or ((prenotazione.paziente.cognome.lower()).find(cognome_search.lower())) == 0:
-                        if prenotazione.servizio.disponibile == False:
-                            item = QStandardItem()
-                            item.setText(prenotazione.servizio.nome)
-                            item.setEditable(False)
-                            font = item.font()
-                            font.setPointSize(18)
-                            item.setFont(font)
-                            self.listview_model.appendRow(item)
+                        item = QStandardItem()
+                        item.setText(prenotazione.servizio.nome)
+                        item.setEditable(False)
+                        font = item.font()
+                        font.setPointSize(18)
+                        item.setFont(font)
+                        self.listview_model.appendRow(item)
         self.list_view.setModel(self.listview_model)
 
     def search_prenotazione (self):

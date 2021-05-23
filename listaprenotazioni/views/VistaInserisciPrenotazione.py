@@ -26,7 +26,7 @@ class VistaInserisciPrenotazione(QWidget):
 
         self.v_layout = QVBoxLayout()
 
-        self.lista_tipi = ["ricovero", "ricovero di emergenza", "ricovero day hospital"]
+        self.lista_tipi = ["ricovero", "ricovero di emergenza"]
         self.label_reparto = QLabel()
         self.label_paziente = QLabel()
         self.label_tipo = QLabel()
@@ -36,7 +36,6 @@ class VistaInserisciPrenotazione(QWidget):
         self.get_paziente("Paziente")
         self.get_reparto("Reparto")
         self.get_tipo_ricovero("Tipo di ricovero")
-
 
         self.v_layout.addItem(QSpacerItem(20, 40, QSizePolicy.Minimum, QSizePolicy.Expanding))
 
@@ -87,6 +86,12 @@ class VistaInserisciPrenotazione(QWidget):
         rbtn_cardiologia = QRadioButton("Reparto di cardiologia")
         self.v_layout.addWidget(rbtn_cardiologia)
         rbtn_cardiologia.toggled.connect(self.reparto_onClicked)
+        rbtn_medicina = QRadioButton("Reparto di medicina")
+        self.v_layout.addWidget(rbtn_medicina)
+        rbtn_medicina.toggled.connect(self.reparto_onClicked)
+        rbtn_riabilitazione = QRadioButton("Reparto di riabilitazione")
+        self.v_layout.addWidget(rbtn_riabilitazione)
+        rbtn_riabilitazione.toggled.connect(self.reparto_onClicked)
         self.v_layout.addWidget(self.label_reparto)
         self.info[tipo] = self.label_reparto
 
@@ -110,7 +115,6 @@ class VistaInserisciPrenotazione(QWidget):
 
     def add_prenotazione(self):
         controller_servizi = ControlloreListaServizi()
-        # controller_ricoveri = ControlloreListaRicoveri()
         data = self.info["Data di inizio ricovero"].text()
         datafine = self.info["Data di fine ricovero"].text()
         date_required = date.today() + timedelta(days=7)
@@ -122,22 +126,19 @@ class VistaInserisciPrenotazione(QWidget):
         tipo_ricovero = self.info["Tipo di ricovero"].text()
         if data == "" or paziente == "":
             QMessageBox.critical(self, 'Errore', 'Per favore, inserisci tutte le informazioni richieste', QMessageBox.Ok, QMessageBox.Ok)
-        elif servizio==None:
-            QMessageBox.critical(self, 'Errore', 'Posti in ' + servizio.reparto + ' terminati, richiedere posti emergenza ',
+        elif servizio == None:
+           QMessageBox.critical(self, 'Errore', 'In questo reparto i posti sono terminati , richiedere posti di emergenza ',
                                  QMessageBox.Ok, QMessageBox.Ok)
         elif newdate.date() <= date_required and tipo_ricovero != "ricovero di emergenza":
             QMessageBox.critical(self, 'Errore', "Bisogna prenotare almeno una settimana prima", QMessageBox.Ok, QMessageBox.Ok)
         elif newdate.date() > finedata.date():
             QMessageBox.critical(self, 'Errore', "Inserire correttamente le date", QMessageBox.Ok, QMessageBox.Ok)
         else:
-            if tipo_ricovero == "ricovero day hospital":
-                datafine = data
-                servizio = controller_servizi.get_servizio_by_reparto_and_tipo(stringa_servizio[len(stringa_servizio)-1],tipo_ricovero)
-            if servizio.is_disponibile():
-               self.controller.aggiungi_prenotazione(Prenotazione((paziente.cognome+paziente.nome).lower(), paziente, servizio, data, datafine))
-               servizio.prenota()
-               controller_servizi.save_data()
-               self.callback()
-               self.close()
-            else:
-                QMessageBox.critical(self, 'Errore', "Non ci sono posti disponibili", QMessageBox.Ok, QMessageBox.Ok)
+            self.controller.aggiungi_prenotazione(Prenotazione((paziente.cognome + paziente.nome).lower(), paziente, servizio, data, datafine))
+            servizio.prenota(data)
+            controller_servizi.save_data()
+            self.callback()
+            self.close()
+
+           # else:
+                #QMessageBox.critical(self, 'Errore', "Non ci sono posti disponibili", QMessageBox.Ok, QMessageBox.Ok)

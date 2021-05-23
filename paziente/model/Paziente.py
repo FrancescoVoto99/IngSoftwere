@@ -1,3 +1,6 @@
+from datetime import date
+
+
 class Paziente():
 
     def __init__(self, nome, cognome, sesso, luogodinascita, datadinascita,
@@ -12,6 +15,7 @@ class Paziente():
         self.telefono = telefono
         self.email = email
         self.ricovero = None
+        self.referto = None
 
     def add_ricovero(self, ricovero):
         self.ricovero = ricovero
@@ -23,5 +27,13 @@ class Paziente():
         else:
             return self.ricovero
 
+    def get_referto(self):
+        if self.referto is not None:
+            return self.referto
+        else:
+            return self.referto == ""
 
+    def add_referto(self, referto):
+        today = date.today()
+        self.referto = str(self.get_referto()) + '\n' + today.strftime('%d/%m/%Y') + ": " + str(referto)
 
