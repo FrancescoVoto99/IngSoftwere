@@ -4,7 +4,6 @@ from PyQt5.QtWidgets import QWidget, QHBoxLayout, QGridLayout, QPushButton, QLis
 from listapazienti.controller.ControlloreListaPazienti import ControlloreListaPazienti
 from listaprenotazioni.controller.ControlloreListaPrenotazioni import ControlloreListaPrenotazioni
 from paziente.view.VistaPaziente import VistaPaziente
-from prenotazione.views.VistaPrenotazione import VistaPrenotazione
 
 
 class VistaListaPrenotazioniReparto(QWidget):
@@ -13,7 +12,7 @@ class VistaListaPrenotazioniReparto(QWidget):
         super(VistaListaPrenotazioniReparto, self).__init__()
 
         self.reparto = reparto
-        self.controller = ControlloreListaPrenotazioni()
+        self.controller = ControlloreListaPazienti()
 
         self.h_layout = QHBoxLayout()
         self.list_view = QListView()
@@ -37,7 +36,7 @@ class VistaListaPrenotazioniReparto(QWidget):
         for prenotazione in controller_prenotazione.get_lista_delle_prenotazioni():
             if prenotazione.servizio.disponibile == False and prenotazione.servizio.reparto == self.reparto:
                 item = QStandardItem()
-                item.setText(prenotazione.paziente.nome + ' '+ prenotazione.paziente.cognome)
+                item.setText(prenotazione.paziente.nome + ' '+ prenotazione.paziente.cognome +  " (" + prenotazione.paziente.cf.upper() + ")")
                 item.setEditable(False)
                 font = item.font()
                 font.setPointSize(18)
@@ -49,10 +48,8 @@ class VistaListaPrenotazioniReparto(QWidget):
         if (len(self.list_view.selectedIndexes()) > 0):
             selected = self.list_view.selectedIndexes()[0].data()
             stringa = selected.split()
-            prenotazione_selezionata = self.controller.get_prenotazione_by_posto_letto(
-                stringa[len(stringa) - 1].replace('(', '').replace(')', ''))
-            self.vista_prenotazione = VistaPrenotazione(prenotazione_selezionata,
-                                                        self.controller.elimina_prenotazione_by_id, self.update_ui)
-            self.vista_prenotazione.show()
+            paziente_selezionato = self.controller.get_paziente_by_cf(stringa[len(stringa) - 1].replace('(', '').replace(')', ''))
+            self.vista_paziente = VistaPaziente(paziente_selezionato, self.controller.archivia_paziente_by_cf, self.update_ui)
+            self.vista_paziente.show()
         else:
             QMessageBox.critical(self, 'Errore', "Selezionare una prenotazione", QMessageBox.Ok, QMessageBox.Ok)

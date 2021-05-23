@@ -20,7 +20,7 @@ class VistaHomeInfermiere(QWidget):
 
         self.setLayout(layout)
         self.resize(600, 200)
-        self.setWindowTitle("Medico")
+        self.setWindowTitle("Infermiere")
 
     def go_lista_prenotazioni(self):
         self.vista_lista_prenotazioni = VistaListaPrenotazioni()
