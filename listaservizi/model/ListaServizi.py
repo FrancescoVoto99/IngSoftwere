@@ -1,4 +1,4 @@
-import datetime
+from datetime import datetime
 import json
 import pickle
 import os.path
@@ -42,16 +42,18 @@ class ListaServizi():
         return None
 
     def get_servizio_by_reparto_and_tipo(self, reparto, tipo, controller, datainizio, datafine):
-       for servizio in self.listaservizi:
-           if servizio.tipo.lower() == tipo.lower():
-                if servizio.reparto.lower() == reparto.lower() and servizio.is_disponibile():
+        for servizio in self.listaservizi:
+            if servizio.tipo.lower() == tipo.lower() and servizio.reparto.lower() == reparto.lower():
+                if servizio.is_disponibile():
                     for prenotazione in controller.get_lista_delle_prenotazioni():
-                        if prenotazione.servizio == servizio:
+                        if prenotazione.servizio.posto_letto == servizio.posto_letto and prenotazione.servizio.tipo == servizio.tipo and prenotazione.servizio.reparto == servizio.reparto:
                             if datetime.strptime(prenotazione.datafine,'%d/%m/%Y') < datetime.strptime(datainizio,'%d/%m/%Y') or datetime.strptime(datafine,'%d/%m/%Y') < datetime.strptime(prenotazione.data,'%d/%m/%Y'):
                                 return servizio
-                else:
-                    return servizio
-       return None
+                    for prenotazione in controller.get_lista_delle_prenotazioni():
+                        if prenotazione.servizio.posto_letto != servizio.posto_letto and prenotazione.servizio.tipo == servizio.tipo and prenotazione.servizio.reparto == servizio.reparto:
+                            return servizio
+                        else:
+                            return None
 
     def get_lista_servizi(self):
         return self.listaservizi

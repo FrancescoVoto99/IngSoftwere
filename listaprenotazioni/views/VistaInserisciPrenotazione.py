@@ -127,7 +127,7 @@ class VistaInserisciPrenotazione(QWidget):
         if datainizio == "" or paziente == "":
                     QMessageBox.critical(self, 'Errore', 'Per favore, inserisci tutte le informazioni richieste', QMessageBox.Ok, QMessageBox.Ok)
         elif servizio == None:
-                    QMessageBox.critical(self, 'Errore', 'In questo reparto i posti sono terminati , richiedere posti di emergenza ',
+                    QMessageBox.critical(self, 'Errore', 'Tutti i servizi in questo reparto sono occupati nelle date inserite, richiedere posti di emergenza o modificare le date',
                                  QMessageBox.Ok, QMessageBox.Ok)
         elif newdate.date() <= date_required and tipo_ricovero != "ricovero di emergenza":
                     QMessageBox.critical(self, 'Errore', "Bisogna prenotare almeno una settimana prima", QMessageBox.Ok, QMessageBox.Ok)
