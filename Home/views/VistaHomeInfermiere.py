@@ -17,6 +17,8 @@ class VistaHomeInfermiere(QWidget):
         layout.addWidget(self.get_button("Visualizza pazienti ricoverati in Cardiologia", self.go_prenotazioni_reparto_cardiologia),0, 1)
         layout.addWidget(self.get_button("Visualizza pazienti ricoverati in Chirurgia", self.go_prenotazioni_reparto_chirurgia), 1,0)
         layout.addWidget(self.get_button("Visualizza pazienti ricoverati in Oncologia", self.go_prenotazioni_reparto_oncologia), 1,1)
+        layout.addWidget(self.get_button("Visualizza pazienti ricoverati in Medicina", self.go_prenotazioni_reparto_medicina), 2,0)
+        layout.addWidget(self.get_button("Visualizza pazienti ricoverati in Riabilitazione", self.go_prenotazioni_reparto_riabilitazione), 2,1)
 
         self.setLayout(layout)
         self.resize(600, 200)
@@ -36,6 +38,14 @@ class VistaHomeInfermiere(QWidget):
 
     def go_prenotazioni_reparto_oncologia(self):
         self.vista_lista_prenotazioni_reparti = VistaListaPrenotazioniReparto("Oncologia")
+        self.vista_lista_prenotazioni_reparti.show()
+
+    def go_prenotazioni_reparto_medicina(self):
+        self.vista_lista_prenotazioni_reparti = VistaListaPrenotazioniReparto("Medicina")
+        self.vista_lista_prenotazioni_reparti.show()
+
+    def go_prenotazioni_reparto_riabilitazione(self):
+        self.vista_lista_prenotazioni_reparti = VistaListaPrenotazioniReparto("Riabilitazione")
         self.vista_lista_prenotazioni_reparti.show()
 
     def get_button(self, titolo, on_click):

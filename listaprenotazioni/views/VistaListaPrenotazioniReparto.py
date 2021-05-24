@@ -63,7 +63,7 @@ class VistaListaPrenotazioniReparto(QWidget):
             selected = self.list_view.selectedIndexes()[0].data()
             stringa = selected.split()
             paziente_selezionato = self.controller.get_paziente_by_cf(stringa[len(stringa) - 1].replace('(', '').replace(')', ''))
-            self.vista_paziente = VistaRefertoPaziente(paziente_selezionato)
+            self.vista_paziente = VistaRefertoPaziente(paziente_selezionato, self.update_ui)
             self.vista_paziente.show()
         else:
             QMessageBox.critical(self, 'Errore', "Selezionare un paziente", QMessageBox.Ok, QMessageBox.Ok)

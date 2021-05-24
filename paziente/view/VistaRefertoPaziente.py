@@ -1,14 +1,16 @@
 from PyQt5.QtWidgets import QWidget, QVBoxLayout, QLabel, QLineEdit, QPushButton, QMessageBox, QTextEdit
 
+from listapazienti.controller.ControlloreListaPazienti import ControlloreListaPazienti
 from paziente.Controller.ControllorePaziente import ControllorePaziente
 
 
 class VistaRefertoPaziente(QWidget):
 
-    def __init__(self, paziente, parent = None):
+    def __init__(self, paziente, callback, parent = None):
         super(VistaRefertoPaziente, self).__init__(parent)
 
         self.controller = ControllorePaziente(paziente)
+        self.callback = callback
 
         v_layout = QVBoxLayout()
 
@@ -29,10 +31,11 @@ class VistaRefertoPaziente(QWidget):
         self.setWindowTitle(self.controller.get_nome_paziente() + " " + self.controller.get_cognome_paziente())
 
     def add_referto(self):
-        if self.controller.get_referto_paziente() == None:
-            self.controller.aggiungi_nuovo_referto_paziente(self.referto_edit.text())
-        else:
-            QMessageBox.critical(self, 'Errore', "Non è possibile inserire un nuovo referto", QMessageBox.Ok, QMessageBox.Ok)
+        controller_pazienti = ControlloreListaPazienti()
+        self.controller.get_referto_paziente = str(self.controller.aggiungi_nuovo_referto_paziente(self.referto_edit))
+        controller_pazienti.save_data()
+        self.callback()
+        self.close()
 
 
 

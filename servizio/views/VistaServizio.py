@@ -1,12 +1,13 @@
 from PyQt5.QtWidgets import QWidget, QHBoxLayout, QVBoxLayout, QLabel, QSpacerItem, QSizePolicy, QPushButton, \
     QMessageBox
 
+from prenotazione.controller.ControllorePrenotazione import ControllorePrenotazione
 from servizio.controller.ControlloreServizio import ControlloreServizio
 
 
 class VistaServizio(QWidget):
 
-    def __init__(self, servizio, elimina_servizio=False, elimina_callback=None, parent=None):
+    def __init__(self, servizio,  elimina_servizio=False, elimina_callback=None, parent=None):
         super(VistaServizio, self).__init__(parent)
         self.controller = ControlloreServizio(servizio)
         self.elimina_servizio = elimina_servizio
@@ -38,7 +39,7 @@ class VistaServizio(QWidget):
 
         v_layout2 = QVBoxLayout()
         label = self.label_generate(self.controller.get_servizio_disponibile(), 25)
-        if(self.controller.get_servizio_disponibile()=="Non disponibile"):
+        if(self.controller.get_servizio_disponibile() == "Non disponibile" ):
             label.setStyleSheet("background-color: red")
         else:
             label.setStyleSheet("background-color: green")

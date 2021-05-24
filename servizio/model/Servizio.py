@@ -16,12 +16,12 @@ class Servizio():
         return self.disponibile
 
     def prenota(self, data):
-        if data <= date.today().strftime('%d/%m/%Y'):
+        if data <= date.today():
             self.disponibile = False
         else:
             self.disponibile = True
 
     def set_disponibile(self):
-        self.disponibile=True
+        self.disponibile = True
 
 

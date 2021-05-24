@@ -15,7 +15,7 @@ class Paziente():
         self.telefono = telefono
         self.email = email
         self.ricovero = None
-        self.referto = None
+        self.referto = ""
 
     def add_ricovero(self, ricovero):
         self.ricovero = ricovero
@@ -28,12 +28,12 @@ class Paziente():
             return self.ricovero
 
     def get_referto(self):
-        if self.referto is not None:
-            return self.referto
-        else:
-            return self.referto == ""
+        return self.referto
 
     def add_referto(self, referto):
         today = date.today()
-        self.referto = str(self.get_referto()) + '\n' + today.strftime('%d/%m/%Y') + ": " + str(referto)
+        if self.get_referto() == None:
+            self.referto = '\n' + today.strftime('%d/%m/%Y') + ": " + str(referto)
+        else:
+            self.referto = str(self.get_referto()) +'\n' + today.strftime('%d/%m/%Y') + ": " + str(referto)
 

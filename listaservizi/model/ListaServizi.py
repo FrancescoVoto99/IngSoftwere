@@ -1,9 +1,8 @@
+import datetime
 import json
 import pickle
 import os.path
 
-from servizio.model.Servizio import Servizio
-from PyQt5.QtWidgets import QMessageBox
 
 class ListaServizi():
 
@@ -42,11 +41,17 @@ class ListaServizi():
                 return servizio
         return None
 
-    def get_servizio_by_reparto_and_tipo(self, reparto, tipo):
-        for servizio in self.listaservizi:
-            if servizio.reparto.lower() == reparto.lower() and servizio.tipo.lower() == tipo.lower() and servizio.is_disponibile():
-                return servizio
-        return None
+    def get_servizio_by_reparto_and_tipo(self, reparto, tipo, controller, datainizio, datafine):
+       for servizio in self.listaservizi:
+           if servizio.tipo.lower() == tipo.lower():
+                if servizio.reparto.lower() == reparto.lower() and servizio.is_disponibile():
+                    for prenotazione in controller.get_lista_delle_prenotazioni():
+                        if prenotazione.servizio == servizio:
+                            if datetime.strptime(prenotazione.datafine,'%d/%m/%Y') < datetime.strptime(datainizio,'%d/%m/%Y') or datetime.strptime(datafine,'%d/%m/%Y') < datetime.strptime(prenotazione.data,'%d/%m/%Y'):
+                                return servizio
+                else:
+                    return servizio
+       return None
 
     def get_lista_servizi(self):
         return self.listaservizi

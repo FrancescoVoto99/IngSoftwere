@@ -25,8 +25,8 @@ class ControlloreListaServizi():
     def get_servizio_by_tipo(self, tipo):
         return self.model.get_servizio_by_tipo(tipo)
 
-    def get_servizio_by_reparto_and_tipo(self, reparto, tipo):
-        return self.model.get_servizio_by_reparto_and_tipo(reparto, tipo)
+    def get_servizio_by_reparto_and_tipo(self, reparto, tipo, controller, datainizio, datafine):
+        return self.model.get_servizio_by_reparto_and_tipo(reparto, tipo, controller, datainizio, datafine)
 
     def save_data(self):
         self.model.salva_dati()

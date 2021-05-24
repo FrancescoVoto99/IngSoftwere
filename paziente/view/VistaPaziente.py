@@ -1,3 +1,5 @@
+from datetime import date, datetime
+
 from PyQt5.QtWidgets import QWidget, QVBoxLayout, QLabel, QSpacerItem, QSizePolicy, QPushButton, QMessageBox
 
 from paziente.Controller.ControllorePaziente import ControllorePaziente
@@ -71,20 +73,24 @@ class VistaPaziente(QWidget):
 
     def check_reparto(self):
         controller_ricoveri = ControlloreListaPrenotazioni()
-        reparto=None
+        reparto = None
         for prenotazione in controller_ricoveri.get_lista_delle_prenotazioni():
             if prenotazione.paziente.cf == self.controller.get_cf_paziente():
-                reparto=prenotazione.servizio.reparto
-        if(reparto!=None):
-             QMessageBox.about(self, "Reparto" , "Il paziente selezionato è ricoverato nel reparto di "+ reparto.upper() )
+                newdate = datetime.strptime(prenotazione.data, "%d/%m/%Y")
+                reparto = prenotazione.servizio.reparto
+        if(reparto != None) and newdate.date() <= date.today():
+             QMessageBox.about(self, "Reparto" , "Il paziente selezionato è ricoverato nel reparto di "+ reparto.upper())
         else:
-            QMessageBox.about (self, "Reparto" , "Il paziente selezionato non è ricoverato" )
+            if (reparto != None) and newdate.date() > date.today():
+                QMessageBox.about(self, "Reparto", "Il paziente selezionato verrà ricoverato nel reparto di " + reparto.upper() + " il giorno " + str(datetime.strptime(prenotazione.data, '%d/%m/%Y')))
+            else:
+                QMessageBox.about (self, "Reparto" , "Il paziente selezionato non è ricoverato" )
 
     def check_referto(self):
         if self.controller.get_referto_paziente() == None:
             QMessageBox.about(self, "Referto", "Non è stato inserito alcun referto per il paziente selezionato")
         else:
-            QMessageBox.about(self, "Referto", "Il referto inserito dal medico è :" + self.controller.get_referto_paziente())
+            QMessageBox.about(self, "Referto", "Il referto inserito dal medico è :" + (self.controller.get_referto_paziente()))
 
     def archivia_paziente_click(self):
         self.archivia_paziente(self.controller.get_cf_paziente())
