@@ -19,6 +19,8 @@ class Servizio():
     def is_prenotato(self):
         self.prenotato = True
 
+    def set_prenotato(self):
+        self.prenotato = False
 
     def prenota(self, data):
         if data <= date.today():

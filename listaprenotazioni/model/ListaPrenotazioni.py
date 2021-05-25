@@ -18,10 +18,12 @@ class ListaPrenotazioni():
         for prenotazione in self.lista_prenotazioni:
             if prenotazione.id == id:
                 prenotazione.servizio.set_disponibile()
+                prenotazione.servizio.set_prenotato()
                 self.lista_prenotazioni.remove(prenotazione)
                 controller=ControlloreListaServizi()
                 disp=controller.get_servizio_by_id(prenotazione.servizio.id)
                 disp.set_disponibile()
+                disp.set_prenotato()
                 controller.save_data()
                 return True
         return False
@@ -43,5 +45,5 @@ class ListaPrenotazioni():
         return self.lista_prenotazioni
 
     def save_data(self):
-        with open('listaprenotazioni/data/lista_prenotazioni.pickle', 'wb') as handle:
+        with open('listaprenotazioni/data/lista_prenotazioni_salvata.pickle', 'wb') as handle:
             pickle.dump(self.lista_prenotazioni, handle, pickle.HIGHEST_PROTOCOL)
