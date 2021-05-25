@@ -32,8 +32,9 @@ class Paziente():
 
     def add_referto(self, referto):
         today = date.today()
-        if self.get_referto() == None:
+        if self.referto == None:
             self.referto = '\n' + today.strftime('%d/%m/%Y') + ": " + str(referto)
         else:
             self.referto = str(self.get_referto()) +'\n' + today.strftime('%d/%m/%Y') + ": " + str(referto)
+
 

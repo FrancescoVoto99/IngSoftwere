@@ -68,3 +68,5 @@ class VistaListaPrenotazioniReparto(QWidget):
         else:
             QMessageBox.critical(self, 'Errore', "Selezionare un paziente", QMessageBox.Ok, QMessageBox.Ok)
 
+    def closeEvent(self, event):
+        self.controller.save_data()

@@ -32,7 +32,6 @@ class VistaPaziente(QWidget):
         v_layout.addWidget(self.get_label_info("Codice Fiscale", self.controller.get_cf_paziente()))
         v_layout.addWidget(self.get_label_info("Telefono", self.controller.get_telefono_paziente()))
         v_layout.addWidget(self.get_label_info("Email", self.controller.get_email_paziente()))
-        # v_layout.addWidget(self.get_label_info("Referto", self.controller.get_referto_paziente()))
 
         v_layout.addItem(QSpacerItem(20, 40, QSizePolicy.Minimum, QSizePolicy.Expanding))
 
@@ -53,13 +52,6 @@ class VistaPaziente(QWidget):
         v_layout.addWidget(btn_modifica)
 
         v_layout.addItem(QSpacerItem(20, 40, QSizePolicy.Minimum, QSizePolicy.Expanding))
-
-        #if self.archivia_paziente != None:
-            #btn_archivia = QPushButton("Archivia")
-            #btn_archivia.clicked.connect(self.archivia_paziente_click)
-            #v_layout.addWidget(btn_archivia)
-
-        #v_layout.addItem(QSpacerItem(20, 20, QSizePolicy.Minimum, QSizePolicy.Expanding))
 
         self.setLayout(v_layout)
         self.setWindowTitle(self.controller.get_nome_paziente() + " " + self.controller.get_cognome_paziente())
@@ -82,7 +74,7 @@ class VistaPaziente(QWidget):
              QMessageBox.about(self, "Reparto" , "Il paziente selezionato è ricoverato nel reparto di "+ reparto.upper())
         else:
             if (reparto != None) and newdate.date() > date.today():
-                QMessageBox.about(self, "Reparto", "Il paziente selezionato verrà ricoverato nel reparto di " + reparto.upper() + " il giorno " + str(datetime.strptime(prenotazione.data, '%d/%m/%Y')))
+                QMessageBox.about(self, "Reparto", "Il paziente selezionato verrà ricoverato nel reparto di " + reparto.upper() + " il giorno " + newdate.strftime('%d/%m/%Y'))
             else:
                 QMessageBox.about (self, "Reparto" , "Il paziente selezionato non è ricoverato" )
 
@@ -90,12 +82,7 @@ class VistaPaziente(QWidget):
         if self.controller.get_referto_paziente() == None:
             QMessageBox.about(self, "Referto", "Non è stato inserito alcun referto per il paziente selezionato")
         else:
-            QMessageBox.about(self, "Referto", "Il referto inserito dal medico è :" + (self.controller.get_referto_paziente()))
-
-    def archivia_paziente_click(self):
-        self.archivia_paziente(self.controller.get_cf_paziente())
-        self.archivia_callback()
-        self.close()
+            QMessageBox.about(self, "Referto", "Il referto inserito dal medico è :" + str(self.controller.get_referto_paziente()))
 
     def modifica_paziente_click(self):
         self.vista_modifica_paziente = VistaModificaPaziente(self.paziente, self.elimina_callback)

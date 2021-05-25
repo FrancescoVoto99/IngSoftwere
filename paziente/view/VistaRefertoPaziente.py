@@ -20,7 +20,7 @@ class VistaRefertoPaziente(QWidget):
         label_inserisci.setFont(font_inserisci)
         v_layout.addWidget(label_inserisci)
 
-        self.referto_edit = QTextEdit(self)
+        self.referto_edit = QLineEdit()
         v_layout.addWidget(self.referto_edit)
 
         btn_ok = QPushButton("Conferma")
@@ -32,9 +32,10 @@ class VistaRefertoPaziente(QWidget):
 
     def add_referto(self):
         controller_pazienti = ControlloreListaPazienti()
-        self.controller.get_referto_paziente = str(self.controller.aggiungi_nuovo_referto_paziente(self.referto_edit))
+        self.controller.aggiungi_nuovo_referto_paziente = self.controller.aggiungi_nuovo_referto_paziente(self.referto_edit.text())
         controller_pazienti.save_data()
-        self.callback()
+        if self.callback() != None:
+            self.callback()
         self.close()
 
 
