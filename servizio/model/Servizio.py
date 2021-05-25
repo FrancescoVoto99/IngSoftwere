@@ -11,9 +11,14 @@ class Servizio():
         self.reparto = reparto
         self.posto_letto = posto_letto
         self.disponibile = disponibile
+        self.prenotato = False
 
     def is_disponibile(self):
         return self.disponibile
+
+    def is_prenotato(self):
+        self.prenotato = True
+
 
     def prenota(self, data):
         if data <= date.today():

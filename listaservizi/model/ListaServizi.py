@@ -49,14 +49,18 @@ class ListaServizi():
                         if prenotazione.servizio.posto_letto == servizio.posto_letto and prenotazione.servizio.tipo == servizio.tipo and prenotazione.servizio.reparto == servizio.reparto:
                             if datetime.strptime(prenotazione.datafine,'%d/%m/%Y') < datetime.strptime(datainizio,'%d/%m/%Y') or datetime.strptime(datafine,'%d/%m/%Y') < datetime.strptime(prenotazione.data,'%d/%m/%Y'):
                                 return servizio
-                    for prenotazione in controller.get_lista_delle_prenotazioni():
-                        if prenotazione.servizio.posto_letto == servizio.posto_letto and prenotazione.servizio.tipo == servizio.tipo and prenotazione.servizio.reparto == servizio.reparto:
-                            return servizio
+                    if servizio.prenotato == False:
+                        return servizio
+       return None
+
+                    #for prenotazione in controller.get_lista_delle_prenotazioni():
+                     #   if prenotazione.servizio.posto_letto == servizio.posto_letto and prenotazione.servizio.tipo == servizio.tipo and prenotazione.servizio.reparto == servizio.reparto:
+                      #      return servizio
                     #for prenotazione in controller.get_lista_delle_prenotazioni():
                         #if prenotazione.servizio.posto_letto != servizio.posto_letto and prenotazione.servizio.tipo != servizio.tipo and prenotazione.servizio.reparto != servizio.reparto:
                             #return servizio
-                        else:
-                            return None
+                       # else:
+                           # return None
 
     def get_lista_servizi(self):
         return self.listaservizi

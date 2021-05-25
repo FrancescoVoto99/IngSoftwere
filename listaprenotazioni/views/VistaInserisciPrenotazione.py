@@ -136,6 +136,7 @@ class VistaInserisciPrenotazione(QWidget):
         else:
              self.controller.aggiungi_prenotazione(Prenotazione((paziente.cognome + paziente.nome).lower(), paziente, servizio, datainizio, datafine))
              servizio.prenota(newdate.date())
+             servizio.is_prenotato()
              controller_servizi.save_data()
              self.callback()
              self.close()

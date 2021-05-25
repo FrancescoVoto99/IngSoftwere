@@ -8,8 +8,8 @@ class ControlloreListaPrenotazioni():
     def __init__(self):
         super(ControlloreListaPrenotazioni, self).__init__()
         self.model = ListaPrenotazioni()
-        if os.path.isfile('listaprenotazioni/data/lista_prenotazioni_salvata.pickle'):
-            with open('listaprenotazioni/data/lista_prenotazioni_salvata.pickle', 'rb') as f:
+        if os.path.isfile('listaprenotazioni/data/lista_prenotazioni.pickle'):
+            with open('listaprenotazioni/data/lista_prenotazioni.pickle', 'rb') as f:
                 lista_prenotazioni_salvata = pickle.load(f)
             self.model.lista_prenotazioni = lista_prenotazioni_salvata
 
