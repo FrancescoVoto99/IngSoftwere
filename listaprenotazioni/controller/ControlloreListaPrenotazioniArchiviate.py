@@ -22,5 +22,8 @@ class ControlloreListaPrenotazioniArchiviate():
     def get_lista_delle_prenotazioni(self):
         return self.model.get_lista_prenotazioni()
 
+    def get_prenotazione_by_posto_letto_and_cf(self, posto_letto, cf):
+        return self.model.get_prenotazione_by_posto_letto_and_cf(posto_letto, cf)
+
     def save_data(self):
         self.model.save_data()

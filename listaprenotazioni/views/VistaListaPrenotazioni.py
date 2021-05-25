@@ -3,6 +3,7 @@ from PyQt5.QtWidgets import QWidget, QHBoxLayout, QListView, QVBoxLayout, QPushB
 
 from listaprenotazioni.controller.ControlloreListaPrenotazioni import ControlloreListaPrenotazioni
 from listaprenotazioni.views.VistaInserisciPrenotazione import VistaInserisciPrenotazione
+from listaprenotazioni.views.VistaListaPrenotazioniArchiviate import VistaListaPrenotazioniArchiviate
 from listaservizi.controller.ControlloreListaServizi import ControlloreListaServizi
 from prenotazione.views.VistaPrenotazione import VistaPrenotazione
 
@@ -30,6 +31,11 @@ class VistaListaPrenotazioni(QWidget):
         button_disponibilita = QPushButton("Visualizza posti disponibili")
         button_disponibilita.clicked.connect(self.show_disponibilita)
         buttons_layout.addWidget(button_disponibilita)
+
+        button_archiviate = QPushButton("Visualizza prenotazioni archiviate")
+        button_archiviate.clicked.connect(self.show_archiviate)
+        buttons_layout.addWidget(button_archiviate)
+
         buttons_layout.addStretch()
 
         button_new = QPushButton("Cerca")
@@ -51,7 +57,7 @@ class VistaListaPrenotazioni(QWidget):
         h_layout.addLayout(buttons_layout)
 
         self.setLayout(h_layout)
-        self.resize(800, 600)
+        self.resize(1200, 600)
         self.setWindowTitle('Lista Prenotazioni')
 
     def get_info_prenotazioni(self):
@@ -97,6 +103,10 @@ class VistaListaPrenotazioni(QWidget):
 
     def search_prenotazione (self):
         self.update_ui(self.lineedit_reparto.text(),self.lineedit_nome.text(), self.lineedit_cognome.text())
+
+    def show_archiviate(self):
+        self.vista_archiviate = VistaListaPrenotazioniArchiviate()
+        self.vista_archiviate.show()
 
     def closeEvent(self, event):
         self.controller.save_data()
