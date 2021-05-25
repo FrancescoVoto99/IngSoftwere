@@ -58,7 +58,7 @@ class VistaListaPrenotazioni(QWidget):
         if (len(self.list_view.selectedIndexes()) > 0):
             selected = self.list_view.selectedIndexes()[0].data()
             stringa = selected.split()
-            prenotazione_selezionata = self.controller.get_prenotazione_by_posto_letto(stringa[len(stringa) - 1].replace('(', '').replace(')', ''))
+            prenotazione_selezionata = self.controller.get_prenotazione_by_posto_letto_and_cf(stringa[len(stringa) - 1].replace('(','').replace(')',''), stringa[0].replace('(','').replace(')',''))
             self.vista_prenotazione = VistaPrenotazione(prenotazione_selezionata, self.controller.elimina_prenotazione_by_id, self.update_ui)
             self.vista_prenotazione.show()
         else:
@@ -87,7 +87,7 @@ class VistaListaPrenotazioni(QWidget):
                 if nome_search == "" or ((prenotazione.paziente.nome.lower()).find(nome_search.lower())) == 0:
                     if cognome_search == "" or ((prenotazione.paziente.cognome.lower()).find(cognome_search.lower())) == 0:
                         item = QStandardItem()
-                        item.setText(prenotazione.servizio.nome)
+                        item.setText("(" + prenotazione.paziente.cf + ") " + prenotazione.servizio.nome)
                         item.setEditable(False)
                         font = item.font()
                         font.setPointSize(18)

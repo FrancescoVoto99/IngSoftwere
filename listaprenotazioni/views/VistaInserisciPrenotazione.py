@@ -113,6 +113,11 @@ class VistaInserisciPrenotazione(QWidget):
     def tipo_onClicked(self, text):
         self.label_tipo.setText(text)
 
+    def check_prenotazione(self, cf, datainizio, datafine):
+        for element in self.controller.get_lista_delle_prenotazioni():
+            if element.paziente.cf == cf and (datetime.strptime(element.datafine,'%d/%m/%Y') > datetime.strptime(datainizio,'%d/%m/%Y') or datetime.strptime(datafine,'%d/%m/%Y') < datetime.strptime(element.data,'%d/%m/%Y')):
+                return True
+
     def add_prenotazione(self):
         controller_servizi = ControlloreListaServizi()
         datainizio = self.info["Data di inizio ricovero"].text()
@@ -124,23 +129,23 @@ class VistaInserisciPrenotazione(QWidget):
         stringa_servizio = self.info["Reparto"].text().split()
         tipo_ricovero = self.info["Tipo di ricovero"].text()
         servizio = controller_servizi.get_servizio_by_reparto_and_tipo(stringa_servizio[len(stringa_servizio)-1], tipo_ricovero, self.controller, datainizio, datafine)
-        if datainizio == "" or paziente == "":
-                    QMessageBox.critical(self, 'Errore', 'Per favore, inserisci tutte le informazioni richieste', QMessageBox.Ok, QMessageBox.Ok)
+        if self.check_prenotazione(paziente.cf, datainizio, datafine) == True:
+                QMessageBox.critical(self, 'Errore', 'Il paziente ' + paziente.nome + ' ' + paziente.cognome + ' è già ricoverato in quel periodo in un altro reparto', QMessageBox.Ok, QMessageBox.Ok)
+        elif datainizio == "" or paziente == "":
+                QMessageBox.critical(self, 'Errore', 'Per favore, inserisci tutte le informazioni richieste', QMessageBox.Ok, QMessageBox.Ok)
         elif servizio == None:
-                    QMessageBox.critical(self, 'Errore', 'Tutti i servizi in questo reparto sono occupati nelle date inserite, richiedere posti di emergenza o modificare le date',
-                                 QMessageBox.Ok, QMessageBox.Ok)
+                QMessageBox.critical(self, 'Errore', 'Tutti i servizi in questo reparto sono occupati nelle date inserite, selezionare un posto di emergenza o modificare le date',
+                  QMessageBox.Ok, QMessageBox.Ok)
         elif newdate.date() <= date_required and tipo_ricovero != "ricovero di emergenza":
-                    QMessageBox.critical(self, 'Errore', "Bisogna prenotare almeno una settimana prima", QMessageBox.Ok, QMessageBox.Ok)
+                QMessageBox.critical(self, 'Errore', "Bisogna prenotare almeno una settimana prima", QMessageBox.Ok, QMessageBox.Ok)
         elif newdate.date() > finedata.date():
-                    QMessageBox.critical(self, 'Errore', "Inserire correttamente le date", QMessageBox.Ok, QMessageBox.Ok)
+                QMessageBox.critical(self, 'Errore', "Inserire correttamente le date", QMessageBox.Ok, QMessageBox.Ok)
         else:
-             self.controller.aggiungi_prenotazione(Prenotazione((paziente.cognome + paziente.nome).lower(), paziente, servizio, datainizio, datafine))
-             servizio.prenota(newdate.date())
-             servizio.is_prenotato()
-             controller_servizi.save_data()
-             self.callback()
-             self.close()
-            #else:
-                    #QMessageBox.critical(self, 'Errore', "Tutti i servizi in questo reparto sono occupati nelle date inserite", QMessageBox.Ok, QMessageBox.Ok)
+            self.controller.aggiungi_prenotazione(Prenotazione((paziente.cognome + paziente.nome).lower(), paziente, servizio, datainizio, datafine))
+            servizio.prenota(newdate.date())
+            servizio.is_prenotato()
+            controller_servizi.save_data()
+            self.callback()
+            self.close()
 
 

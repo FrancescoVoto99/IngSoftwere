@@ -31,9 +31,9 @@ class ListaPrenotazioni():
     def get_prenotazione_by_index(self, index):
         return self.lista_prenotazioni[index]
 
-    def get_prenotazione_by_posto_letto(self,posto_letto):
+    def get_prenotazione_by_posto_letto_and_cf(self,posto_letto, cf):
         for prenotazione in self.lista_prenotazioni:
-            if prenotazione.servizio.posto_letto == posto_letto:
+            if prenotazione.servizio.posto_letto == posto_letto and prenotazione.paziente.cf == cf:
                 return prenotazione
 
     def get_prenotazione_by_id(self, id):

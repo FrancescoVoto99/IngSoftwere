@@ -37,7 +37,7 @@ class ListaServizi():
 
     def get_servizio_by_reparto(self, reparto):
         for servizio in self.listaservizi:
-            if servizio.reparto.lower() == reparto.lower() and servizio.is_disponibile() and servizio.tipo != "ricovero di emergenza":
+            if servizio.reparto.lower() == reparto.lower() and servizio.is_disponibile() and servizio.tipo == "ricovero di emergenza":
                 return servizio
         return None
 
@@ -52,15 +52,6 @@ class ListaServizi():
                     if servizio.prenotato == False:
                         return servizio
        return None
-
-                    #for prenotazione in controller.get_lista_delle_prenotazioni():
-                     #   if prenotazione.servizio.posto_letto == servizio.posto_letto and prenotazione.servizio.tipo == servizio.tipo and prenotazione.servizio.reparto == servizio.reparto:
-                      #      return servizio
-                    #for prenotazione in controller.get_lista_delle_prenotazioni():
-                        #if prenotazione.servizio.posto_letto != servizio.posto_letto and prenotazione.servizio.tipo != servizio.tipo and prenotazione.servizio.reparto != servizio.reparto:
-                            #return servizio
-                       # else:
-                           # return None
 
     def get_lista_servizi(self):
         return self.listaservizi

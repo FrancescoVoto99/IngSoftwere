@@ -1,4 +1,4 @@
-import datetime
+from datetime import datetime, date
 
 from PyQt5.QtWidgets import QWidget, QLabel, QVBoxLayout, QSpacerItem, QSizePolicy, QPushButton, QComboBox, QDateEdit, \
     QRadioButton, QMessageBox, QLineEdit
@@ -50,7 +50,7 @@ class VistaInserisciPrenotazioneEmergenza(QWidget):
 
     def get_data(self,tipo):
         self.v_layout.addWidget(QLabel(tipo))
-        today = datetime.date.today()
+        today = date.today()
         date_edit = QLabel(today.strftime('%d/%m/%Y'))
         self.v_layout.addWidget(date_edit)
         self.info[tipo] = date_edit
@@ -72,13 +72,18 @@ class VistaInserisciPrenotazioneEmergenza(QWidget):
     def add_prenotazione(self):
         controller_servizi = ControlloreListaServizi()
         data = self.info["Data di inizio ricovero"].text()
+        newdate = datetime.strptime(data, '%d/%m/%Y')
         paziente = self.controller_pazienti.get_paziente_by_cf(self.info["Paziente"].text())
-        servizio = controller_servizi.get_servizio_by_reparto_and_tipo(self.info["Reparto"].text(), "ricovero di emergenza")
+        servizio = controller_servizi.get_servizio_by_reparto(self.info["Reparto"].text())
         if data == "" or paziente == "" or servizio == "":
-            QMessageBox.critical(self, 'Errore', 'Per favore, inserisci tutte le informazioni richieste', QMessageBox.Ok, QMessageBox.Ok)
+                QMessageBox.critical(self, 'Errore', 'Per favore, inserisci tutte le informazioni richieste', QMessageBox.Ok, QMessageBox.Ok)
+        elif servizio == None:
+                QMessageBox.critical(self, 'Errore', "Tutti i servizi in questo reparto sono occupati, spostare il paziente in un'altra struttura",
+                  QMessageBox.Ok, QMessageBox.Ok)
         else:
-            self.controller.aggiungi_prenotazione(Prenotazione((paziente.cognome+paziente.nome).lower(), paziente, servizio, data))
-            servizio.prenota(data)
+            self.controller.aggiungi_prenotazione(Prenotazione((paziente.cognome + paziente.nome).lower(), paziente, servizio, data, None))
+            servizio.prenota(newdate.date())
+            servizio.is_prenotato()
             controller_servizi.save_data()
             self.callback()
             self.close()

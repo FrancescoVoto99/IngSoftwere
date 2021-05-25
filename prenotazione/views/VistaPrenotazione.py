@@ -1,6 +1,7 @@
 from datetime import date
 
-from PyQt5.QtWidgets import QWidget, QHBoxLayout, QVBoxLayout, QLabel, QSizePolicy, QSpacerItem, QPushButton
+from PyQt5.QtWidgets import QWidget, QHBoxLayout, QVBoxLayout, QLabel, QSizePolicy, QSpacerItem, QPushButton, \
+    QMessageBox
 
 from listapazienti.controller.ControlloreListaPazienti import ControlloreListaPazienti
 from listaprenotazioni.controller.ControlloreListaPrenotazioni import ControlloreListaPrenotazioni
@@ -61,16 +62,27 @@ class VistaPrenotazione(QWidget):
         return current_label
 
     def disdici_prenotazione_click(self):
+        if self.prenotazione.servizio.is_disponibile() == False:
+            QMessageBox.critical(self, 'Errore', 'Non è possibile disdire perché il paziente è attualmente ricoverato', QMessageBox.Ok, QMessageBox.Ok)
+        else:
+            self.elimina_prenotazione()
+
+    def libera_posto_letto_click(self):
+        if self.prenotazione.servizio.is_disponibile() == True:
+            QMessageBox.critical(self, 'Errore', 'Non è possibile liberare il posto letto, perché il servizio è già disponibile',
+                                 QMessageBox.Ok, QMessageBox.Ok)
+        else:
+           self.controller.set_data_fine(date.today())
+           archivio=ControlloreListaPrenotazioniArchiviate()
+           archivio.aggiungi_prenotazione(self.prenotazione)
+           archivio.save_data()
+           self.elimina_prenotazione()
+
+    def elimina_prenotazione(self):
         self.disdici_prenotazione(self.controller.get_id_prenotazione())
         self.elimina_callback()
         self.close()
 
-    def libera_posto_letto_click(self):
-        self.controller.set_data_fine(date.today())
-        archivio=ControlloreListaPrenotazioniArchiviate()
-        archivio.aggiungi_prenotazione(self.prenotazione)
-        archivio.save_data()
-        self.disdici_prenotazione_click()
 
     def visualizza_paziente_click(self):
        self.visualizza_paziente = VistaPaziente(self.controller.get_paziente_prenotazione())
