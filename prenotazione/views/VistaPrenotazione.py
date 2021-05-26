@@ -13,13 +13,14 @@ from servizio.views.VistaServizio import VistaServizio
 
 class VistaPrenotazione(QWidget):
 
-    def __init__(self, prenotazione,disdici_prenotazione, elimina_callback,  parent = None):
+    def __init__(self, prenotazione,disdici_prenotazione, elimina_callback,  bool, parent = None):
         super(VistaPrenotazione, self).__init__(parent)
         self.prenotazione=prenotazione
         self.controller = ControllorePrenotazione(prenotazione)
         self.disdici_prenotazione = disdici_prenotazione
         self.elimina_callback = elimina_callback
         self.controller_paziente = ControlloreListaPazienti()
+        self.bool = bool
 
         v_layout = QVBoxLayout()
 
@@ -48,9 +49,10 @@ class VistaPrenotazione(QWidget):
 
         self.setLayout(v_layout)
 
-        button_visualizza_servizio = QPushButton("Visualizza servizio")
-        button_visualizza_servizio.clicked.connect(self.visualizza_servizio_click)
-        v_layout.addWidget(button_visualizza_servizio)
+        if self.bool == True:
+            button_visualizza_servizio = QPushButton("Visualizza servizio")
+            button_visualizza_servizio.clicked.connect(self.visualizza_servizio_click)
+            v_layout.addWidget(button_visualizza_servizio)
 
         self.setLayout(v_layout)
 

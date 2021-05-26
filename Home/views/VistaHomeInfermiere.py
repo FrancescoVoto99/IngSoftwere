@@ -21,31 +21,31 @@ class VistaHomeInfermiere(QWidget):
         layout.addWidget(self.get_button("Visualizza pazienti ricoverati in Riabilitazione", self.go_prenotazioni_reparto_riabilitazione), 2,1)
 
         self.setLayout(layout)
-        self.resize(600, 200)
+        self.resize(800, 400)
         self.setWindowTitle("Infermiere")
 
     def go_lista_prenotazioni(self):
-        self.vista_lista_prenotazioni = VistaListaPrenotazioni()
+        self.vista_lista_prenotazioni = VistaListaPrenotazioni(False)
         self.vista_lista_prenotazioni.show()
 
     def go_prenotazioni_reparto_cardiologia(self):
-        self.vista_lista_prenotazioni_reparti = VistaListaPrenotazioniReparto("Cardiologia")
+        self.vista_lista_prenotazioni_reparti = VistaListaPrenotazioniReparto("Cardiologia", False)
         self.vista_lista_prenotazioni_reparti.show()
 
     def go_prenotazioni_reparto_chirurgia(self):
-        self.vista_lista_prenotazioni_reparti = VistaListaPrenotazioniReparto("Chirurgia")
+        self.vista_lista_prenotazioni_reparti = VistaListaPrenotazioniReparto("Chirurgia", False)
         self.vista_lista_prenotazioni_reparti.show()
 
     def go_prenotazioni_reparto_oncologia(self):
-        self.vista_lista_prenotazioni_reparti = VistaListaPrenotazioniReparto("Oncologia")
+        self.vista_lista_prenotazioni_reparti = VistaListaPrenotazioniReparto("Oncologia", False)
         self.vista_lista_prenotazioni_reparti.show()
 
     def go_prenotazioni_reparto_medicina(self):
-        self.vista_lista_prenotazioni_reparti = VistaListaPrenotazioniReparto("Medicina")
+        self.vista_lista_prenotazioni_reparti = VistaListaPrenotazioniReparto("Medicina", False)
         self.vista_lista_prenotazioni_reparti.show()
 
     def go_prenotazioni_reparto_riabilitazione(self):
-        self.vista_lista_prenotazioni_reparti = VistaListaPrenotazioniReparto("Riabilitazione")
+        self.vista_lista_prenotazioni_reparti = VistaListaPrenotazioniReparto("Riabilitazione", False)
         self.vista_lista_prenotazioni_reparti.show()
 
     def get_button(self, titolo, on_click):

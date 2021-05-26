@@ -25,27 +25,27 @@ class VistaHomeMedico(QWidget):
         self.setWindowTitle("Medico")
 
     def go_lista_prenotazioni(self):
-        self.vista_lista_prenotazioni = VistaListaPrenotazioni()
+        self.vista_lista_prenotazioni = VistaListaPrenotazioni(False)
         self.vista_lista_prenotazioni.show()
 
     def go_prenotazioni_reparto_cardiologia(self):
-        self.vista_lista_prenotazioni_reparti = VistaListaPrenotazioniReparto("Cardiologia")
+        self.vista_lista_prenotazioni_reparti = VistaListaPrenotazioniReparto("Cardiologia", True)
         self.vista_lista_prenotazioni_reparti.show()
 
     def go_prenotazioni_reparto_chirurgia(self):
-        self.vista_lista_prenotazioni_reparti = VistaListaPrenotazioniReparto("Chirurgia")
+        self.vista_lista_prenotazioni_reparti = VistaListaPrenotazioniReparto("Chirurgia", True)
         self.vista_lista_prenotazioni_reparti.show()
 
     def go_prenotazioni_reparto_oncologia(self):
-        self.vista_lista_prenotazioni_reparti = VistaListaPrenotazioniReparto("Oncologia")
+        self.vista_lista_prenotazioni_reparti = VistaListaPrenotazioniReparto("Oncologia", True)
         self.vista_lista_prenotazioni_reparti.show()
 
     def go_prenotazioni_reparto_medicina(self):
-        self.vista_lista_prenotazioni_reparti = VistaListaPrenotazioniReparto("Medicina")
+        self.vista_lista_prenotazioni_reparti = VistaListaPrenotazioniReparto("Medicina", True)
         self.vista_lista_prenotazioni_reparti.show()
 
     def go_prenotazioni_reparto_riabilitazione(self):
-        self.vista_lista_prenotazioni_reparti = VistaListaPrenotazioniReparto("Riabilitazione")
+        self.vista_lista_prenotazioni_reparti = VistaListaPrenotazioniReparto("Riabilitazione", True)
         self.vista_lista_prenotazioni_reparti.show()
 
     def get_button(self, titolo, on_click):
