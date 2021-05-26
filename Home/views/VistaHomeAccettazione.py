@@ -35,7 +35,7 @@ class VistaHomeAccettazione(QWidget):
         self.vista_lista_operatori.show()
 
     def go_lista_prenotazioni(self):
-        self.vista_lista_prenotazioni = VistaListaPrenotazioni()
+        self.vista_lista_prenotazioni = VistaListaPrenotazioni(True)
         self.vista_lista_prenotazioni.show()
 
     def get_button(self, titolo, on_click):

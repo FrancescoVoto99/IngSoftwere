@@ -9,11 +9,12 @@ from paziente.view.VistaRefertoPaziente import VistaRefertoPaziente
 
 class VistaListaPrenotazioniReparto(QWidget):
 
-    def __init__(self, reparto):
+    def __init__(self, reparto, bool):
         super(VistaListaPrenotazioniReparto, self).__init__()
 
         self.reparto = reparto
         self.controller = ControlloreListaPazienti()
+        self.bool = bool
 
         self.h_layout = QHBoxLayout()
         self.list_view = QListView()
@@ -24,9 +25,12 @@ class VistaListaPrenotazioniReparto(QWidget):
         open_button = QPushButton("Apri")
         open_button.clicked.connect(self.get_info_paziente)
         buttons_layout.addWidget(open_button)
-        referto_button = QPushButton("Nuovo referto")
-        referto_button.clicked.connect(self.get_referto_paziente)
-        buttons_layout.addWidget(referto_button)
+
+        if self.bool == True:
+            referto_button = QPushButton("Nuovo referto")
+            referto_button.clicked.connect(self.get_referto_paziente)
+            buttons_layout.addWidget(referto_button)
+
         buttons_layout.addStretch()
         self.h_layout.addLayout(buttons_layout)
 

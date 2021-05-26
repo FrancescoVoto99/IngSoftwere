@@ -8,9 +8,10 @@ from prenotazione.views.VistaPrenotazione import VistaPrenotazione
 
 class VistaListaPrenotazioniEmergenza(QWidget):
 
-    def __init__(self):
+    def __init__(self, bool):
         super(VistaListaPrenotazioniEmergenza, self).__init__()
 
+        self.bool = bool
         h_layout = QHBoxLayout()
         self.controller = ControlloreListaPrenotazioni()
         self.list_view = QListView()
@@ -52,7 +53,7 @@ class VistaListaPrenotazioniEmergenza(QWidget):
             selected = self.list_view.selectedIndexes()[0].data()
             stringa = selected.split()
             prenotazione_selezionata = self.controller.get_prenotazione_by_posto_letto_and_cf(stringa[len(stringa) - 1].replace('(', '').replace(')', ''), stringa[0].replace('(','').replace(')',''))
-            self.vista_prenotazione = VistaPrenotazione(prenotazione_selezionata,self.controller.elimina_prenotazione_by_id, self.update_ui)
+            self.vista_prenotazione = VistaPrenotazione(prenotazione_selezionata,self.controller.elimina_prenotazione_by_id, self.update_ui, self.bool)
             self.vista_prenotazione.show()
         else:
             QMessageBox.critical(self, 'Errore', "Selezionare una prenotazione", QMessageBox.Ok, QMessageBox.Ok)

@@ -13,13 +13,14 @@ from servizio.views.VistaServizio import VistaServizio
 
 class VistaPrenotazione(QWidget):
 
-    def __init__(self, prenotazione,disdici_prenotazione, elimina_callback,  parent = None):
+    def __init__(self, prenotazione,disdici_prenotazione, elimina_callback,  bool, parent = None):
         super(VistaPrenotazione, self).__init__(parent)
         self.prenotazione=prenotazione
         self.controller = ControllorePrenotazione(prenotazione)
         self.disdici_prenotazione = disdici_prenotazione
         self.elimina_callback = elimina_callback
         self.controller_paziente = ControlloreListaPazienti()
+        self.bool = bool
 
         v_layout = QVBoxLayout()
 
@@ -27,7 +28,7 @@ class VistaPrenotazione(QWidget):
         v_layout.addWidget(self.get_label_info("Paziente", self.controller.get_paziente_prenotazione().nome+" "+self.controller.get_paziente_prenotazione().cognome))
         v_layout.addWidget(self.get_label_info("Servizio", self.controller.get_servizio_prenotazione().nome))
         v_layout.addWidget(self.get_label_info("Data di inizio ricovero", self.controller.get_data_prenotazione()))
-        v_layout.addWidget(self.get_label_info("Data di fine ricovero", str(datetime.strftime(self.controller.get_datafine_prenotazione(), '%d/%m/%Y'))))
+        v_layout.addWidget(self.get_label_info("Data di fine ricovero", self.controller.get_datafine_prenotazione()))
         v_layout.addItem(QSpacerItem(20, 40, QSizePolicy.Minimum, QSizePolicy.Expanding))
 
         button_disdici = QPushButton("Disdici")
@@ -48,9 +49,10 @@ class VistaPrenotazione(QWidget):
 
         self.setLayout(v_layout)
 
-        button_visualizza_servizio = QPushButton("Visualizza servizio")
-        button_visualizza_servizio.clicked.connect(self.visualizza_servizio_click)
-        v_layout.addWidget(button_visualizza_servizio)
+        if self.bool == True:
+            button_visualizza_servizio = QPushButton("Visualizza servizio")
+            button_visualizza_servizio.clicked.connect(self.visualizza_servizio_click)
+            v_layout.addWidget(button_visualizza_servizio)
 
         self.setLayout(v_layout)
 

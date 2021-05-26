@@ -29,7 +29,7 @@ class VistaHomeProntoSoccorso(QWidget):
         self.vista_lista_pazienti.show()
 
     def go_lista_prenotazioni(self):
-        self.vista_lista_prenotazioni_emergenza = VistaListaPrenotazioniEmergenza()
+        self.vista_lista_prenotazioni_emergenza = VistaListaPrenotazioniEmergenza(True)
         self.vista_lista_prenotazioni_emergenza.show()
 
     def get_button(self, titolo, on_click):

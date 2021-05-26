@@ -16,6 +16,7 @@ class VistaAutenticazione(QWidget):
         self.lbl = QLabel("Benvenuto a HospItaly")
         font_lbl = self.lbl.font()
         font_lbl.setPointSize(50)
+        font_lbl.setBold(True)
         self.lbl.setFont(font_lbl)
         self.v_layout.addWidget(self.lbl, 0, 1)
 
