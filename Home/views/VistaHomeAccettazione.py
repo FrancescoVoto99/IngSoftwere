@@ -13,10 +13,10 @@ class VistaHomeAccettazione(QWidget):
 
         # ricoveri_bottone.clicked.connect()
 
-        grid_layout.addWidget(self.get_button("Lista Servizi", self.go_lista_servizi), 0, 0)
-        grid_layout.addWidget(self.get_button("Lista Pazienti", self.go_lista_pazienti), 0, 1)
-        grid_layout.addWidget(self.get_button("Lista Operatori", self.go_lista_operatori), 1, 0)
-        grid_layout.addWidget(self.get_button("Lista Prenotazioni", self.go_lista_prenotazioni), 1, 1)
+        grid_layout.addWidget(self.get_button("Lista Servizi", self.go_lista_servizi, "background-color: #cfc7e5"), 0, 0)
+        grid_layout.addWidget(self.get_button("Lista Pazienti", self.go_lista_pazienti, "background-color: #bad9ac"), 0, 1)
+        grid_layout.addWidget(self.get_button("Lista Operatori", self.go_lista_operatori, "background-color: #ffd597"), 1, 0)
+        grid_layout.addWidget(self.get_button("Lista Prenotazioni", self.go_lista_prenotazioni, "background-color: #cfc7e5"), 1, 1)
 
         self.setLayout(grid_layout)
         self.resize(400, 400)
@@ -38,8 +38,9 @@ class VistaHomeAccettazione(QWidget):
         self.vista_lista_prenotazioni = VistaListaPrenotazioni()
         self.vista_lista_prenotazioni.show()
 
-    def get_button(self, titolo, on_click):
+    def get_button(self, titolo, on_click, colore):
         bottone = QPushButton(titolo)
         bottone.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
         bottone.clicked.connect(on_click)
+        bottone.setStyleSheet(colore)
         return bottone

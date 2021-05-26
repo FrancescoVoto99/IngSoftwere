@@ -1,5 +1,6 @@
 from PyQt5.QtGui import QStandardItemModel, QStandardItem
-from PyQt5.QtWidgets import QWidget, QHBoxLayout, QListView, QVBoxLayout, QPushButton, QMessageBox, QLabel, QLineEdit
+from PyQt5.QtWidgets import QWidget, QHBoxLayout, QListView, QVBoxLayout, QPushButton, QMessageBox, QLabel, QLineEdit, \
+    QTableWidget, QTableWidgetItem, QHeaderView
 
 from listaprenotazioni.controller.ControlloreListaPrenotazioni import ControlloreListaPrenotazioni
 from listaprenotazioni.views.VistaInserisciPrenotazione import VistaInserisciPrenotazione
@@ -75,16 +76,51 @@ class VistaListaPrenotazioni(QWidget):
         self.vista_inserisci_prenotazione.show()
 
     def show_disponibilita(self):
+        self.tableWidget = QTableWidget()
+        self.tableWidget.setRowCount(6)
+        self.tableWidget.setColumnCount(3)
+        self.tableWidget.setItem(0, 0, QTableWidgetItem("Reparto"))
+        self.tableWidget.setItem(0, 1, QTableWidgetItem("Posti Disponibili"))
+        self.tableWidget.setItem(0, 2, QTableWidgetItem("Posti Occupati"))
+        self.tableWidget.setItem(1, 0, QTableWidgetItem("Oncologia"))
+        self.tableWidget.setItem(1, 1, QTableWidgetItem(str(self.posti_disponibili("oncologia"))))
+        self.tableWidget.setItem(1, 2, QTableWidgetItem(str(self.posti_occupati("oncologia"))))
+        self.tableWidget.setItem(2, 0, QTableWidgetItem("Chirurgia"))
+        self.tableWidget.setItem(2, 1, QTableWidgetItem(str(self.posti_disponibili("chirurgia"))))
+        self.tableWidget.setItem(2, 2, QTableWidgetItem(str(self.posti_occupati("chirurgia"))))
+        self.tableWidget.setItem(3, 0, QTableWidgetItem("Cardiologia"))
+        self.tableWidget.setItem(3, 1, QTableWidgetItem(str(self.posti_disponibili("cardiologia"))))
+        self.tableWidget.setItem(3, 2, QTableWidgetItem(str(self.posti_occupati("cardiologia"))))
+        self.tableWidget.setItem(4, 0, QTableWidgetItem("Medicina"))
+        self.tableWidget.setItem(4, 1, QTableWidgetItem(str(self.posti_disponibili("medicina"))))
+        self.tableWidget.setItem(4, 2, QTableWidgetItem(str(self.posti_occupati("medicina"))))
+        self.tableWidget.setItem(5, 0, QTableWidgetItem("Riabilitazione"))
+        self.tableWidget.setItem(5, 1, QTableWidgetItem(str(self.posti_disponibili("riabilitazione"))))
+        self.tableWidget.setItem(5, 2, QTableWidgetItem(str(self.posti_occupati("riabilitazione"))))
+        self.tableWidget.horizontalHeader().setStretchLastSection(True)
+        self.tableWidget.horizontalHeader().setSectionResizeMode(QHeaderView.Stretch)
+        self.tableWidget.verticalHeader().setStretchLastSection(True)
+        self.tableWidget.verticalHeader().setSectionResizeMode(QHeaderView.Stretch)
+        self.tableWidget.setWindowTitle("Posti disponibili in ogni reparto")
+        self.tableWidget.show()
+
+    def posti_disponibili(self, reparto):
         contatore_posti_disponibili = 0
+        controller_servizi = ControlloreListaServizi()
+        for servizio in controller_servizi.get_lista_servizi():
+            if servizio.reparto.lower() == reparto.lower():
+               if (servizio.is_disponibile()):
+                   contatore_posti_disponibili += 1
+        return contatore_posti_disponibili
+
+    def posti_occupati(self, reparto):
         contatore_posti_occupati = 0
         controller_servizi = ControlloreListaServizi()
         for servizio in controller_servizi.get_lista_servizi():
-            if (servizio.is_disponibile()):
-                contatore_posti_disponibili += 1
-            else:
-                contatore_posti_occupati += 1
-        text = "I posti attualmente disponibili sono: " + str(contatore_posti_disponibili) + '\n' + "I posti attualmente occupati sono: " + str(contatore_posti_occupati)
-        QMessageBox.information(self, "Visualizza posti disponibili", text, QMessageBox.Ok, QMessageBox.Ok)
+            if servizio.reparto.lower() == reparto.lower():
+               if servizio.is_disponibile() == False:
+                   contatore_posti_occupati += 1
+        return contatore_posti_occupati
 
     def update_ui(self, reparto_search = "", nome_search = "", cognome_search = ""):
         self.listview_model = QStandardItemModel(self.list_view)
