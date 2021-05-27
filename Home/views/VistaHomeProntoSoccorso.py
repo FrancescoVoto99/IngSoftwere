@@ -12,9 +12,9 @@ class VistaHomeProntoSoccorso(QWidget):
 
         layout = QGridLayout()
 
-        layout.addWidget(self.get_button("Lista Servizi di Emergenza", self.go_lista_servizi), 0, 0)
-        layout.addWidget(self.get_button("Lista Pazienti", self.go_lista_pazienti), 0, 1)
-        layout.addWidget(self.get_button("Lista Prenotazioni di Emergenza", self.go_lista_prenotazioni), 0, 2)
+        layout.addWidget(self.get_button("Lista Servizi di Emergenza", self.go_lista_servizi, "background-color: #cfc7e5"), 0, 0)
+        layout.addWidget(self.get_button("Lista Pazienti", self.go_lista_pazienti, "background-color: #bad9ac"), 0, 1)
+        layout.addWidget(self.get_button("Lista Prenotazioni di Emergenza", self.go_lista_prenotazioni, "background-color: #cfc7e5"), 0, 2)
 
         self.setLayout(layout)
         self.resize(600, 200)
@@ -32,8 +32,13 @@ class VistaHomeProntoSoccorso(QWidget):
         self.vista_lista_prenotazioni_emergenza = VistaListaPrenotazioniEmergenza(True)
         self.vista_lista_prenotazioni_emergenza.show()
 
-    def get_button(self, titolo, on_click):
+    def get_button(self, titolo, on_click, colore):
         bottone = QPushButton(titolo)
         bottone.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
+        font = bottone.font()
+        font.setPointSize(9)
+        font.setBold(True)
+        bottone.setFont(font)
         bottone.clicked.connect(on_click)
+        bottone.setStyleSheet(colore)
         return bottone

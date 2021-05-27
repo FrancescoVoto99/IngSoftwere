@@ -13,12 +13,12 @@ class VistaHomeMedico(QWidget):
 
         layout = QGridLayout()
 
-        layout.addWidget(self.get_button("Lista dei ricoveri", self.go_lista_prenotazioni), 0, 0)
-        layout.addWidget(self.get_button("Visualizza pazienti ricoverati in Cardiologia", self.go_prenotazioni_reparto_cardiologia), 0, 1)
-        layout.addWidget(self.get_button("Visualizza pazienti ricoverati in Chirurgia", self.go_prenotazioni_reparto_chirurgia), 1, 0)
-        layout.addWidget(self.get_button("Visualizza pazienti ricoverati in Oncologia", self.go_prenotazioni_reparto_oncologia), 1, 1)
-        layout.addWidget(self.get_button("Visualizza pazienti ricoverati in Medicina", self.go_prenotazioni_reparto_medicina), 2,0)
-        layout.addWidget(self.get_button("Visualizza pazienti ricoverati in Riabilitazione", self.go_prenotazioni_reparto_riabilitazione), 2,1)
+        layout.addWidget(self.get_button("Lista dei ricoveri", self.go_lista_prenotazioni, "background-color: #cfc7e5"), 0, 0)
+        layout.addWidget(self.get_button("Visualizza pazienti ricoverati in Cardiologia", self.go_prenotazioni_reparto_cardiologia, "background-color: #cfc7e5"), 0, 1)
+        layout.addWidget(self.get_button("Visualizza pazienti ricoverati in Chirurgia", self.go_prenotazioni_reparto_chirurgia, "background-color: #cfc7e5"), 1, 0)
+        layout.addWidget(self.get_button("Visualizza pazienti ricoverati in Oncologia", self.go_prenotazioni_reparto_oncologia, "background-color: #cfc7e5"), 1, 1)
+        layout.addWidget(self.get_button("Visualizza pazienti ricoverati in Medicina", self.go_prenotazioni_reparto_medicina, "background-color: #cfc7e5"), 2,0)
+        layout.addWidget(self.get_button("Visualizza pazienti ricoverati in Riabilitazione", self.go_prenotazioni_reparto_riabilitazione, "background-color: #cfc7e5"), 2,1)
 
         self.setLayout(layout)
         self.resize(800, 400)
@@ -48,9 +48,14 @@ class VistaHomeMedico(QWidget):
         self.vista_lista_prenotazioni_reparti = VistaListaPrenotazioniReparto("Riabilitazione", True)
         self.vista_lista_prenotazioni_reparti.show()
 
-    def get_button(self, titolo, on_click):
+    def get_button(self, titolo, on_click, colore):
         bottone = QPushButton(titolo)
         bottone.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
+        font = bottone.font()
+        font.setPointSize(10)
+        font.setBold(True)
+        bottone.setFont(font)
         bottone.clicked.connect(on_click)
+        bottone.setStyleSheet(colore)
         return bottone
 

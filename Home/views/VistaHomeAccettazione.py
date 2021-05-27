@@ -41,6 +41,10 @@ class VistaHomeAccettazione(QWidget):
     def get_button(self, titolo, on_click, colore):
         bottone = QPushButton(titolo)
         bottone.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
+        font = bottone.font()
+        font.setPointSize(10)
+        font.setBold(True)
+        bottone.setFont(font)
         bottone.clicked.connect(on_click)
         bottone.setStyleSheet(colore)
         return bottone
