@@ -1,3 +1,4 @@
+from PyQt5.QtGui import QFont
 from PyQt5.QtWidgets import QWidget, QVBoxLayout, QLabel, QLineEdit, QMessageBox, QSpacerItem, QSizePolicy, QPushButton, \
     QDateEdit, QRadioButton, QGridLayout
 from PyQt5 import QtCore
@@ -27,6 +28,7 @@ class VistaInserisciPaziente(QWidget):
         self.grid_layout.addItem(QSpacerItem(20, 40, QSizePolicy.Minimum, QSizePolicy.Expanding))
 
         btn_ok = QPushButton("OK")
+        btn_ok.setFont(QFont('Verdana', 15))
         btn_ok.clicked.connect(self.add_paziente)
         self.grid_layout.addWidget(btn_ok, 9, 0)
 

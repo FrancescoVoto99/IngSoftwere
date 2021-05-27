@@ -1,3 +1,5 @@
+from PyQt5.QtCore import Qt
+from PyQt5.QtGui import QPalette
 from PyQt5.QtWidgets import QGridLayout, QPushButton, QSizePolicy, QWidget
 
 from listapazienti.views.VistaListaPazienti import VistaListaPazienti
@@ -33,10 +35,13 @@ class VistaHomeProntoSoccorso(QWidget):
         self.vista_lista_prenotazioni_emergenza.show()
 
     def get_button(self, titolo, on_click, colore):
+        palette = QPalette()
+        palette.setColor(QPalette.ButtonText, Qt.black)
         bottone = QPushButton(titolo)
+        bottone.setPalette(palette)
         bottone.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
         font = bottone.font()
-        font.setPointSize(9)
+        font.setPointSize(15)
         font.setBold(True)
         bottone.setFont(font)
         bottone.clicked.connect(on_click)

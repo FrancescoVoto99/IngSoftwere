@@ -1,4 +1,5 @@
 from PyQt5 import QtCore
+from PyQt5.QtGui import QFont
 from PyQt5.QtWidgets import QWidget, QVBoxLayout, QLabel, QLineEdit, QSpacerItem, QSizePolicy, QPushButton, \
     QRadioButton, QMessageBox, QCheckBox, QGridLayout, QComboBox
 
@@ -30,6 +31,7 @@ class VistaInserisciServizio(QWidget):
         self.v_layout.addItem(QSpacerItem(20, 40, QSizePolicy.Minimum, QSizePolicy.Expanding))
 
         btn_ok = QPushButton("OK")
+        btn_ok.setFont(QFont('Verdana', 15))
         btn_ok.clicked.connect(self.add_servizio)
         self.v_layout.addWidget(btn_ok)
 

@@ -1,6 +1,7 @@
 import datetime
 from datetime import datetime, date
 
+from PyQt5.QtGui import QFont
 from PyQt5.QtWidgets import QWidget, QVBoxLayout, QSpacerItem, QSizePolicy, \
     QPushButton, QLabel, QLineEdit, QMessageBox, \
     QRadioButton, QDateEdit, QGridLayout
@@ -35,6 +36,7 @@ class VistaInserisciOperatore(QWidget):
         self.grid_layout.addItem(QSpacerItem(10, 30, QSizePolicy.Minimum, QSizePolicy.Expanding))
 
         btn_ok = QPushButton("OK")
+        btn_ok.setFont(QFont('Verdana', 15))
         btn_ok.clicked.connect(self.add_operatore)
         self.grid_layout.addWidget(btn_ok, 10, 1)
 

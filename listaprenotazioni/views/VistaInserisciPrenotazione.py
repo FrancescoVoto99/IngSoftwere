@@ -2,7 +2,7 @@ import os
 import pickle
 from datetime import datetime, date, timedelta
 
-from PyQt5.QtGui import QStandardItemModel, QStandardItem
+from PyQt5.QtGui import QStandardItemModel, QStandardItem, QFont
 from PyQt5.QtWidgets import QVBoxLayout, QLabel, QLineEdit, QComboBox, QSpacerItem, QSizePolicy, QPushButton, QWidget, \
     QDateEdit, QRadioButton, QMessageBox
 from PyQt5 import QtCore
@@ -40,6 +40,7 @@ class VistaInserisciPrenotazione(QWidget):
         self.v_layout.addItem(QSpacerItem(20, 40, QSizePolicy.Minimum, QSizePolicy.Expanding))
 
         btn_ok = QPushButton("OK")
+        btn_ok.setFont(QFont('Verdana', 15))
         btn_ok.clicked.connect(self.add_prenotazione)
         self.v_layout.addWidget(btn_ok)
 

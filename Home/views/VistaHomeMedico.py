@@ -1,4 +1,5 @@
-from PyQt5.QtGui import QStandardItem, QStandardItemModel
+from PyQt5.QtCore import Qt
+from PyQt5.QtGui import QStandardItem, QStandardItemModel, QPalette
 from PyQt5.QtWidgets import QGridLayout, QPushButton, QSizePolicy, QWidget, QListView, QVBoxLayout, QHBoxLayout
 
 from listaprenotazioni.controller.ControlloreListaPrenotazioni import ControlloreListaPrenotazioni
@@ -49,10 +50,13 @@ class VistaHomeMedico(QWidget):
         self.vista_lista_prenotazioni_reparti.show()
 
     def get_button(self, titolo, on_click, colore):
+        palette = QPalette()
+        palette.setColor(QPalette.ButtonText, Qt.black)
         bottone = QPushButton(titolo)
+        bottone.setPalette(palette)
         bottone.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
         font = bottone.font()
-        font.setPointSize(10)
+        font.setPointSize(15)
         font.setBold(True)
         bottone.setFont(font)
         bottone.clicked.connect(on_click)
