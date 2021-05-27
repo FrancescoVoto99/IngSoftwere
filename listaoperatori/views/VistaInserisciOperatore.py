@@ -3,7 +3,7 @@ from datetime import datetime, date
 
 from PyQt5.QtWidgets import QWidget, QVBoxLayout, QSpacerItem, QSizePolicy, \
     QPushButton, QLabel, QLineEdit, QMessageBox, \
-    QRadioButton, QDateEdit
+    QRadioButton, QDateEdit, QGridLayout
 from PyQt5 import QtCore
 
 from operatore.model.Operatore import Operatore
@@ -18,47 +18,60 @@ class VistaInserisciOperatore(QWidget):
 
         self.lbl_ruolo = QLabel("")
         self.lbl_date = QLabel("")
-        self.v_layout = QVBoxLayout()
+        self.grid_layout = QGridLayout()
 
-        self.get_type("Nome")
-        self.get_type("Cognome")
-        self.get_type("Codice fiscale")
+        self.get_type("Nome", 0, 0, 1, 0)
+        self.get_type("Cognome", 0, 1, 1, 1)
+        self.grid_layout.addItem(QSpacerItem(10, 30, QSizePolicy.Minimum, QSizePolicy.Expanding))
+        self.get_type("Codice fiscale ", 2, 0, 3, 0)
+        self.get_type("Email", 2, 1, 3, 1)
+        self.grid_layout.addItem(QSpacerItem(10, 30, QSizePolicy.Minimum, QSizePolicy.Expanding))
         self.get_datanascita("Data di nascita")
-        self.get_type("Luogo di nascita")
-        self.get_type("Email")
+        self.get_type("Luogo di nascita", 4, 1, 5, 1)
+        self.grid_layout.addItem(QSpacerItem(10, 30, QSizePolicy.Minimum, QSizePolicy.Expanding))
         self.get_ruolo("Ruolo")
-        self.get_type("Password")
-
-        self.v_layout.addItem(QSpacerItem(20, 40, QSizePolicy.Minimum, QSizePolicy.Expanding))
+        self.grid_layout.addItem(QSpacerItem(10, 30, QSizePolicy.Minimum, QSizePolicy.Expanding))
+        self.get_type("Password", 9, 0, 10, 0)
+        self.grid_layout.addItem(QSpacerItem(10, 30, QSizePolicy.Minimum, QSizePolicy.Expanding))
 
         btn_ok = QPushButton("OK")
         btn_ok.clicked.connect(self.add_operatore)
-        self.v_layout.addWidget(btn_ok)
+        self.grid_layout.addWidget(btn_ok, 10, 1)
 
-        self.setLayout((self.v_layout))
+        self.setLayout((self.grid_layout))
         self.setWindowTitle("Nuovo Operatore")
 
-    def get_type(self, tipo):
-        self.v_layout.addWidget(QLabel(tipo))
+    def get_type(self, tipo, rl, cl, re, ce):
+        lbl = QLabel(tipo)
+        font_lbl = lbl.font()
+        font_lbl.setPointSize(17)
+        font_lbl.setBold(True)
+        lbl.setFont(font_lbl)
+        self.grid_layout.addWidget(lbl, rl, cl)
         current_text = QLineEdit(self)
-        self.v_layout.addWidget(current_text)
+        self.grid_layout.addWidget(current_text, re, ce)
         self.info[tipo] = current_text
 
     def get_ruolo(self, tipo):
-        self.v_layout.addWidget(QLabel(tipo))
+        lbl = QLabel(tipo)
+        font_lbl = lbl.font()
+        font_lbl.setPointSize(17)
+        font_lbl.setBold(True)
+        lbl.setFont(font_lbl)
+        self.grid_layout.addWidget(lbl, 6, 0)
         rbtn_accettazione = QRadioButton("Amministratore dell'ufficio di accettazione")
-        self.v_layout.addWidget(rbtn_accettazione)
+        self.grid_layout.addWidget(rbtn_accettazione, 7, 0)
         rbtn_accettazione.toggled.connect(self.ruolo_onClicked)
         rbtn_prontosoccorso = QRadioButton("Amministratore del pronto soccorso")
-        self.v_layout.addWidget(rbtn_prontosoccorso)
+        self.grid_layout.addWidget(rbtn_prontosoccorso, 8, 0)
         rbtn_prontosoccorso.toggled.connect(self.ruolo_onClicked)
         rbtn_infermiere = QRadioButton("Infermiere")
-        self.v_layout.addWidget(rbtn_infermiere)
+        self.grid_layout.addWidget(rbtn_infermiere, 7, 1)
         rbtn_infermiere.toggled.connect(self.ruolo_onClicked)
         rbtn_medico = QRadioButton("Medico")
-        self.v_layout.addWidget(rbtn_medico)
+        self.grid_layout.addWidget(rbtn_medico, 8, 1)
         rbtn_medico.toggled.connect(self.ruolo_onClicked)
-        self.v_layout.addWidget(self.lbl_ruolo)
+        self.grid_layout.addWidget(self.lbl_ruolo)
         self.info[tipo] = self.lbl_ruolo
 
     def ruolo_onClicked(self):
@@ -67,11 +80,16 @@ class VistaInserisciOperatore(QWidget):
             self.lbl_ruolo.setText(rbtn.text())
 
     def get_datanascita(self,tipo):
-        self.v_layout.addWidget(QLabel(tipo))
+        lbl = QLabel(tipo)
+        font_lbl = lbl.font()
+        font_lbl.setPointSize(17)
+        font_lbl.setBold(True)
+        lbl.setFont(font_lbl)
+        self.grid_layout.addWidget(lbl, 4, 0)
         dateedit = QDateEdit(calendarPopup = True)
         dateedit.setDateTime(QtCore.QDateTime.currentDateTime())
         dateedit.setDisplayFormat('dd/MM/yyyy')
-        self.v_layout.addWidget(dateedit)
+        self.grid_layout.addWidget(dateedit, 5, 0)
         self.info[tipo] = dateedit
 
     def check_email(self, text):

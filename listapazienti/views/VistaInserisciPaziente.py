@@ -1,5 +1,5 @@
 from PyQt5.QtWidgets import QWidget, QVBoxLayout, QLabel, QLineEdit, QMessageBox, QSpacerItem, QSizePolicy, QPushButton, \
-    QDateEdit, QRadioButton
+    QDateEdit, QRadioButton, QGridLayout
 from PyQt5 import QtCore
 from paziente.model.Paziente import Paziente
 
@@ -12,42 +12,52 @@ class VistaInserisciPaziente(QWidget):
         self.callback = callback
         self.info = {}
 
-        self.v_layout = QVBoxLayout()
+        self.grid_layout = QGridLayout()
         self.label_sesso = QLabel()
 
-        self.get_type("Nome")
-        self.get_type("Cognome")
+        self.get_type("Nome", 0, 0, 1, 0)
+        self.get_type("Cognome", 0, 1, 1, 1)
         self.get_sesso("Sesso")
-        self.get_type("Luogo di nascita")
+        self.get_type("Luogo di nascita", 5, 0, 6, 0)
         self.get_datanascita("Data di nascita")
-        self.get_type("Codice fiscale")
-        self.get_type("Telefono")
-        self.get_type("Email")
+        self.get_type("Codice fiscale", 2, 1, 3, 1)
+        self.get_type("Telefono", 7, 0, 8, 0)
+        self.get_type("Email", 7, 1, 8, 1)
 
-        self.v_layout.addItem(QSpacerItem(20, 40, QSizePolicy.Minimum, QSizePolicy.Expanding))
+        self.grid_layout.addItem(QSpacerItem(20, 40, QSizePolicy.Minimum, QSizePolicy.Expanding))
 
         btn_ok = QPushButton("OK")
         btn_ok.clicked.connect(self.add_paziente)
-        self.v_layout.addWidget(btn_ok)
+        self.grid_layout.addWidget(btn_ok, 9, 0)
 
-        self.setLayout((self.v_layout))
+        self.setLayout((self.grid_layout))
         self.setWindowTitle("Nuovo Paziente")
 
-    def get_type (self, tipo):
-        self.v_layout.addWidget(QLabel(tipo))
+    def get_type (self, tipo, rl, cl, re, ce):
+        lbl = QLabel(tipo)
+        font_lbl = lbl.font()
+        font_lbl.setPointSize(17)
+        font_lbl.setBold(True)
+        lbl.setFont(font_lbl)
+        self.grid_layout.addWidget(lbl, rl, cl)
         current_text = QLineEdit(self)
-        self.v_layout.addWidget(current_text)
+        self.grid_layout.addWidget(current_text, re, ce)
         self.info[tipo] = current_text
 
     def get_sesso (self, titolo):
-        self.v_layout.addWidget(QLabel(titolo))
+        lbl = QLabel(titolo)
+        font_lbl = lbl.font()
+        font_lbl.setPointSize(17)
+        font_lbl.setBold(True)
+        lbl.setFont(font_lbl)
+        self.grid_layout.addWidget(lbl, 2, 0)
         rbtn_maschio = QRadioButton("Maschio")
-        self.v_layout.addWidget(rbtn_maschio)
+        self.grid_layout.addWidget(rbtn_maschio,3, 0)
         rbtn_maschio.toggled.connect(self.sesso_onClicked)
         rbtn_femmina = QRadioButton("Femmina")
-        self.v_layout.addWidget(rbtn_femmina)
+        self.grid_layout.addWidget(rbtn_femmina, 4, 0)
         rbtn_femmina.toggled.connect(self.sesso_onClicked)
-        self.v_layout.addWidget(self.label_sesso)
+        self.grid_layout.addWidget(self.label_sesso)
         self.info[titolo] = self.label_sesso
 
     def sesso_onClicked(self):
@@ -56,11 +66,16 @@ class VistaInserisciPaziente(QWidget):
             self.label_sesso.setText(rbtn.text())
 
     def get_datanascita(self, tipo):
-        self.v_layout.addWidget(QLabel(tipo))
+        lbl = QLabel(tipo)
+        font_lbl = lbl.font()
+        font_lbl.setPointSize(17)
+        font_lbl.setBold(True)
+        lbl.setFont(font_lbl)
+        self.grid_layout.addWidget(lbl, 5, 1)
         dateedit = QDateEdit(calendarPopup = True)
         dateedit.setDateTime(QtCore.QDateTime.currentDateTime())
         dateedit.setDisplayFormat('dd/MM/yyyy')
-        self.v_layout.addWidget(dateedit)
+        self.grid_layout.addWidget(dateedit, 6, 1)
         self.info[tipo] = dateedit
 
     def add_paziente(self):
