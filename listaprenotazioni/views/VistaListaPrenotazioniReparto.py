@@ -35,7 +35,7 @@ class VistaListaPrenotazioniReparto(QWidget):
         self.h_layout.addLayout(buttons_layout)
 
         self.setLayout(self.h_layout)
-        self.resize(600, 300)
+        self.resize(1200, 600)
         self.setWindowTitle('Lista pazienti ricoverati nel reparto di ' + self.reparto)
 
     def update_ui(self):

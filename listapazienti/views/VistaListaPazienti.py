@@ -48,7 +48,7 @@ class VistaListaPazienti(QWidget):
         h_layout.addLayout(button_layout)
 
         self.setLayout(h_layout)
-        self.resize(800,300)
+        self.resize(800,400)
         self.setWindowTitle("Lista Pazienti")
 
     def update_ui(self, nome_search = "", cognome_search = "", cf_search=""):

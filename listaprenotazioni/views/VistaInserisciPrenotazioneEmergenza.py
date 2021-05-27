@@ -1,5 +1,6 @@
 from datetime import datetime, date
 
+from PyQt5.QtGui import QFont
 from PyQt5.QtWidgets import QWidget, QLabel, QVBoxLayout, QSpacerItem, QSizePolicy, QPushButton, QComboBox, QDateEdit, \
     QRadioButton, QMessageBox, QLineEdit
 
@@ -29,14 +30,21 @@ class VistaInserisciPrenotazioneEmergenza(QWidget):
         self.v_layout.addItem(QSpacerItem(20, 40, QSizePolicy.Minimum, QSizePolicy.Expanding))
 
         btn_ok = QPushButton("OK")
+        btn_ok.setFont(QFont('Verdana', 15))
         btn_ok.clicked.connect(self.add_prenotazione)
         self.v_layout.addWidget(btn_ok)
 
         self.setLayout(self.v_layout)
+        self.resize(300, 500)
         self.setWindowTitle('Nuova Prenotazione')
 
     def get_paziente(self, titolo):
-        self.v_layout.addWidget(QLabel(titolo))
+        lbl = QLabel(titolo)
+        font_lbl = lbl.font()
+        font_lbl.setPointSize(17)
+        font_lbl.setBold(True)
+        lbl.setFont(font_lbl)
+        self.v_layout.addWidget(lbl)
         combo_pazienti = QComboBox()
         for paziente in self.controller_pazienti.get_lista_pazienti():
             combo_pazienti.addItem(paziente.cf)
@@ -49,14 +57,25 @@ class VistaInserisciPrenotazioneEmergenza(QWidget):
         self.label_paziente.setText(text)
 
     def get_data(self,tipo):
-        self.v_layout.addWidget(QLabel(tipo))
+        lbl = QLabel(tipo)
+        font_lbl = lbl.font()
+        font_lbl.setPointSize(17)
+        font_lbl.setBold(True)
+        lbl.setFont(font_lbl)
+        self.v_layout.addWidget(lbl)
         today = date.today()
         date_edit = QLabel(today.strftime('%d/%m/%Y'))
+        date_edit.setFont(font_lbl)
         self.v_layout.addWidget(date_edit)
         self.info[tipo] = date_edit
 
     def get_reparto(self, tipo):
-        self.v_layout.addWidget(QLabel(tipo))
+        lbl = QLabel(tipo)
+        font_lbl = lbl.font()
+        font_lbl.setPointSize(17)
+        font_lbl.setBold(True)
+        lbl.setFont(font_lbl)
+        self.v_layout.addWidget(lbl)
         for element in self.list_reparti:
             rbtn = QRadioButton(element)
             self.v_layout.addWidget(rbtn)

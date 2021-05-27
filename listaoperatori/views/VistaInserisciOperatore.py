@@ -40,7 +40,8 @@ class VistaInserisciOperatore(QWidget):
         btn_ok.clicked.connect(self.add_operatore)
         self.grid_layout.addWidget(btn_ok, 10, 1)
 
-        self.setLayout((self.grid_layout))
+        self.setLayout(self.grid_layout)
+        self.resize(600, 400)
         self.setWindowTitle("Nuovo Operatore")
 
     def get_type(self, tipo, rl, cl, re, ce):

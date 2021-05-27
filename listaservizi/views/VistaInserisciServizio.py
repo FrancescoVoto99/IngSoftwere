@@ -36,16 +36,27 @@ class VistaInserisciServizio(QWidget):
         self.v_layout.addWidget(btn_ok)
 
         self.setLayout(self.v_layout)
+        self.resize(300, 500)
         self.setWindowTitle("Nuovo Servizio")
 
     def get_type(self, tipo):
-        self.v_layout.addWidget(QLabel(tipo))
+        lbl = QLabel(tipo)
+        font_lbl = lbl.font()
+        font_lbl.setPointSize(17)
+        font_lbl.setBold(True)
+        lbl.setFont(font_lbl)
+        self.v_layout.addWidget(lbl)
         current_text = QLineEdit(self)
         self.v_layout.addWidget(current_text)
         self.info[tipo] = current_text
 
     def get_tipo(self, tipo):
-        self.v_layout.addWidget(QLabel(tipo))
+        lbl = QLabel(tipo)
+        font_lbl = lbl.font()
+        font_lbl.setPointSize(17)
+        font_lbl.setBold(True)
+        lbl.setFont(font_lbl)
+        self.v_layout.addWidget(lbl)
         comboBox_tipo = QComboBox()
         for element in self.list_tipi:
             comboBox_tipo.addItem(element)
@@ -58,7 +69,12 @@ class VistaInserisciServizio(QWidget):
         self.lbl_tipo.setText(text)
 
     def get_reparto(self, tipo):
-        self.v_layout.addWidget(QLabel(tipo))
+        lbl = QLabel(tipo)
+        font_lbl = lbl.font()
+        font_lbl.setPointSize(17)
+        font_lbl.setBold(True)
+        lbl.setFont(font_lbl)
+        self.v_layout.addWidget(lbl)
         for reparto in self.list_reparti:
             rbtn = QRadioButton(reparto)
             self.v_layout.addWidget(rbtn)

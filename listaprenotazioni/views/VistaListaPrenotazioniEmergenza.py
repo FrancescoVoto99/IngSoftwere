@@ -45,7 +45,7 @@ class VistaListaPrenotazioniEmergenza(QWidget):
         h_layout.addLayout(buttons_layout)
 
         self.setLayout(h_layout)
-        self.resize(800, 600)
+        self.resize(1200, 600)
         self.setWindowTitle('Lista Prenotazioni')
 
     def get_info_prenotazioni(self):

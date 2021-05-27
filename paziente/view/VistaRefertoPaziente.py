@@ -1,3 +1,4 @@
+from PyQt5.QtGui import QFont
 from PyQt5.QtWidgets import QWidget, QVBoxLayout, QLabel, QLineEdit, QPushButton, QMessageBox, QTextEdit
 
 from listapazienti.controller.ControlloreListaPazienti import ControlloreListaPazienti
@@ -24,6 +25,7 @@ class VistaRefertoPaziente(QWidget):
         v_layout.addWidget(self.referto_edit)
 
         btn_ok = QPushButton("Conferma")
+        btn_ok.setFont(QFont('Verdana', 15))
         btn_ok.clicked.connect(self.add_referto)
         v_layout.addWidget(btn_ok)
 

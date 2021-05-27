@@ -42,7 +42,7 @@ class VistaListaOperatori(QWidget):
         h_layout.addLayout(button_layout)
 
         self.setLayout(h_layout)
-        self.resize(600, 300)
+        self.resize(800, 400)
         self.setWindowTitle("Lista Operatori")
 
     def update_ui(self,nome_search="",cognome_search=""):

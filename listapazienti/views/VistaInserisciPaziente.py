@@ -33,6 +33,7 @@ class VistaInserisciPaziente(QWidget):
         self.grid_layout.addWidget(btn_ok, 9, 0)
 
         self.setLayout((self.grid_layout))
+        self.resize(600, 400)
         self.setWindowTitle("Nuovo Paziente")
 
     def get_type (self, tipo, rl, cl, re, ce):
