@@ -51,9 +51,6 @@ class VistaListaOperatori(QWidget):
         for operatore in self.controller.get_lista_operatori():
          if nome_search == "" or ((operatore.nome.lower()).find(nome_search.lower())) == 0:
             if cognome_search == "" or ((operatore.cognome.lower()).find(cognome_search.lower())) == 0:
-
-            #if nome_search=="" or operatore.nome.lower() == nome_search.lower() :
-             #   if cognome_search=="" or operatore.cognome.lower() == cognome_search.lower() :
                     item = QStandardItem()
                     item.setText(operatore.nome + " " + operatore.cognome)
                     item.setEditable(False)

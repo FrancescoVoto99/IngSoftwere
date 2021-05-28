@@ -81,6 +81,12 @@ class VistaInserisciPaziente(QWidget):
         self.grid_layout.addWidget(dateedit, 6, 1)
         self.info[tipo] = dateedit
 
+    def check_email(self, text):
+        if text.find('@') == -1:
+            return True
+        else:
+            return False
+
     def add_paziente(self):
         nome = self.info["Nome"].text()
         cognome = self.info["Cognome"].text()
@@ -94,6 +100,8 @@ class VistaInserisciPaziente(QWidget):
             QMessageBox.critical(self, 'Errore', 'Per favore inserisci tutte le informazioni', QMessageBox.Ok, QMessageBox.Ok)
         elif self.controller.check_cf(cf):
             QMessageBox.critical(self, 'Errore', "Il paziente è già stato inserito nella lista", QMessageBox.Ok, QMessageBox.Ok)
+        elif self.check_email(email):
+            QMessageBox.critical(self, 'Errore', "Per favore, inserisci correttamente l'email", QMessageBox.Ok,QMessageBox.Ok)
         elif len(telefono) < 8 or len(telefono) > 10:
             QMessageBox.critical(self, 'Errore', "Numero di telefono sbagliato", QMessageBox.Ok, QMessageBox.Ok)
         else:

@@ -24,7 +24,7 @@ class VistaInserisciOperatore(QWidget):
         self.get_type("Nome", 0, 0, 1, 0)
         self.get_type("Cognome", 0, 1, 1, 1)
         self.grid_layout.addItem(QSpacerItem(10, 30, QSizePolicy.Minimum, QSizePolicy.Expanding))
-        self.get_type("Codice fiscale ", 2, 0, 3, 0)
+        self.get_type("Codice fiscale", 2, 0, 3, 0)
         self.get_type("Email", 2, 1, 3, 1)
         self.grid_layout.addItem(QSpacerItem(10, 30, QSizePolicy.Minimum, QSizePolicy.Expanding))
         self.get_datanascita("Data di nascita")

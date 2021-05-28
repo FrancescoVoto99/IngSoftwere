@@ -21,8 +21,20 @@ class ControlloreServizio():
     def is_disponibile(self):
         return self.model.is_disponibile
 
+    def is_prenotato(self):
+        return self.model.is_prenotato
+
+    def set_prenotato(self):
+        return self.model.set_prenotato
+
     def get_servizio_disponibile(self):
         if self.model.is_disponibile():
             return "Disponibile"
         else:
             return "Non disponibile"
+
+    def prenota(self, data):
+        return self.model.prenota(data)
+
+    def set_disponibile(self):
+        return self.model.set_disponibile
