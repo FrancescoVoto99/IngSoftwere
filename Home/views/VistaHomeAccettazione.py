@@ -29,7 +29,7 @@ class VistaHomeAccettazione(QWidget):
         self.vista_lista_servizi.show()
 
     def go_lista_pazienti(self):
-        self.vista_lista_pazienti = VistaListaPazienti()
+        self.vista_lista_pazienti = VistaListaPazienti(False)
         self.vista_lista_pazienti.show()
 
     def go_lista_operatori(self):

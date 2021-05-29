@@ -1,8 +1,9 @@
 import datetime
 from datetime import datetime, date
 
+from PyQt5.QtGui import QFont
 from PyQt5.QtWidgets import QWidget, QVBoxLayout, QSpacerItem, QSizePolicy, QLabel, QPushButton, QLineEdit, \
-    QRadioButton, QDateEdit, QMessageBox
+    QRadioButton, QDateEdit, QMessageBox, QGridLayout
 from PyQt5 import QtCore
 
 from operatore.model.Operatore import Operatore
@@ -16,35 +17,47 @@ class VistaModificaPaziente(QWidget):
 
         self.label_sesso = QLabel("")
         self.lbl_date = QLabel("")
-        self.v_layout = QVBoxLayout()
+        self.grid_layout = QGridLayout()
 
-        self.get_type("Nome", paziente.nome)
-        self.get_type("Cognome", paziente.cognome)
+        self.get_type("Nome", paziente.nome, 0, 0, 1, 0)
+        self.get_type("Cognome", paziente.cognome, 0, 1, 1, 1)
         self.get_sesso("Sesso", paziente.sesso)
-        self.get_type("Luogo di nascita", paziente.luogodinascita)
+        self.get_type("Luogo di nascita", paziente.luogodinascita, 5, 0, 6, 0)
         self.get_datanascita("Data di nascita", paziente.datadinascita)
-        self.get_type("Codice fiscale", paziente.cf)
-        self.get_type("Telefono", paziente.telefono)
-        self.get_type("Email", paziente.email)
+        self.get_type("Codice fiscale", paziente.cf, 2, 1, 3, 1)
+        self.get_type("Telefono", paziente.telefono, 7, 0, 8, 0)
+        self.get_type("Email", paziente.email, 7, 1, 8, 1)
 
-        self.v_layout.addItem(QSpacerItem(20, 40, QSizePolicy.Minimum, QSizePolicy.Expanding))
+        self.grid_layout.addItem(QSpacerItem(20, 40, QSizePolicy.Minimum, QSizePolicy.Expanding))
 
         btn_ok = QPushButton("modifica")
+        btn_ok.setFont(QFont('Verdana', 15))
         btn_ok.clicked.connect(self.modifica_paziente)
-        self.v_layout.addWidget(btn_ok)
+        self.grid_layout.addWidget(btn_ok, 9, 0)
 
-        self.setLayout((self.v_layout))
+        self.setLayout(self.grid_layout)
+        self.resize(600, 400)
         self.setWindowTitle("Modifica Paziente")
 
-    def get_type(self, tipo, set):
-        self.v_layout.addWidget(QLabel(tipo))
+    def get_type(self, tipo, set, rl, cl, re, ce):
+        lbl = QLabel(tipo)
+        font_lbl = lbl.font()
+        font_lbl.setPointSize(17)
+        font_lbl.setBold(True)
+        lbl.setFont(font_lbl)
+        self.grid_layout.addWidget(lbl, rl, cl)
         current_text = QLineEdit(self)
         current_text.setText(set)
-        self.v_layout.addWidget(current_text)
+        self.grid_layout.addWidget(current_text, re, ce)
         self.info[tipo] = current_text
 
     def get_sesso(self, tipo1, tipo2):
-        self.v_layout.addWidget(QLabel(tipo1))
+        lbl = QLabel(tipo1)
+        font_lbl = lbl.font()
+        font_lbl.setPointSize(17)
+        font_lbl.setBold(True)
+        lbl.setFont(font_lbl)
+        self.grid_layout.addWidget(lbl, 2, 0)
         rbtn_maschio = QRadioButton("Maschio")
         rbtn_maschio.toggled.connect(self.sesso_onClicked)
         rbtn_femmina = QRadioButton("Femmina")
@@ -54,9 +67,9 @@ class VistaModificaPaziente(QWidget):
             rbtn_maschio.setChecked(True)
         else:
             rbtn_femmina.setChecked(True)
-        self.v_layout.addWidget(rbtn_maschio)
-        self.v_layout.addWidget(rbtn_femmina)
-        self.v_layout.addWidget(self.label_sesso)
+        self.grid_layout.addWidget(rbtn_maschio,3, 0)
+        self.grid_layout.addWidget(rbtn_femmina, 4, 0)
+        self.grid_layout.addWidget(self.label_sesso)
 
     def sesso_onClicked(self):
         rbtn = self.sender()
@@ -64,12 +77,17 @@ class VistaModificaPaziente(QWidget):
             self.label_sesso.setText(rbtn.text())
 
     def get_datanascita(self,tipo,set):
-        self.v_layout.addWidget(QLabel(tipo))
+        lbl = QLabel(tipo)
+        font_lbl = lbl.font()
+        font_lbl.setPointSize(17)
+        font_lbl.setBold(True)
+        lbl.setFont(font_lbl)
+        self.grid_layout.addWidget(lbl, 5, 1)
         dateedit = QDateEdit(calendarPopup = True)
         prova=datetime.strptime(set, '%d/%m/%Y')
         dateedit.setDateTime(prova)
         dateedit.setDisplayFormat('dd/MM/yyyy')
-        self.v_layout.addWidget(dateedit)
+        self.grid_layout.addWidget(dateedit, 6, 1)
         self.info[tipo] = dateedit
 
     def modifica_paziente(self):

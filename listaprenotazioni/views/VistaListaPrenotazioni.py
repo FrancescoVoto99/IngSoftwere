@@ -114,6 +114,7 @@ class VistaListaPrenotazioni(QWidget):
         self.tableWidget.verticalHeader().setStretchLastSection(True)
         self.tableWidget.verticalHeader().setSectionResizeMode(QHeaderView.Stretch)
         self.tableWidget.setWindowTitle("Posti disponibili in ogni reparto")
+        self.tableWidget.setGeometry(500, 500, 500, 500)
         self.tableWidget.show()
 
     def posti_disponibili(self, reparto):
@@ -166,7 +167,7 @@ class VistaListaPrenotazioni(QWidget):
         self.update_ui(self.lineedit_reparto.text(),self.lineedit_nome.text(), self.lineedit_cognome.text())
 
     def show_archiviate(self):
-        self.vista_archiviate = VistaListaPrenotazioniArchiviate()
+        self.vista_archiviate = VistaListaPrenotazioniArchiviate(None)
         self.vista_archiviate.show()
 
     def closeEvent(self, event):

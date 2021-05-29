@@ -1,9 +1,10 @@
 import datetime
 from datetime import datetime, date
 
+from PyQt5.QtGui import QFont
 from PyQt5.QtWidgets import QWidget, QVBoxLayout, QSpacerItem, QSizePolicy, \
     QPushButton, QLabel, QLineEdit, QMessageBox, \
-    QRadioButton, QDateEdit
+    QRadioButton, QDateEdit, QGridLayout
 from PyQt5 import QtCore
 
 from operatore.model.Operatore import Operatore
@@ -17,46 +18,58 @@ class VistaModificaOperatore(QWidget):
 
         self.lbl_ruolo = QLabel("")
         self.lbl_date = QLabel("")
-        self.v_layout = QVBoxLayout()
+        self.grid_layout = QGridLayout()
 
-        self.get_type("Nome",operatore.nome)
-        self.get_type("Cognome", operatore.cognome)
-        self.get_type("Codice fiscale",operatore.cf)
+        self.get_type("Nome",operatore.nome, 0, 0, 1, 0)
+        self.get_type("Cognome", operatore.cognome, 0, 1, 1, 1)
+        self.get_type("Codice fiscale",operatore.cf,  2, 0, 3, 0)
         self.get_datanascita("Data di nascita",operatore.datanascita)
-        self.get_type("Luogo di nascita",operatore.luogonascita)
-        self.get_type("Email",operatore.email)
+        self.get_type("Luogo di nascita",operatore.luogonascita,  4, 1, 5, 1)
+        self.get_type("Email",operatore.email, 2, 1, 3, 1)
         self.get_ruolo("Ruolo",operatore.ruolo)
-        self.get_type("Password",operatore.password)
+        self.get_type("Password",operatore.password, 9, 0, 10, 0)
 
-        self.v_layout.addItem(QSpacerItem(20, 40, QSizePolicy.Minimum, QSizePolicy.Expanding))
+        self.grid_layout.addItem(QSpacerItem(20, 40, QSizePolicy.Minimum, QSizePolicy.Expanding))
 
         btn_ok = QPushButton("modifica")
+        btn_ok.setFont(QFont('Verdana', 15))
         btn_ok.clicked.connect(self.modifica_operatore)
-        self.v_layout.addWidget(btn_ok)
+        self.grid_layout.addWidget(btn_ok,  10, 1)
 
-        self.setLayout((self.v_layout))
+        self.setLayout((self.grid_layout))
+        self.resize(600, 400)
         self.setWindowTitle("Modifica Operatore")
 
-    def get_type(self, tipo, set ):
-        self.v_layout.addWidget(QLabel(tipo))
+    def get_type(self, tipo, set, rl, cl, re, ce):
+        lbl = QLabel(tipo)
+        font_lbl = lbl.font()
+        font_lbl.setPointSize(17)
+        font_lbl.setBold(True)
+        lbl.setFont(font_lbl)
+        self.grid_layout.addWidget(lbl, rl, cl)
         current_text = QLineEdit(self)
         current_text.setText(set)
-        self.v_layout.addWidget(current_text)
+        self.grid_layout.addWidget(current_text, re, ce)
         self.info[tipo] = current_text
 
     def get_ruolo(self, tipo ,ruolo):
-        self.v_layout.addWidget(QLabel(tipo))
+        lbl = QLabel(tipo)
+        font_lbl = lbl.font()
+        font_lbl.setPointSize(17)
+        font_lbl.setBold(True)
+        lbl.setFont(font_lbl)
+        self.grid_layout.addWidget(lbl, 6, 0)
+
         rbtn_accettazione = QRadioButton("Amministratore dell'ufficio di accettazione")
-
         rbtn_accettazione.toggled.connect(self.ruolo_onCliked)
+
         rbtn_prontosoccorso = QRadioButton("Amministratore del pronto soccorso")
-
         rbtn_prontosoccorso.toggled.connect(self.ruolo_onCliked)
+
         rbtn_infermiere = QRadioButton("Infermiere")
-
         rbtn_infermiere.toggled.connect(self.ruolo_onCliked)
-        rbtn_medico = QRadioButton("Medico")
 
+        rbtn_medico = QRadioButton("Medico")
         rbtn_medico.toggled.connect(self.ruolo_onCliked)
 
         self.info[tipo] = self.lbl_ruolo
@@ -68,11 +81,11 @@ class VistaModificaOperatore(QWidget):
             rbtn_infermiere.setChecked(True)
         else:
             rbtn_medico.setChecked(True)
-        self.v_layout.addWidget(rbtn_accettazione)
-        self.v_layout.addWidget(rbtn_prontosoccorso)
-        self.v_layout.addWidget(rbtn_infermiere)
-        self.v_layout.addWidget(rbtn_medico)
-        self.v_layout.addWidget(self.lbl_ruolo)
+        self.grid_layout.addWidget(rbtn_accettazione, 7, 0)
+        self.grid_layout.addWidget(rbtn_prontosoccorso,  8, 0)
+        self.grid_layout.addWidget(rbtn_infermiere, 7, 1)
+        self.grid_layout.addWidget(rbtn_medico,  8, 1)
+        self.grid_layout.addWidget(self.lbl_ruolo, 9, 1)
 
     def ruolo_onCliked(self):
         rbtn = self.sender()
@@ -80,13 +93,18 @@ class VistaModificaOperatore(QWidget):
             self.lbl_ruolo.setText(rbtn.text())
 
     def get_datanascita(self,tipo,set):
-        self.v_layout.addWidget(QLabel(tipo))
+        lbl = QLabel(tipo)
+        font_lbl = lbl.font()
+        font_lbl.setPointSize(17)
+        font_lbl.setBold(True)
+        lbl.setFont(font_lbl)
+        self.grid_layout.addWidget(lbl, 4, 0)
         dateedit = QDateEdit(calendarPopup = True)
 
         prova=datetime.strptime(set, '%d/%m/%Y')
         dateedit.setDateTime(prova)
         dateedit.setDisplayFormat('dd/MM/yyyy')
-        self.v_layout.addWidget(dateedit)
+        self.grid_layout.addWidget(dateedit, 5, 0)
         self.info[tipo] = dateedit
 
     def modifica_operatore(self):

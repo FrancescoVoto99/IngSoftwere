@@ -7,13 +7,14 @@ from prenotazione.views.VistaPrenotazione import VistaPrenotazione
 
 class VistaListaPrenotazioniArchiviate(QWidget):
 
-    def __init__(self):
+    def __init__(self, bool):
         super(VistaListaPrenotazioniArchiviate, self).__init__()
         h_layout = QHBoxLayout()
         self.controller = ControlloreListaPrenotazioniArchiviate()
         self.list_view = QListView()
         self.update_ui()
         h_layout.addWidget(self.list_view)
+        self.bool = bool
 
         buttons_layout = QVBoxLayout()
         open_button = QPushButton("Apri")
@@ -47,7 +48,7 @@ class VistaListaPrenotazioniArchiviate(QWidget):
             selected = self.list_view.selectedIndexes()[0].data()
             stringa = selected.split()
             prenotazione_selezionata = self.controller.get_prenotazione_by_posto_letto_and_cf(stringa[len(stringa) - 1].replace('(', '').replace(')', ''), stringa[0].replace('(', '').replace(')', ''))
-            self.vista_prenotazione = VistaPrenotazione(prenotazione_selezionata, None, self.update_ui)
+            self.vista_prenotazione = VistaPrenotazione(prenotazione_selezionata, None, self.update_ui, self.bool)
             self.vista_prenotazione.show()
         else:
             QMessageBox.critical(self, 'Errore', "Selezionare una prenotazione", QMessageBox.Ok, QMessageBox.Ok)

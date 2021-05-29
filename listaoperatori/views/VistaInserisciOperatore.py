@@ -74,7 +74,7 @@ class VistaInserisciOperatore(QWidget):
         rbtn_medico = QRadioButton("Medico")
         self.grid_layout.addWidget(rbtn_medico, 8, 1)
         rbtn_medico.toggled.connect(self.ruolo_onClicked)
-        self.grid_layout.addWidget(self.lbl_ruolo)
+        self.grid_layout.addWidget(self.lbl_ruolo, 9, 1)
         self.info[tipo] = self.lbl_ruolo
 
     def ruolo_onClicked(self):
