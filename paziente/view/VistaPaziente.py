@@ -9,9 +9,10 @@ from ricovero.view.VistaRicovero import VistaRicovero
 
 
 class VistaPaziente(QWidget):
-    def __init__(self, paziente, modifica_paziente = None, elimina_callback = None, parent=None):
+    def __init__(self, paziente, bool, modifica_paziente = None, elimina_callback = None, parent=None):
         super(VistaPaziente, self).__init__(parent)
         self.paziente = paziente
+        self.bool = bool
         self.modifica_paziente = modifica_paziente
         self.controller = ControllorePaziente(paziente)
         self.elimina_callback = elimina_callback
@@ -41,9 +42,10 @@ class VistaPaziente(QWidget):
 
         v_layout.addItem(QSpacerItem(20, 20, QSizePolicy.Minimum, QSizePolicy.Expanding))
 
-        btn_referto = QPushButton("Referto")
-        btn_referto.clicked.connect(self.check_referto)
-        v_layout.addWidget(btn_referto)
+        if self.bool == True:
+          btn_referto = QPushButton("Referto")
+          btn_referto.clicked.connect(self.check_referto)
+          v_layout.addWidget(btn_referto)
 
         v_layout.addItem(QSpacerItem(20, 20, QSizePolicy.Minimum, QSizePolicy.Expanding))
 
@@ -68,8 +70,8 @@ class VistaPaziente(QWidget):
         reparto = None
         for prenotazione in controller_ricoveri.get_lista_delle_prenotazioni():
             if prenotazione.paziente.cf == self.controller.get_cf_paziente():
-                newdate = datetime.strptime(prenotazione.data, "%d/%m/%Y")
-                reparto = prenotazione.servizio.reparto
+               newdate = datetime.strptime(prenotazione.data, "%d/%m/%Y")
+               reparto = prenotazione.servizio.reparto
         if(reparto != None) and newdate.date() <= date.today():
              QMessageBox.about(self, "Reparto" , "Il paziente selezionato è ricoverato nel reparto di "+ reparto.upper())
         else:

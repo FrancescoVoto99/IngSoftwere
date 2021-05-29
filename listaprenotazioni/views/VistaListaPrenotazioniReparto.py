@@ -9,12 +9,12 @@ from paziente.view.VistaRefertoPaziente import VistaRefertoPaziente
 
 class VistaListaPrenotazioniReparto(QWidget):
 
-    def __init__(self, reparto, bool):
+    def __init__(self, reparto, bool1):
         super(VistaListaPrenotazioniReparto, self).__init__()
 
         self.reparto = reparto
         self.controller = ControlloreListaPazienti()
-        self.bool = bool
+        self.bool1 = bool1
 
         self.h_layout = QHBoxLayout()
         self.list_view = QListView()
@@ -26,7 +26,7 @@ class VistaListaPrenotazioniReparto(QWidget):
         open_button.clicked.connect(self.get_info_paziente)
         buttons_layout.addWidget(open_button)
 
-        if self.bool == True:
+        if self.bool1 == True:
             referto_button = QPushButton("Nuovo referto")
             referto_button.clicked.connect(self.get_referto_paziente)
             buttons_layout.addWidget(referto_button)
@@ -57,7 +57,7 @@ class VistaListaPrenotazioniReparto(QWidget):
             selected = self.list_view.selectedIndexes()[0].data()
             stringa = selected.split()
             paziente_selezionato = self.controller.get_paziente_by_cf(stringa[len(stringa) - 1].replace('(', '').replace(')', ''))
-            self.vista_paziente = VistaPaziente(paziente_selezionato, self.controller.archivia_paziente_by_cf, self.update_ui)
+            self.vista_paziente = VistaPaziente(paziente_selezionato, True, self.controller.archivia_paziente_by_cf, self.update_ui)
             self.vista_paziente.show()
         else:
             QMessageBox.critical(self, 'Errore', "Selezionare una paziente", QMessageBox.Ok, QMessageBox.Ok)

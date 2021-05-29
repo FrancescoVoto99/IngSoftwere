@@ -27,7 +27,7 @@ class VistaHomeInfermiere(QWidget):
         self.setWindowTitle("Infermiere")
 
     def go_lista_prenotazioni(self):
-        self.vista_lista_prenotazioni = VistaListaPrenotazioni(False)
+        self.vista_lista_prenotazioni = VistaListaPrenotazioni(False, False)
         self.vista_lista_prenotazioni.show()
 
     def go_prenotazioni_reparto_cardiologia(self):

@@ -11,10 +11,11 @@ from prenotazione.views.VistaPrenotazione import VistaPrenotazione
 
 
 class VistaListaPrenotazioni(QWidget):
-    def __init__(self, bool):
+    def __init__(self, bool1, bool2):
         super(VistaListaPrenotazioni, self).__init__()
 
-        self.bool = bool
+        self.bool1 = bool1
+        self.bool2 = bool2
 
         h_layout = QHBoxLayout()
         self.controller = ControlloreListaPrenotazioni()
@@ -27,17 +28,20 @@ class VistaListaPrenotazioni(QWidget):
         open_button.clicked.connect(self.get_info_prenotazioni)
         buttons_layout.addWidget(open_button)
 
-        new_button = QPushButton("Nuova")
-        new_button.clicked.connect(self.show_new_prenotazione)
-        buttons_layout.addWidget(new_button)
+        if self.bool1 == True:
+          new_button = QPushButton("Nuova")
+          new_button.clicked.connect(self.show_new_prenotazione)
+          buttons_layout.addWidget(new_button)
 
-        button_disponibilita = QPushButton("Visualizza posti disponibili")
-        button_disponibilita.clicked.connect(self.show_disponibilita)
-        buttons_layout.addWidget(button_disponibilita)
+        if self.bool1 == True:
+          button_disponibilita = QPushButton("Visualizza posti disponibili")
+          button_disponibilita.clicked.connect(self.show_disponibilita)
+          buttons_layout.addWidget(button_disponibilita)
 
-        button_archiviate = QPushButton("Visualizza prenotazioni archiviate")
-        button_archiviate.clicked.connect(self.show_archiviate)
-        buttons_layout.addWidget(button_archiviate)
+        if self.bool2 == True:
+          button_archiviate = QPushButton("Visualizza prenotazioni archiviate")
+          button_archiviate.clicked.connect(self.show_archiviate)
+          buttons_layout.addWidget(button_archiviate)
 
         buttons_layout.addStretch()
 
@@ -68,7 +72,7 @@ class VistaListaPrenotazioni(QWidget):
             selected = self.list_view.selectedIndexes()[0].data()
             stringa = selected.split()
             prenotazione_selezionata = self.controller.get_prenotazione_by_posto_letto_and_cf(stringa[len(stringa) - 1].replace('(','').replace(')',''), stringa[0].replace('(','').replace(')',''))
-            self.vista_prenotazione = VistaPrenotazione(prenotazione_selezionata, self.controller.elimina_prenotazione_by_id, self.update_ui, self.bool)
+            self.vista_prenotazione = VistaPrenotazione(prenotazione_selezionata, self.controller.elimina_prenotazione_by_id, self.update_ui, self.bool1)
             self.vista_prenotazione.show()
         else:
             QMessageBox.critical(self, 'Errore', "Selezionare una prenotazione", QMessageBox.Ok, QMessageBox.Ok)
@@ -80,25 +84,31 @@ class VistaListaPrenotazioni(QWidget):
     def show_disponibilita(self):
         self.tableWidget = QTableWidget()
         self.tableWidget.setRowCount(6)
-        self.tableWidget.setColumnCount(3)
+        self.tableWidget.setColumnCount(4)
         self.tableWidget.setItem(0, 0, QTableWidgetItem("Reparto"))
         self.tableWidget.setItem(0, 1, QTableWidgetItem("Posti Disponibili"))
         self.tableWidget.setItem(0, 2, QTableWidgetItem("Posti Occupati"))
+        self.tableWidget.setItem(0, 3, QTableWidgetItem("Statistiche sui posti disponibili"))
         self.tableWidget.setItem(1, 0, QTableWidgetItem("Oncologia"))
         self.tableWidget.setItem(1, 1, QTableWidgetItem(str(self.posti_disponibili("oncologia"))))
         self.tableWidget.setItem(1, 2, QTableWidgetItem(str(self.posti_occupati("oncologia"))))
+        self.tableWidget.setItem(1, 3, QTableWidgetItem(self.statistiche("oncologia")))
         self.tableWidget.setItem(2, 0, QTableWidgetItem("Chirurgia"))
         self.tableWidget.setItem(2, 1, QTableWidgetItem(str(self.posti_disponibili("chirurgia"))))
         self.tableWidget.setItem(2, 2, QTableWidgetItem(str(self.posti_occupati("chirurgia"))))
+        self.tableWidget.setItem(2, 3, QTableWidgetItem(self.statistiche("chirurgia")))
         self.tableWidget.setItem(3, 0, QTableWidgetItem("Cardiologia"))
         self.tableWidget.setItem(3, 1, QTableWidgetItem(str(self.posti_disponibili("cardiologia"))))
         self.tableWidget.setItem(3, 2, QTableWidgetItem(str(self.posti_occupati("cardiologia"))))
+        self.tableWidget.setItem(3, 3, QTableWidgetItem(self.statistiche("cardiologia")))
         self.tableWidget.setItem(4, 0, QTableWidgetItem("Medicina"))
         self.tableWidget.setItem(4, 1, QTableWidgetItem(str(self.posti_disponibili("medicina"))))
         self.tableWidget.setItem(4, 2, QTableWidgetItem(str(self.posti_occupati("medicina"))))
+        self.tableWidget.setItem(4, 3, QTableWidgetItem(self.statistiche("medicina")))
         self.tableWidget.setItem(5, 0, QTableWidgetItem("Riabilitazione"))
         self.tableWidget.setItem(5, 1, QTableWidgetItem(str(self.posti_disponibili("riabilitazione"))))
         self.tableWidget.setItem(5, 2, QTableWidgetItem(str(self.posti_occupati("riabilitazione"))))
+        self.tableWidget.setItem(5, 3, QTableWidgetItem(self.statistiche("riabilitazione")))
         self.tableWidget.horizontalHeader().setStretchLastSection(True)
         self.tableWidget.horizontalHeader().setSectionResizeMode(QHeaderView.Stretch)
         self.tableWidget.verticalHeader().setStretchLastSection(True)
@@ -123,6 +133,19 @@ class VistaListaPrenotazioni(QWidget):
                if servizio.is_disponibile() == False:
                    contatore_posti_occupati += 1
         return contatore_posti_occupati
+
+    def posti_totali(self, reparto):
+        contatore_posti_totali = 0
+        controller_servizi = ControlloreListaServizi()
+        for servizio in controller_servizi.get_lista_servizi():
+            if servizio.reparto.lower() == reparto.lower():
+                contatore_posti_totali += 1
+        return contatore_posti_totali
+
+    def statistiche(self, reparto):
+        numero = (self.posti_disponibili(reparto)/self.posti_totali(reparto))*100
+        statistica = str(numero) + '%'
+        return statistica
 
     def update_ui(self, reparto_search = "", nome_search = "", cognome_search = ""):
         self.listview_model = QStandardItemModel(self.list_view)

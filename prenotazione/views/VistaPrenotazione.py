@@ -87,7 +87,7 @@ class VistaPrenotazione(QWidget):
 
 
     def visualizza_paziente_click(self):
-       self.visualizza_paziente = VistaPaziente(self.controller.get_paziente_prenotazione())
+       self.visualizza_paziente = VistaPaziente(self.controller.get_paziente_prenotazione(), False)
        self.visualizza_paziente.show()
        self.close()
 
