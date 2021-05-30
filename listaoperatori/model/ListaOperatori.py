@@ -42,7 +42,7 @@ class ListaOperatori():
         return len(self.lista_operatori)
 
     def get_operatore_by_id(self, id):
-        for operatore in self.lista_operatori:
+        for operatore in self.get_lista_operatori():
             if operatore.id==id:
                 return operatore
 

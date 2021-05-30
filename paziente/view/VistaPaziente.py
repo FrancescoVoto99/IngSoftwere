@@ -81,7 +81,7 @@ class VistaPaziente(QWidget):
                 QMessageBox.about (self, "Reparto" , "Il paziente selezionato non è ricoverato" )
 
     def check_referto(self):
-        if self.controller.get_referto_paziente() == None:
+        if self.controller.get_referto_paziente() == "":
             QMessageBox.about(self, "Referto", "Non è stato inserito alcun referto per il paziente selezionato")
         else:
             QMessageBox.about(self, "Referto", "Il referto inserito dal medico è :" + str(self.controller.get_referto_paziente()))

@@ -63,7 +63,7 @@ class VistaListaOperatori(QWidget):
     def show_selected_info(self):
         if (len(self.list_view.selectedIndexes()) > 0):
             selected= self.list_view.selectedIndexes()[0].data()
-            operatore_selezionato = self.controller.get_operatore_by_id(selected.replace(" ", ""))
+            operatore_selezionato = self.controller.get_operatore_by_id(selected.replace(" ", "").lower())
             self.vista_operatore = VistaOperatore(operatore_selezionato, self.controller.elimina_operatore_by_id, self.update_ui)
             self.vista_operatore.show()
         else:
