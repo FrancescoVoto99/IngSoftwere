@@ -3,6 +3,7 @@ import json
 from PyQt5.QtGui import QFont, QPixmap
 from PyQt5.QtWidgets import QWidget, QLabel, QSpacerItem, QSizePolicy, \
     QPushButton, QGridLayout
+from PyQt5.QtCore import Qt
 
 from autenticazione.views.VistaInserisciCredenziali import VistaInserisciCredenziali
 
@@ -11,6 +12,7 @@ class VistaAutenticazione(QWidget):
 
     def __init__(self, parent = None):
         super(VistaAutenticazione, self).__init__(parent)
+
 
         self.v_layout = QGridLayout()
         self.lbl = QLabel("Benvenuto a HospItaly")
@@ -24,6 +26,7 @@ class VistaAutenticazione(QWidget):
 
         self.lbl_foto = QLabel()
         foto = QPixmap('immagine.jpg')
+        self.lbl_foto.setAlignment(Qt.AlignCenter)
         self.lbl_foto.setPixmap(foto)
         self.v_layout.addWidget(self.lbl_foto, 1, 1)
 
@@ -34,9 +37,20 @@ class VistaAutenticazione(QWidget):
         btn_accedi.clicked.connect(self.go_vista_inserisci_credenziali)
         self.v_layout.addWidget(btn_accedi, 2, 1)
 
+        btn_chiudi = QPushButton("Esci")
+        btn_chiudi.setFont(QFont('Verdana', 30))
+        btn_chiudi.clicked.connect(self.close)
+        self.v_layout.addWidget(btn_chiudi, 3, 1)
+
         self.setLayout(self.v_layout)
         self.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
         self.setWindowTitle("Benvenuto")
+
+
+        self.showFullScreen()
+        self.setStyleSheet("background-color: lightblue")
+
+
 
     def go_vista_inserisci_credenziali(self):
         self.vista_inserisci_credenziali = VistaInserisciCredenziali()
