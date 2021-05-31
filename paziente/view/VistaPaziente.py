@@ -2,8 +2,8 @@ from datetime import date, datetime
 
 from PyQt5.QtWidgets import QWidget, QVBoxLayout, QLabel, QSpacerItem, QSizePolicy, QPushButton, QMessageBox
 
+from listaprenotazioni.controller.ControlloreListaPrenotazioni import ControlloreListaPrenotazioni
 from paziente.Controller.ControllorePaziente import ControllorePaziente
-from listaricoveri.controller.ControlloreListaRicoveri import ControlloreListaPrenotazioni
 from paziente.view.VistaModificaPaziente import VistaModificaPaziente
 from ricovero.view.VistaRicovero import VistaRicovero
 

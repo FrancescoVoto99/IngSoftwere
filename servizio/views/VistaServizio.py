@@ -1,3 +1,4 @@
+from datetime import datetime, date
 from PyQt5.QtWidgets import QWidget, QHBoxLayout, QVBoxLayout, QLabel, QSpacerItem, QSizePolicy, QPushButton, \
     QMessageBox
 
@@ -7,9 +8,10 @@ from servizio.controller.ControlloreServizio import ControlloreServizio
 
 class VistaServizio(QWidget):
 
-    def __init__(self, servizio,  elimina_servizio=False, elimina_callback=None, parent=None):
+    def __init__(self, servizio,  elimina_servizio=False, elimina_callback=None, data=None, parent=None):
         super(VistaServizio, self).__init__(parent)
         self.controller = ControlloreServizio(servizio)
+        self.data = data
         self.elimina_servizio = elimina_servizio
         self.elimina_callback = elimina_callback
 
@@ -38,6 +40,9 @@ class VistaServizio(QWidget):
         h_layout.addItem(QSpacerItem(50, 10, QSizePolicy.Minimum, QSizePolicy.Expanding))
 
         v_layout2 = QVBoxLayout()
+        if self.data is not None:
+            newdate = datetime.strptime(self.data, '%d/%m/%Y')
+            self.controller.prenota(newdate.date())
         label = self.label_generate(self.controller.get_servizio_disponibile(), 25)
         if(self.controller.get_servizio_disponibile() == "Non disponibile" ):
             label.setStyleSheet("background-color: red")
