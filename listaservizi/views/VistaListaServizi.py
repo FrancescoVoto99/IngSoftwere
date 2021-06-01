@@ -60,10 +60,10 @@ class VistaListaServizi(QWidget):
         self.setLayout(h_layout)
         self.resize(800,500)
         self.setWindowTitle("Lista Servizi")
-        self.setStyleSheet("background-color: #FF7377")
+        self.setStyleSheet("QWidget{background-color: plum} QPushButton{background-color: mediumorchid} ")
         self.resize(1200, 600)
         self.list_view.setStyleSheet("background-color: white")
-        self.list_view.verticalScrollBar().setStyleSheet("background-color: black")
+        self.list_view.verticalScrollBar().setStyleSheet("background-color: mediumorchid")
 
     def lista_prenotazioni(self, nome):
         for prenotazione in self.controller_prenotazioni.get_lista_delle_prenotazioni():

@@ -57,6 +57,7 @@ class VistaPaziente(QWidget):
 
         self.setLayout(v_layout)
         self.setWindowTitle(self.controller.get_nome_paziente() + " " + self.controller.get_cognome_paziente())
+        self.setStyleSheet("QWidget{background-color: lightpink} QPushButton{background-color: palevioletred} ")
 
     def get_label_info(self, testo, valore):
         current_label = QLabel("{}: {}".format(testo, valore))

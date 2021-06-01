@@ -60,7 +60,7 @@ class VistaInserisciCredenziali(QWidget):
 
         self.setLayout(self.h_layout)
         self.setWindowTitle("HospItaly")
-        self.setStyleSheet("background-color: lightblue")
+        self.setStyleSheet("QWidget{background-color: lightblue}QPushButton{background-color: cornflowerblue}")
 
     def identity_check(self):
         username = self.line_edit_username.text()

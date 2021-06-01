@@ -47,7 +47,7 @@ class VistaInserisciPrenotazione(QWidget):
         self.setLayout(self.grid_layout)
         self.resize(600, 400)
         self.setWindowTitle('Nuova Prenotazione')
-        self.setStyleSheet("background-color: #ffffac")
+        self.setStyleSheet("QWidget{background-color: #ffffac} QPushButton{background-color: gold}")
 
     def get_paziente(self, titolo):
         lbl = QLabel(titolo)

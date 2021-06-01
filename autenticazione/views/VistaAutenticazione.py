@@ -48,7 +48,7 @@ class VistaAutenticazione(QWidget):
 
 
         self.showFullScreen()
-        self.setStyleSheet("background-color: lightblue")
+        self.setStyleSheet("QWidget{background-color: lightblue}QPushButton{background-color: cornflowerblue}")
 
 
 

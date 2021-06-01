@@ -22,6 +22,7 @@ class VistaRefertoPaziente(QWidget):
         v_layout.addWidget(label_inserisci)
 
         self.referto_edit = QLineEdit()
+        self.referto_edit.setStyleSheet("background-color: white")
         v_layout.addWidget(self.referto_edit)
 
         btn_ok = QPushButton("Conferma")
@@ -31,6 +32,7 @@ class VistaRefertoPaziente(QWidget):
 
         self.setLayout(v_layout)
         self.setWindowTitle(self.controller.get_nome_paziente() + " " + self.controller.get_cognome_paziente())
+        self.setStyleSheet("QWidget{background-color: lightpink} QPushButton{background-color: palevioletred} ")
 
     def add_referto(self):
         controller_pazienti = ControlloreListaPazienti()

@@ -45,9 +45,9 @@ class VistaServizio(QWidget):
             self.controller.prenota(newdate.date())
         label = self.label_generate(self.controller.get_servizio_disponibile(), 25)
         if(self.controller.get_servizio_disponibile() == "Non disponibile" ):
-            label.setStyleSheet("background-color: red")
+            label.setStyleSheet("color: red")
         else:
-            label.setStyleSheet("background-color: green")
+            label.setStyleSheet("color: green")
         if self.elimina_servizio:
             btn_elimina = QPushButton("Elimina servizio")
             btn_elimina.clicked.connect(self.conferma_eliminazione)
@@ -59,6 +59,7 @@ class VistaServizio(QWidget):
 
         self.setLayout(h_layout)
         self.setWindowTitle(servizio.nome)
+        self.setStyleSheet("QWidget{background-color: plum} QPushButton{background-color: mediumorchid} ")
 
     def label_generate(self, etichetta, dimensione):
         label = QLabel(etichetta)

@@ -35,7 +35,7 @@ class VistaInserisciPaziente(QWidget):
         self.setLayout((self.grid_layout))
         self.resize(600, 400)
         self.setWindowTitle("Nuovo Paziente")
-        self.setStyleSheet("background-color: #ffacac")
+        self.setStyleSheet("QWidget{background-color: lightpink} QPushButton{background-color: palevioletred} ")
 
     def get_type (self, tipo, rl, cl, re, ce):
         lbl = QLabel(tipo)

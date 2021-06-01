@@ -21,6 +21,7 @@ class VistaHomeProntoSoccorso(QWidget):
         self.setLayout(layout)
         self.resize(600, 200)
         self.setWindowTitle("Amministratore del pronto soccorso")
+        self.setStyleSheet("QWidget{background-color: #ffffac} QPushButton{background-color: gold}")
 
     def go_lista_servizi(self):
         self.vista_lista_servizi = VistaListaServiziEmergenza()

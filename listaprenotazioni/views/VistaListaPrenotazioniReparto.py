@@ -37,6 +37,7 @@ class VistaListaPrenotazioniReparto(QWidget):
         self.setLayout(self.h_layout)
         self.resize(1200, 600)
         self.setWindowTitle('Lista pazienti ricoverati nel reparto di ' + self.reparto)
+        self.setStyleSheet("QWidget{background-color: #ffffac} QPushButton{background-color: gold}")
 
     def update_ui(self):
         self.listview_model = QStandardItemModel(self.list_view)

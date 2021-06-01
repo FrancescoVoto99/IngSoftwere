@@ -47,6 +47,7 @@ class VistaListaPrenotazioniEmergenza(QWidget):
         self.setLayout(h_layout)
         self.resize(1200, 600)
         self.setWindowTitle('Lista Prenotazioni')
+        self.setStyleSheet("QWidget{background-color: #ffffac} QPushButton{background-color: gold}")
 
     def get_info_prenotazioni(self):
         if (len(self.list_view.selectedIndexes()) > 0):

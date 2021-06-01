@@ -38,7 +38,7 @@ class VistaInserisciServizio(QWidget):
         self.setLayout(self.v_layout)
         self.resize(300, 500)
         self.setWindowTitle("Nuovo Servizio")
-        self.setStyleSheet("background-color: #FF7377")
+        self.setStyleSheet("QWidget{background-color: plum} QPushButton{background-color: mediumorchid} ")
 
     def get_type(self, tipo):
         lbl = QLabel(tipo)

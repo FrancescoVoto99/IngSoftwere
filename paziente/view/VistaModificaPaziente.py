@@ -41,6 +41,7 @@ class VistaModificaPaziente(QWidget):
         self.setLayout(self.grid_layout)
         self.resize(600, 400)
         self.setWindowTitle("Modifica Paziente")
+        self.setStyleSheet("QWidget{background-color: lightpink} QPushButton{background-color: palevioletred} ")
 
     def get_type(self, tipo, set, rl, cl, re, ce):
         lbl = QLabel(tipo)
@@ -51,6 +52,7 @@ class VistaModificaPaziente(QWidget):
         self.grid_layout.addWidget(lbl, rl, cl)
         current_text = QLineEdit(self)
         current_text.setText(set)
+        current_text.setStyleSheet("background-color: white")
         self.grid_layout.addWidget(current_text, re, ce)
         self.info[tipo] = current_text
 
@@ -87,6 +89,7 @@ class VistaModificaPaziente(QWidget):
         lbl.setFont(font_lbl)
         self.grid_layout.addWidget(lbl, 5, 1)
         dateedit = QDateEdit(calendarPopup = True)
+        dateedit.setStyleSheet("background-color: white")
         prova=datetime.strptime(set, '%d/%m/%Y')
         dateedit.setDateTime(prova)
         dateedit.setDisplayFormat('dd/MM/yyyy')

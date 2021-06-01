@@ -1,6 +1,6 @@
 from PyQt5.QtGui import QStandardItemModel, QStandardItem
 from PyQt5.QtWidgets import QWidget, QHBoxLayout, QListView, QVBoxLayout, QPushButton, QMessageBox, QLabel, QLineEdit, \
-    QTableWidget, QTableWidgetItem, QHeaderView
+    QTableWidget, QTableWidgetItem, QHeaderView, QDesktopWidget
 
 from listaprenotazioni.controller.ControlloreListaPrenotazioni import ControlloreListaPrenotazioni
 from listaprenotazioni.views.VistaInserisciPrenotazione import VistaInserisciPrenotazione
@@ -69,7 +69,7 @@ class VistaListaPrenotazioni(QWidget):
         self.setLayout(h_layout)
         self.resize(1200, 600)
         self.setWindowTitle('Lista Prenotazioni')
-        self.setStyleSheet("background-color: #ffffac")
+        self.setStyleSheet("QWidget{background-color: #ffffac} QPushButton{background-color: gold}")
         self.list_view.setStyleSheet("background-color: white")
 
     def get_info_prenotazioni(self):
@@ -120,6 +120,7 @@ class VistaListaPrenotazioni(QWidget):
         self.tableWidget.verticalHeader().setSectionResizeMode(QHeaderView.Stretch)
         self.tableWidget.setWindowTitle("Posti disponibili in ogni reparto")
         self.tableWidget.setGeometry(500, 500, 500, 500)
+        self.tableWidget.move(self.pos())
         self.tableWidget.setStyleSheet("background-color: #ffffac")
         self.tableWidget.show()
 
@@ -178,3 +179,4 @@ class VistaListaPrenotazioni(QWidget):
 
     def closeEvent(self, event):
         self.controller.save_data()
+

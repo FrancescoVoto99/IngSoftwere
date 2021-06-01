@@ -38,6 +38,8 @@ class VistaListaServiziEmergenza(QWidget):
         lbl_posto_letto = QLabel("Posto letto")
         self.lineedit_reparto = QLineEdit(self)
         self.lineedit_posto_letto = QLineEdit(self)
+        self.lineedit_posto_letto.setStyleSheet("background-color: white")
+        self.lineedit_reparto.setStyleSheet("background-color: white")
         button_new.clicked.connect(self.search_servizio)
         button_layout.addWidget(lbl_reparto)
         button_layout.addWidget(self.lineedit_reparto)
@@ -52,6 +54,9 @@ class VistaListaServiziEmergenza(QWidget):
         self.setLayout(h_layout)
         self.resize(800, 500)
         self.setWindowTitle("Lista Servizi di Emergenza")
+        self.setStyleSheet("QWidget{background-color: plum} QPushButton{background-color: mediumorchid} ")
+        self.list_view.setStyleSheet("background-color: white")
+        self.list_view.verticalScrollBar().setStyleSheet("background-color: mediumorchid")
 
     def show_selected_info(self):
         selected = self.list_view.selectedIndexes()[0].data()

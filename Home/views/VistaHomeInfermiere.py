@@ -25,6 +25,7 @@ class VistaHomeInfermiere(QWidget):
         self.setLayout(layout)
         self.resize(800, 400)
         self.setWindowTitle("Infermiere")
+        self.setStyleSheet("QWidget{background-color: lightgreen} QPushButton{background-color: mediumseagreen}")
 
     def go_lista_prenotazioni(self):
         self.vista_lista_prenotazioni = VistaListaPrenotazioni(False, False)

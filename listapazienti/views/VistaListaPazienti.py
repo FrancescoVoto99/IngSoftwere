@@ -52,9 +52,11 @@ class VistaListaPazienti(QWidget):
         h_layout.addLayout(button_layout)
 
         self.setLayout(h_layout)
-        self.resize(800,400)
+        self.resize(1000,500)
         self.setWindowTitle("Lista Pazienti")
-        self.setStyleSheet("background-color: #ffacac")
+        self.setStyleSheet("QWidget{background-color: lightpink} QPushButton{background-color: palevioletred} ")
+        self.setStyleSheet("background-color: lightpink")
+        self.list_view.verticalScrollBar().setStyleSheet("background-color: palevioletred")
         self.list_view.setStyleSheet("background-color: white")
 
     def update_ui(self, nome_search = "", cognome_search = "", cf_search=""):

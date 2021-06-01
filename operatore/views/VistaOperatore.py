@@ -43,7 +43,7 @@ class VistaOperatore(QWidget):
 
         self.setLayout(v_layout)
         self.setWindowTitle(self.controller.get_nome_operatore() + ' ' + self.controller.get_cognome_operatore())
-        self.setStyleSheet("background-color: #caffca")
+        self.setStyleSheet("QWidget{background-color: lightgreen} QPushButton{background-color: mediumseagreen}")
 
     def get_label_info(self, txt, val):
         lbl = QLabel("{}: {}".format(txt, val))

@@ -27,7 +27,7 @@ class VistaListaPrenotazioniArchiviate(QWidget):
         self.setLayout(h_layout)
         self.resize(1200, 600)
         self.setWindowTitle('Lista Prenotazioni Archiviate')
-        self.setStyleSheet("background-color: #ffffac")
+        self.setStyleSheet("QWidget{background-color: #ffffac} QPushButton{background-color: gold}")
         self.list_view.setStyleSheet("background-color: white")
 
     def update_ui(self, reparto_search = "", nome_search = "", cognome_search = ""):
