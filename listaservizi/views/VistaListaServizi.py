@@ -46,6 +46,8 @@ class VistaListaServizi(QWidget):
         lbl_posto_letto = QLabel("Posto letto")
         self.lineedit_reparto = QLineEdit(self)
         self.lineedit_posto_letto = QLineEdit(self)
+        self.lineedit_reparto.setStyleSheet("background-color: white")
+        self.lineedit_posto_letto.setStyleSheet("background-color: white")
         button_new.clicked.connect(self.search_servizio)
         button_layout.addWidget(lbl_reparto)
         button_layout.addWidget(self.lineedit_reparto)
@@ -58,6 +60,10 @@ class VistaListaServizi(QWidget):
         self.setLayout(h_layout)
         self.resize(800,500)
         self.setWindowTitle("Lista Servizi")
+        self.setStyleSheet("background-color: #FF7377")
+        self.resize(1200, 600)
+        self.list_view.setStyleSheet("background-color: white")
+        self.list_view.verticalScrollBar().setStyleSheet("background-color: black")
 
     def lista_prenotazioni(self, nome):
         for prenotazione in self.controller_prenotazioni.get_lista_delle_prenotazioni():

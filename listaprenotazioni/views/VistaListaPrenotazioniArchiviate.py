@@ -27,6 +27,8 @@ class VistaListaPrenotazioniArchiviate(QWidget):
         self.setLayout(h_layout)
         self.resize(1200, 600)
         self.setWindowTitle('Lista Prenotazioni Archiviate')
+        self.setStyleSheet("background-color: #FFFF66")
+        self.list_view.setStyleSheet("background-color: white")
 
     def update_ui(self, reparto_search = "", nome_search = "", cognome_search = ""):
         self.listview_model = QStandardItemModel(self.list_view)

@@ -24,6 +24,7 @@ class VistaPrenotazione(QWidget):
 
         v_layout = QVBoxLayout()
 
+
         v_layout.addWidget(self.get_label_info("Id", self.controller.get_id_prenotazione()))
         v_layout.addWidget(self.get_label_info("Paziente", self.controller.get_paziente_prenotazione().nome+" "+self.controller.get_paziente_prenotazione().cognome))
         v_layout.addWidget(self.get_label_info("Servizio", self.controller.get_servizio_prenotazione().nome))
@@ -36,6 +37,8 @@ class VistaPrenotazione(QWidget):
         v_layout.addWidget(button_disdici)
 
         self.setLayout(v_layout)
+        self.setStyleSheet("background-color: #FFFF66")
+
 
         button_libera_posto_letto = QPushButton("Libera posto letto")
         button_libera_posto_letto.clicked.connect(self.libera_posto_letto_click)
@@ -55,6 +58,7 @@ class VistaPrenotazione(QWidget):
             v_layout.addWidget(button_visualizza_servizio)
 
         self.setLayout(v_layout)
+
 
     def get_label_info(self, testo, valore):
         current_label = QLabel("{}: {}".format(testo, valore))

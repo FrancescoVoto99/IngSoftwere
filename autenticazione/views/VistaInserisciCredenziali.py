@@ -34,6 +34,7 @@ class VistaInserisciCredenziali(QWidget):
         lbl_username.setFont(font_lbl_u)
         self.h_layout.addWidget((lbl_username),1,0)
         self.line_edit_username = QLineEdit()
+        self.line_edit_username.setStyleSheet("background-color: white")
         self.h_layout.addWidget((self.line_edit_username), 1, 1)
 
         self.h_layout.addItem(QSpacerItem(20, 40, QSizePolicy.Minimum, QSizePolicy.Expanding))
@@ -45,6 +46,7 @@ class VistaInserisciCredenziali(QWidget):
         self.h_layout.addWidget((lbl_password), 2, 0)
         self.line_edit_password = QLineEdit()
         self.line_edit_password.setEchoMode(QLineEdit.Password)
+        self.line_edit_password.setStyleSheet("background-color: white")
         self.h_layout.addWidget((self.line_edit_password), 2, 1)
 
         self.h_layout.addItem(QSpacerItem(20, 40, QSizePolicy.Minimum, QSizePolicy.Expanding))
@@ -58,6 +60,7 @@ class VistaInserisciCredenziali(QWidget):
 
         self.setLayout(self.h_layout)
         self.setWindowTitle("HospItaly")
+        self.setStyleSheet("background-color: lightblue")
 
     def identity_check(self):
         username = self.line_edit_username.text()

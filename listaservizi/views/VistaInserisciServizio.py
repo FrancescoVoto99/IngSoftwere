@@ -38,6 +38,7 @@ class VistaInserisciServizio(QWidget):
         self.setLayout(self.v_layout)
         self.resize(300, 500)
         self.setWindowTitle("Nuovo Servizio")
+        self.setStyleSheet("background-color: #FF7377")
 
     def get_type(self, tipo):
         lbl = QLabel(tipo)
@@ -47,6 +48,7 @@ class VistaInserisciServizio(QWidget):
         lbl.setFont(font_lbl)
         self.v_layout.addWidget(lbl)
         current_text = QLineEdit(self)
+        current_text.setStyleSheet("background-color: white")
         self.v_layout.addWidget(current_text)
         self.info[tipo] = current_text
 
@@ -58,6 +60,7 @@ class VistaInserisciServizio(QWidget):
         lbl.setFont(font_lbl)
         self.v_layout.addWidget(lbl)
         comboBox_tipo = QComboBox()
+        comboBox_tipo.setStyleSheet("background-color: white")
         for element in self.list_tipi:
             comboBox_tipo.addItem(element)
         self.v_layout.addWidget(comboBox_tipo)

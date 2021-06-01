@@ -35,6 +35,9 @@ class VistaListaPazienti(QWidget):
         self.lineedit_nome = QLineEdit(self)
         self.lineedit_cognome = QLineEdit(self)
         self.lineedit_cf = QLineEdit(self)
+        self.lineedit_nome.setStyleSheet("background-color: white")
+        self.lineedit_cognome.setStyleSheet("background-color: white")
+        self.lineedit_cf.setStyleSheet("background-color: white")
         button_new.clicked.connect(self.search_operatore)
         button_layout.addWidget(lbl_nome)
         button_layout.addWidget(self.lineedit_nome)
@@ -51,6 +54,8 @@ class VistaListaPazienti(QWidget):
         self.setLayout(h_layout)
         self.resize(800,400)
         self.setWindowTitle("Lista Pazienti")
+        self.setStyleSheet("background-color: #bad9ac")
+        self.list_view.setStyleSheet("background-color: white")
 
     def update_ui(self, nome_search = "", cognome_search = "", cf_search=""):
         self.listview_model = QStandardItemModel(self.list_view)

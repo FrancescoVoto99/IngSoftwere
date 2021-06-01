@@ -39,6 +39,7 @@ class VistaModificaOperatore(QWidget):
         self.setLayout((self.grid_layout))
         self.resize(600, 400)
         self.setWindowTitle("Modifica Operatore")
+        self.setStyleSheet("background-color: #ffd597")
 
     def get_type(self, tipo, set, rl, cl, re, ce):
         lbl = QLabel(tipo)
@@ -48,6 +49,7 @@ class VistaModificaOperatore(QWidget):
         lbl.setFont(font_lbl)
         self.grid_layout.addWidget(lbl, rl, cl)
         current_text = QLineEdit(self)
+        current_text.setStyleSheet("background-color: white")
         current_text.setText(set)
         self.grid_layout.addWidget(current_text, re, ce)
         self.info[tipo] = current_text
@@ -100,6 +102,7 @@ class VistaModificaOperatore(QWidget):
         lbl.setFont(font_lbl)
         self.grid_layout.addWidget(lbl, 4, 0)
         dateedit = QDateEdit(calendarPopup = True)
+        dateedit.setStyleSheet("background-color: white")
 
         prova=datetime.strptime(set, '%d/%m/%Y')
         dateedit.setDateTime(prova)

@@ -35,6 +35,7 @@ class VistaInserisciPaziente(QWidget):
         self.setLayout((self.grid_layout))
         self.resize(600, 400)
         self.setWindowTitle("Nuovo Paziente")
+        self.setStyleSheet("background-color: #bad9ac")
 
     def get_type (self, tipo, rl, cl, re, ce):
         lbl = QLabel(tipo)
@@ -44,6 +45,7 @@ class VistaInserisciPaziente(QWidget):
         lbl.setFont(font_lbl)
         self.grid_layout.addWidget(lbl, rl, cl)
         current_text = QLineEdit(self)
+        current_text.setStyleSheet("background-color: white")
         self.grid_layout.addWidget(current_text, re, ce)
         self.info[tipo] = current_text
 
@@ -76,6 +78,7 @@ class VistaInserisciPaziente(QWidget):
         lbl.setFont(font_lbl)
         self.grid_layout.addWidget(lbl, 5, 1)
         dateedit = QDateEdit(calendarPopup = True)
+        dateedit.setStyleSheet("background-color: white")
         dateedit.setDateTime(QtCore.QDateTime.currentDateTime())
         dateedit.setDisplayFormat('dd/MM/yyyy')
         self.grid_layout.addWidget(dateedit, 6, 1)

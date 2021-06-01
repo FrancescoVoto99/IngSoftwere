@@ -52,6 +52,9 @@ class VistaListaPrenotazioni(QWidget):
         self.lineedit_reparto = QLineEdit(self)
         self.lineedit_nome = QLineEdit(self)
         self.lineedit_cognome = QLineEdit(self)
+        self.lineedit_reparto.setStyleSheet("background-color: white")
+        self.lineedit_nome.setStyleSheet("background-color: white")
+        self.lineedit_cognome.setStyleSheet("background-color: white")
         button_new.clicked.connect(self.search_prenotazione)
         buttons_layout.addWidget(lbl_reparto)
         buttons_layout.addWidget(self.lineedit_reparto)
@@ -66,6 +69,8 @@ class VistaListaPrenotazioni(QWidget):
         self.setLayout(h_layout)
         self.resize(1200, 600)
         self.setWindowTitle('Lista Prenotazioni')
+        self.setStyleSheet("background-color: #FFFF66")
+        self.list_view.setStyleSheet("background-color: white")
 
     def get_info_prenotazioni(self):
         if (len(self.list_view.selectedIndexes()) > 0):
@@ -115,6 +120,7 @@ class VistaListaPrenotazioni(QWidget):
         self.tableWidget.verticalHeader().setSectionResizeMode(QHeaderView.Stretch)
         self.tableWidget.setWindowTitle("Posti disponibili in ogni reparto")
         self.tableWidget.setGeometry(500, 500, 500, 500)
+        self.tableWidget.setStyleSheet("background-color: #FFFF66")
         self.tableWidget.show()
 
     def posti_disponibili(self, reparto):

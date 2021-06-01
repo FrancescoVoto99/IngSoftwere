@@ -15,14 +15,15 @@ class VistaHomeAccettazione(QWidget):
 
         # ricoveri_bottone.clicked.connect()
 
-        grid_layout.addWidget(self.get_button("Lista Servizi", self.go_lista_servizi, "background-color: #cfc7e5"), 0, 0)
+        grid_layout.addWidget(self.get_button("Lista Servizi", self.go_lista_servizi, "background-color: #FF7377"), 0, 0)
         grid_layout.addWidget(self.get_button("Lista Pazienti", self.go_lista_pazienti, "background-color: #bad9ac"), 0, 1)
         grid_layout.addWidget(self.get_button("Lista Operatori", self.go_lista_operatori, "background-color: #ffd597"), 1, 0)
-        grid_layout.addWidget(self.get_button("Lista Prenotazioni", self.go_lista_prenotazioni, "background-color: #cfc7e5"), 1, 1)
+        grid_layout.addWidget(self.get_button("Lista Prenotazioni", self.go_lista_prenotazioni, "background-color: #FFFF66"), 1, 1)
 
         self.setLayout(grid_layout)
         self.resize(400, 400)
         self.setWindowTitle("Amministratore dell'ufficio di accettazione")
+        self.setStyleSheet("background-color: lightblue")
 
     def go_lista_servizi(self):
         self.vista_lista_servizi = VistaListaServizi()

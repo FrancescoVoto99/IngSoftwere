@@ -30,8 +30,11 @@ class VistaListaOperatori(QWidget):
         lbl_cognome = QLabel("Cognome")
         self.lineedit_nome = QLineEdit(self)
         self.lineedit_cognome = QLineEdit(self)
+        self.lineedit_nome.setStyleSheet("background-color: white")
+        self.lineedit_cognome.setStyleSheet("background-color: white")
         button_new.clicked.connect(self.search_operatore)
         button_layout.addWidget(lbl_nome)
+
         button_layout.addWidget(self.lineedit_nome)
         button_layout.addWidget(lbl_cognome)
         button_layout.addWidget(self.lineedit_cognome)
@@ -44,6 +47,8 @@ class VistaListaOperatori(QWidget):
         self.setLayout(h_layout)
         self.resize(800, 400)
         self.setWindowTitle("Lista Operatori")
+        self.setStyleSheet("background-color: #ffd597")
+        self.list_view.setStyleSheet("background-color: white")
 
     def update_ui(self,nome_search="",cognome_search=""):
         self.listview_model = QStandardItemModel(self.list_view)

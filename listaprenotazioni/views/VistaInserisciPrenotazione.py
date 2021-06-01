@@ -47,6 +47,7 @@ class VistaInserisciPrenotazione(QWidget):
         self.setLayout(self.grid_layout)
         self.resize(600, 400)
         self.setWindowTitle('Nuova Prenotazione')
+        self.setStyleSheet("background-color: #FFFF66")
 
     def get_paziente(self, titolo):
         lbl = QLabel(titolo)
@@ -56,6 +57,7 @@ class VistaInserisciPrenotazione(QWidget):
         lbl.setFont(font_lbl)
         self.grid_layout.addWidget(lbl, 2, 0)
         combo_pazienti = QComboBox()
+        combo_pazienti.setStyleSheet("background-color: white")
         for paziente in self.controller_pazienti.get_lista_pazienti():
             combo_pazienti.addItem(paziente.cf)
         self.grid_layout.addWidget(combo_pazienti, 3, 0)
@@ -74,6 +76,7 @@ class VistaInserisciPrenotazione(QWidget):
         lbl.setFont(font_lbl)
         self.grid_layout.addWidget(lbl, 0, 1)
         dateedit = QDateEdit(calendarPopup=True)
+        dateedit.setStyleSheet("background-color: white")
         dateedit.setDateTime(QtCore.QDateTime.currentDateTime())
         dateedit.setDisplayFormat('dd/MM/yyyy')
         self.grid_layout.addWidget(dateedit, 1, 1)
@@ -87,6 +90,7 @@ class VistaInserisciPrenotazione(QWidget):
         lbl.setFont(font_lbl)
         self.grid_layout.addWidget(lbl, 0, 0)
         dateedit = QDateEdit(calendarPopup=True)
+        dateedit.setStyleSheet("background-color: white")
         dateedit.setDateTime(QtCore.QDateTime.currentDateTime())
         dateedit.setDisplayFormat('dd/MM/yyyy')
         self.grid_layout.addWidget(dateedit, 1, 0)
@@ -130,6 +134,7 @@ class VistaInserisciPrenotazione(QWidget):
         lbl.setFont(font_lbl)
         self.grid_layout.addWidget(lbl, 2, 1)
         combo_ricoveri = QComboBox()
+        combo_ricoveri.setStyleSheet("background-color: white")
         for ricovero in self.lista_tipi:
             combo_ricoveri.addItem(ricovero)
         self.grid_layout.addWidget(combo_ricoveri, 3, 1)
