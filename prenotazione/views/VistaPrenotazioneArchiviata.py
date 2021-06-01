@@ -1,7 +1,15 @@
-class VistaPrenotazione(QWidget):
+from PyQt5.QtWidgets import QLabel, QPushButton, QSpacerItem, QSizePolicy, QVBoxLayout, QWidget
+
+from listapazienti.controller.ControlloreListaPazienti import ControlloreListaPazienti
+from paziente.view.VistaPaziente import VistaPaziente
+from prenotazione.controller.ControllorePrenotazione import ControllorePrenotazione
+from servizio.views.VistaServizio import VistaServizio
+
+
+class VistaPrenotazioneArchiviata(QWidget):
 
     def __init__(self, prenotazione, elimina_callback,  bool, parent = None):
-        super(VistaPrenotazione, self).__init__(parent)
+        super(VistaPrenotazioneArchiviata, self).__init__(parent)
         self.prenotazione=prenotazione
         self.controller = ControllorePrenotazione(prenotazione)
         self.elimina_callback = elimina_callback
@@ -27,12 +35,12 @@ class VistaPrenotazione(QWidget):
 
         self.setLayout(v_layout)
 
-        #if self.bool == True:
-         #   button_visualizza_servizio = QPushButton("Visualizza servizio")
-          #  button_visualizza_servizio.clicked.connect(self.visualizza_servizio_click)
-           # v_layout.addWidget(button_visualizza_servizio)
+        if self.bool == True:
+           button_visualizza_servizio = QPushButton("Visualizza servizio")
+           button_visualizza_servizio.clicked.connect(self.visualizza_servizio_click)
+           v_layout.addWidget(button_visualizza_servizio)
 
-#        self.setLayout(v_layout)
+        self.setLayout(v_layout)
 
 
     def get_label_info(self, testo, valore):

@@ -3,10 +3,7 @@ from PyQt5.QtWidgets import QWidget, QHBoxLayout, QListView, QVBoxLayout, QPushB
 
 from listaprenotazioni.controller.ControlloreListaPrenotazioniArchiviate import ControlloreListaPrenotazioniArchiviate
 from prenotazione.views.VistaPrenotazione import VistaPrenotazione
-
-
-class VistaPrenotazioneArchiaviata:
-    pass
+from prenotazione.views.VistaPrenotazioneArchiviata import VistaPrenotazioneArchiviata
 
 
 class VistaListaPrenotazioniArchiviate(QWidget):
@@ -54,8 +51,8 @@ class VistaListaPrenotazioniArchiviate(QWidget):
             selected = self.list_view.selectedIndexes()[0].data()
             stringa = selected.split()
             prenotazione_selezionata = self.controller.get_prenotazione_by_posto_letto_and_cf(stringa[len(stringa) - 1].replace('(', '').replace(')', ''), stringa[0].replace('(', '').replace(')', ''))
-            self.vista_prenotazione_archiviata = VistaPrenotazioneArchiaviata(prenotazione_selezionata, self.bool)
-            self.vista_prenotazione.show()
+            self.vista_prenotazione_archiviata = VistaPrenotazioneArchiviata(prenotazione_selezionata, self.update_ui, self.bool)
+            self.vista_prenotazione_archiviata.show()
         else:
             QMessageBox.critical(self, 'Errore', "Selezionare una prenotazione", QMessageBox.Ok, QMessageBox.Ok)
 
