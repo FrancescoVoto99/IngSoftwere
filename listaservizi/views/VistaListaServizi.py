@@ -1,7 +1,9 @@
+from datetime import datetime, date
 from PyQt5.QtGui import QStandardItemModel, QStandardItem
 from PyQt5.QtWidgets import QWidget, QBoxLayout, QListView, QHBoxLayout, QVBoxLayout, QPushButton, QLabel, QLineEdit, \
     QMessageBox
 
+from listaprenotazioni.controller.ControlloreListaPrenotazioni import ControlloreListaPrenotazioni
 from listaservizi.controller.ControlloreListaServizi import ControlloreListaServizi
 from listaservizi.views.VistaInserisciServizio import VistaInserisciServizio
 from servizio.views.VistaServizio import VistaServizio
@@ -12,6 +14,7 @@ class VistaListaServizi(QWidget):
         super(VistaListaServizi, self).__init__(parent)
 
         self.controller= ControlloreListaServizi()
+        self.controller_prenotazioni = ControlloreListaPrenotazioni()
 
         h_layout = QHBoxLayout()
         self.list_view= QListView()
@@ -56,6 +59,14 @@ class VistaListaServizi(QWidget):
         self.resize(800,500)
         self.setWindowTitle("Lista Servizi")
 
+    def lista_prenotazioni(self, nome):
+        for prenotazione in self.controller_prenotazioni.get_lista_delle_prenotazioni():
+            if prenotazione.servizio.nome.lower() == nome.lower():
+                newdate = datetime.strptime(prenotazione.data, '%d/%m/%Y')
+                if newdate.date() <= date.today():
+                    return prenotazione.data
+        return None
+
     def closeEvent(self, event):
         self.controller.save_data()
         event.accept()
@@ -65,7 +76,7 @@ class VistaListaServizi(QWidget):
             selected = self.list_view.selectedIndexes()[0].data()
             stringa = selected.split()
             servizio_selezionato = self.controller.get_servizio_by_nome(stringa[len(stringa)-1].replace('(', '').replace(')', ''))
-            self.vista_servizio = VistaServizio(servizio_selezionato, self.controller.elimina_servizio_by_nome, self.update_ui)
+            self.vista_servizio = VistaServizio(servizio_selezionato, self.controller.elimina_servizio_by_nome, self.update_ui, self.lista_prenotazioni(servizio_selezionato.nome))
             self.vista_servizio.show()
         else:
             QMessageBox.critical(self, 'Errore', "Selezionare un servizio", QMessageBox.Ok, QMessageBox.Ok)
