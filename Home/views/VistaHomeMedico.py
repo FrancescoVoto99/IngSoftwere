@@ -14,43 +14,43 @@ class VistaHomeMedico(QWidget):
 
         layout = QGridLayout()
 
-        layout.addWidget(self.get_button("Lista dei ricoveri", self.go_lista_prenotazioni, "background-color: #cfc7e5"), 0, 0)
-        layout.addWidget(self.get_button("Visualizza pazienti ricoverati in Cardiologia", self.go_prenotazioni_reparto_cardiologia, "background-color: #cfc7e5"), 0, 1)
-        layout.addWidget(self.get_button("Visualizza pazienti ricoverati in Chirurgia", self.go_prenotazioni_reparto_chirurgia, "background-color: #cfc7e5"), 1, 0)
-        layout.addWidget(self.get_button("Visualizza pazienti ricoverati in Oncologia", self.go_prenotazioni_reparto_oncologia, "background-color: #cfc7e5"), 1, 1)
-        layout.addWidget(self.get_button("Visualizza pazienti ricoverati in Medicina", self.go_prenotazioni_reparto_medicina, "background-color: #cfc7e5"), 2,0)
-        layout.addWidget(self.get_button("Visualizza pazienti ricoverati in Riabilitazione", self.go_prenotazioni_reparto_riabilitazione, "background-color: #cfc7e5"), 2,1)
+        layout.addWidget(self.get_button("Lista dei ricoveri", self.go_lista_prenotazioni), 0, 0)
+        layout.addWidget(self.get_button("Visualizza pazienti ricoverati in Cardiologia", self.go_prenotazioni_reparto_cardiologia), 0, 1)
+        layout.addWidget(self.get_button("Visualizza pazienti ricoverati in Chirurgia", self.go_prenotazioni_reparto_chirurgia), 1, 0)
+        layout.addWidget(self.get_button("Visualizza pazienti ricoverati in Oncologia", self.go_prenotazioni_reparto_oncologia), 1, 1)
+        layout.addWidget(self.get_button("Visualizza pazienti ricoverati in Medicina", self.go_prenotazioni_reparto_medicina), 2,0)
+        layout.addWidget(self.get_button("Visualizza pazienti ricoverati in Riabilitazione", self.go_prenotazioni_reparto_riabilitazione), 2,1)
 
         self.setLayout(layout)
         self.resize(800, 400)
         self.setWindowTitle("Medico")
-        self.setStyleSheet("QWidget{background-color: lightpink} QPushButton{background-color: palevioletred} ")
+        self.setStyleSheet("QWidget{background-color: #ffffac} QPushButton{background-color: gold}")
 
     def go_lista_prenotazioni(self):
         self.vista_lista_prenotazioni = VistaListaPrenotazioni(False, True)
-        self.vista_lista_prenotazioni.show()
+        self.vista_lista_prenotazioni.showMaximized()
 
     def go_prenotazioni_reparto_cardiologia(self):
         self.vista_lista_prenotazioni_reparti = VistaListaPrenotazioniReparto("Cardiologia", True)
-        self.vista_lista_prenotazioni_reparti.show()
+        self.vista_lista_prenotazioni_reparti.showMaximized()
 
     def go_prenotazioni_reparto_chirurgia(self):
         self.vista_lista_prenotazioni_reparti = VistaListaPrenotazioniReparto("Chirurgia", True)
-        self.vista_lista_prenotazioni_reparti.show()
+        self.vista_lista_prenotazioni_reparti.showMaximized()
 
     def go_prenotazioni_reparto_oncologia(self):
         self.vista_lista_prenotazioni_reparti = VistaListaPrenotazioniReparto("Oncologia", True)
-        self.vista_lista_prenotazioni_reparti.show()
+        self.vista_lista_prenotazioni_reparti.showMaximized()
 
     def go_prenotazioni_reparto_medicina(self):
         self.vista_lista_prenotazioni_reparti = VistaListaPrenotazioniReparto("Medicina", True)
-        self.vista_lista_prenotazioni_reparti.show()
+        self.vista_lista_prenotazioni_reparti.showMaximized()
 
     def go_prenotazioni_reparto_riabilitazione(self):
         self.vista_lista_prenotazioni_reparti = VistaListaPrenotazioniReparto("Riabilitazione", True)
-        self.vista_lista_prenotazioni_reparti.show()
+        self.vista_lista_prenotazioni_reparti.showMaximized()
 
-    def get_button(self, titolo, on_click, colore):
+    def get_button(self, titolo, on_click):
         palette = QPalette()
         palette.setColor(QPalette.ButtonText, Qt.black)
         bottone = QPushButton(titolo)
@@ -61,6 +61,6 @@ class VistaHomeMedico(QWidget):
         font.setBold(True)
         bottone.setFont(font)
         bottone.clicked.connect(on_click)
-        bottone.setStyleSheet(colore)
+
         return bottone
 

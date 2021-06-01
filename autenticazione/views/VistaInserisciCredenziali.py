@@ -76,19 +76,19 @@ class VistaInserisciCredenziali(QWidget):
     def openHome(self):
         if self.identity_check() == "Amministratore dell'ufficio di accettazione":
             self.go_vista = VistaHomeAccettazione()
-            self.go_vista.show()
+            self.go_vista.showMaximized()
             self.close()
         elif self.identity_check() == "Amministratore del pronto soccorso":
             self.go_vista = VistaHomeProntoSoccorso()
-            self.go_vista.show()
+            self.go_vista.showMaximized()
             self.close()
         elif self.identity_check() == "Infermiere":
             self.go_vista = VistaHomeInfermiere()
-            self.go_vista.show()
+            self.go_vista.showMaximized()
             self.close()
         elif self.identity_check() == "Medico":
             self.go_vista = VistaHomeMedico()
-            self.go_vista.show()
+            self.go_vista.showMaximized()
             self.close()
         else:
             QMessageBox.critical(self, 'Errore', 'Credenziali errate', QMessageBox.Ok, QMessageBox.Ok)

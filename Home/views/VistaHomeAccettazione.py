@@ -27,19 +27,19 @@ class VistaHomeAccettazione(QWidget):
 
     def go_lista_servizi(self):
         self.vista_lista_servizi = VistaListaServizi()
-        self.vista_lista_servizi.show()
+        self.vista_lista_servizi.showMaximized()
 
     def go_lista_pazienti(self):
         self.vista_lista_pazienti = VistaListaPazienti(False)
-        self.vista_lista_pazienti.show()
+        self.vista_lista_pazienti.showMaximized()
 
     def go_lista_operatori(self):
         self.vista_lista_operatori = VistaListaOperatori()
-        self.vista_lista_operatori.show()
+        self.vista_lista_operatori.showMaximized()
 
     def go_lista_prenotazioni(self):
         self.vista_lista_prenotazioni = VistaListaPrenotazioni(True, True)
-        self.vista_lista_prenotazioni.show()
+        self.vista_lista_prenotazioni.showMaximized()
 
     def get_button(self, titolo, on_click, colore):
         palette = QPalette()

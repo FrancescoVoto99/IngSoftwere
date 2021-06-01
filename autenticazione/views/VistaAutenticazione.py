@@ -47,7 +47,7 @@ class VistaAutenticazione(QWidget):
         self.setWindowTitle("Benvenuto")
 
 
-        self.showFullScreen()
+        self.showMaximized()
         self.setStyleSheet("QWidget{background-color: lightblue}QPushButton{background-color: cornflowerblue}")
 
 
