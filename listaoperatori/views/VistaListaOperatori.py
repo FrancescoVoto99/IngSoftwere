@@ -47,7 +47,7 @@ class VistaListaOperatori(QWidget):
         self.setLayout(h_layout)
         self.resize(800, 400)
         self.setWindowTitle("Lista Operatori")
-        self.setStyleSheet("background-color: #ffd597")
+        self.setStyleSheet("background-color: #caffca")
         self.list_view.setStyleSheet("background-color: white")
 
     def update_ui(self,nome_search="",cognome_search=""):

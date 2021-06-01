@@ -43,7 +43,7 @@ class VistaInserisciOperatore(QWidget):
         self.setLayout(self.grid_layout)
         self.resize(600, 400)
         self.setWindowTitle("Nuovo Operatore")
-        self.setStyleSheet("background-color: #ffd597")
+        self.setStyleSheet("background-color: #caffca")
 
     def get_type(self, tipo, rl, cl, re, ce):
         lbl = QLabel(tipo)

@@ -37,7 +37,7 @@ class VistaPrenotazione(QWidget):
         v_layout.addWidget(button_disdici)
 
         self.setLayout(v_layout)
-        self.setStyleSheet("background-color: #FFFF66")
+        self.setStyleSheet("background-color: #ffffac")
 
 
         button_libera_posto_letto = QPushButton("Libera posto letto")

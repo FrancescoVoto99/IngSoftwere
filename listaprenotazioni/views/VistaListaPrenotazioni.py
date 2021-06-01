@@ -69,7 +69,7 @@ class VistaListaPrenotazioni(QWidget):
         self.setLayout(h_layout)
         self.resize(1200, 600)
         self.setWindowTitle('Lista Prenotazioni')
-        self.setStyleSheet("background-color: #FFFF66")
+        self.setStyleSheet("background-color: #ffffac")
         self.list_view.setStyleSheet("background-color: white")
 
     def get_info_prenotazioni(self):
@@ -120,7 +120,7 @@ class VistaListaPrenotazioni(QWidget):
         self.tableWidget.verticalHeader().setSectionResizeMode(QHeaderView.Stretch)
         self.tableWidget.setWindowTitle("Posti disponibili in ogni reparto")
         self.tableWidget.setGeometry(500, 500, 500, 500)
-        self.tableWidget.setStyleSheet("background-color: #FFFF66")
+        self.tableWidget.setStyleSheet("background-color: #ffffac")
         self.tableWidget.show()
 
     def posti_disponibili(self, reparto):

@@ -54,7 +54,7 @@ class VistaListaPazienti(QWidget):
         self.setLayout(h_layout)
         self.resize(800,400)
         self.setWindowTitle("Lista Pazienti")
-        self.setStyleSheet("background-color: #bad9ac")
+        self.setStyleSheet("background-color: #ffacac")
         self.list_view.setStyleSheet("background-color: white")
 
     def update_ui(self, nome_search = "", cognome_search = "", cf_search=""):

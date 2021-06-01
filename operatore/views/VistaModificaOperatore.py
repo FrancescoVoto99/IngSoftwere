@@ -39,7 +39,7 @@ class VistaModificaOperatore(QWidget):
         self.setLayout((self.grid_layout))
         self.resize(600, 400)
         self.setWindowTitle("Modifica Operatore")
-        self.setStyleSheet("background-color: #ffd597")
+        self.setStyleSheet("background-color: #caffca")
 
     def get_type(self, tipo, set, rl, cl, re, ce):
         lbl = QLabel(tipo)

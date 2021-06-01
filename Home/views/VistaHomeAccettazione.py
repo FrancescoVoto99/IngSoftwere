@@ -16,9 +16,9 @@ class VistaHomeAccettazione(QWidget):
         # ricoveri_bottone.clicked.connect()
 
         grid_layout.addWidget(self.get_button("Lista Servizi", self.go_lista_servizi, "background-color: #FF7377"), 0, 0)
-        grid_layout.addWidget(self.get_button("Lista Pazienti", self.go_lista_pazienti, "background-color: #bad9ac"), 0, 1)
-        grid_layout.addWidget(self.get_button("Lista Operatori", self.go_lista_operatori, "background-color: #ffd597"), 1, 0)
-        grid_layout.addWidget(self.get_button("Lista Prenotazioni", self.go_lista_prenotazioni, "background-color: #FFFF66"), 1, 1)
+        grid_layout.addWidget(self.get_button("Lista Pazienti", self.go_lista_pazienti, "background-color: #ffacac"), 0, 1)
+        grid_layout.addWidget(self.get_button("Lista Operatori", self.go_lista_operatori, "background-color: #caffca"), 1, 0)
+        grid_layout.addWidget(self.get_button("Lista Prenotazioni", self.go_lista_prenotazioni, "background-color: #ffffac"), 1, 1)
 
         self.setLayout(grid_layout)
         self.resize(400, 400)
