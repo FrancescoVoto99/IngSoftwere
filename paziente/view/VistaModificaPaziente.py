@@ -7,11 +7,14 @@ from PyQt5.QtWidgets import QWidget, QVBoxLayout, QSpacerItem, QSizePolicy, QLab
 from PyQt5 import QtCore
 
 from operatore.model.Operatore import Operatore
+from paziente.Controller.ControllorePaziente import ControllorePaziente
+
 
 class VistaModificaPaziente(QWidget):
     def __init__(self, paziente, callback):
         super(VistaModificaPaziente, self).__init__()
         self.paziente = paziente
+        self.controller = ControllorePaziente(paziente)
         self.callback = callback
         self.info = {}
 
@@ -19,14 +22,14 @@ class VistaModificaPaziente(QWidget):
         self.lbl_date = QLabel("")
         self.grid_layout = QGridLayout()
 
-        self.get_type("Nome", paziente.nome, 0, 0, 1, 0)
-        self.get_type("Cognome", paziente.cognome, 0, 1, 1, 1)
-        self.get_sesso("Sesso", paziente.sesso)
-        self.get_type("Luogo di nascita", paziente.luogodinascita, 5, 0, 6, 0)
-        self.get_datanascita("Data di nascita", paziente.datadinascita)
-        self.get_type("Codice fiscale", paziente.cf, 2, 1, 3, 1)
-        self.get_type("Telefono", paziente.telefono, 7, 0, 8, 0)
-        self.get_type("Email", paziente.email, 7, 1, 8, 1)
+        self.get_type("Nome", self.controller.get_nome_paziente() , 0, 0, 1, 0)
+        self.get_type("Cognome", self.controller.get_cognome_paziente(), 0, 1, 1, 1)
+        self.get_sesso("Sesso", self.controller.get_sesso_paziente())
+        self.get_type("Luogo di nascita", self.controller.get_luogodinascita_paziente(), 5, 0, 6, 0)
+        self.get_datanascita("Data di nascita", self.controller.get_datadinascita_paziente())
+        self.get_type("Codice fiscale", self.controller.get_cf_paziente(), 2, 1, 3, 1)
+        self.get_type("Telefono", self.controller.get_telefono_paziente(), 7, 0, 8, 0)
+        self.get_type("Email", self.controller.get_email_paziente(), 7, 1, 8, 1)
 
         self.grid_layout.addItem(QSpacerItem(20, 40, QSizePolicy.Minimum, QSizePolicy.Expanding))
 

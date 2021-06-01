@@ -5,14 +5,14 @@ from PyQt5.QtGui import QFont
 from PyQt5.QtWidgets import QWidget, QVBoxLayout, QSpacerItem, QSizePolicy, \
     QPushButton, QLabel, QLineEdit, QMessageBox, \
     QRadioButton, QDateEdit, QGridLayout
-from PyQt5 import QtCore
 
-from operatore.model.Operatore import Operatore
+from operatore.controller.ControlloreOperatore import ControlloreOperatore
 
 class VistaModificaOperatore(QWidget):
     def __init__(self, operatore, callback):
         super(VistaModificaOperatore, self).__init__()
         self.operatore = operatore
+        self.controller = ControlloreOperatore(operatore)
         self.callback = callback
         self.info = {}
 
@@ -20,14 +20,14 @@ class VistaModificaOperatore(QWidget):
         self.lbl_date = QLabel("")
         self.grid_layout = QGridLayout()
 
-        self.get_type("Nome",operatore.nome, 0, 0, 1, 0)
-        self.get_type("Cognome", operatore.cognome, 0, 1, 1, 1)
-        self.get_type("Codice fiscale",operatore.cf,  2, 0, 3, 0)
-        self.get_datanascita("Data di nascita",operatore.datanascita)
-        self.get_type("Luogo di nascita",operatore.luogonascita,  4, 1, 5, 1)
-        self.get_type("Email",operatore.email, 2, 1, 3, 1)
-        self.get_ruolo("Ruolo",operatore.ruolo)
-        self.get_type("Password",operatore.password, 9, 0, 10, 0)
+        self.get_type("Nome",self.controller.get_nome_operatore(), 0, 0, 1, 0)
+        self.get_type("Cognome", self.controller.get_cognome_operatore(), 0, 1, 1, 1)
+        self.get_type("Codice fiscale", self.controller.get_cognome_operatore(),  2, 0, 3, 0)
+        self.get_datanascita("Data di nascita", self.controller.get_data_nascita_operatore())
+        self.get_type("Luogo di nascita", self.controller.get_luogo_nascita_operatore(),  4, 1, 5, 1)
+        self.get_type("Email", self.controller.get_email_operatore(), 2, 1, 3, 1)
+        self.get_ruolo("Ruolo", self.controller.get_ruolo_operatore())
+        self.get_type("Password", self.controller.get_password_operatore(), 9, 0, 10, 0)
 
         self.grid_layout.addItem(QSpacerItem(20, 40, QSizePolicy.Minimum, QSizePolicy.Expanding))
 
