@@ -21,7 +21,7 @@ class VistaHomeProntoSoccorso(QWidget):
         self.setLayout(layout)
         self.resize(600, 200)
         self.setWindowTitle("Amministratore del pronto soccorso")
-        self.setStyleSheet("QWidget{background-color: lightpink} QPushButton{background-color: palevioletred} ")
+        self.setStyleSheet("QWidget{background-color: lightpink} QPushButton{background-color: palevioletred;color: black} ")
 
     def go_lista_servizi(self):
         self.vista_lista_servizi = VistaListaServiziEmergenza()
@@ -36,10 +36,7 @@ class VistaHomeProntoSoccorso(QWidget):
         self.vista_lista_prenotazioni_emergenza.showMaximized()
 
     def get_button(self, titolo, on_click):
-        palette = QPalette()
-        palette.setColor(QPalette.ButtonText, Qt.black)
         bottone = QPushButton(titolo)
-        bottone.setPalette(palette)
         bottone.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
         font = bottone.font()
         font.setPointSize(15)

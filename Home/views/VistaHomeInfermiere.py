@@ -25,7 +25,7 @@ class VistaHomeInfermiere(QWidget):
         self.setLayout(layout)
         self.resize(800, 400)
         self.setWindowTitle("Infermiere")
-        self.setStyleSheet("QWidget{background-color: lightgreen} QPushButton{background-color: mediumseagreen}")
+        self.setStyleSheet("QWidget{background-color: lightgreen} QPushButton{background-color: mediumseagreen; color: black}")
 
     def go_lista_prenotazioni(self):
         self.vista_lista_prenotazioni = VistaListaPrenotazioni(False, False)
@@ -52,10 +52,7 @@ class VistaHomeInfermiere(QWidget):
         self.vista_lista_prenotazioni_reparti.showMaximized()
 
     def get_button(self, titolo, on_click):
-        palette = QPalette()
-        palette.setColor(QPalette.ButtonText, Qt.black)
         bottone = QPushButton(titolo)
-        bottone.setPalette(palette)
         bottone.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
         font = bottone.font()
         font.setPointSize(15)

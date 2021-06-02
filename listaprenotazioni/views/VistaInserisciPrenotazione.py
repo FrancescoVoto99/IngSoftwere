@@ -76,6 +76,7 @@ class VistaInserisciPrenotazione(QWidget):
         lbl.setFont(font_lbl)
         self.grid_layout.addWidget(lbl, 0, 1)
         dateedit = QDateEdit(calendarPopup=True)
+        dateedit.setStyleSheet(" background-color: white")
         dateedit.setDateTime(QtCore.QDateTime.currentDateTime())
         dateedit.setDisplayFormat('dd/MM/yyyy')
         self.grid_layout.addWidget(dateedit, 1, 1)
