@@ -145,15 +145,14 @@ class VistaInserisciPrenotazione(QWidget):
         self.label_tipo.setText(text)
 
     def check_prenotazione(self, cf, datainizio, datafine):
-        self.bool = True
         for element in self.controller.get_lista_delle_prenotazioni():
-            if element.paziente.cf.lower() == cf.lower():
+            if element.paziente.cf.lower() == cf.lower() and ((datetime.strptime(element.datafine,'%d/%m/%Y') > datetime.strptime(datainizio,'%d/%m/%Y') or
+                                                               datetime.strptime(datafine,'%d/%m/%Y') < datetime.strptime(element.data,'%d/%m/%Y')) and
+                                                              (datetime.strptime(element.datafine,'%d/%m/%Y') < datetime.strptime(datainizio,'%d/%m/%Y') or
+                                                                datetime.strptime(datafine,'%d/%m/%Y') < datetime.strptime(element.data,'%d/%m/%Y'))):
+                return True
+            else:
                 return False
-                #if (datetime.strptime(element.datafine,'%d/%m/%Y') > datetime.strptime(datainizio,'%d/%m/%Y') or datetime.strptime(datafine,'%d/%m/%Y') < datetime.strptime(element.data,'%d/%m/%Y')):
-                  #self.bool = True
-                #else:
-                  #return False
-        return True
 
     def add_prenotazione(self):
         controller_servizi = ControlloreListaServizi()
@@ -166,7 +165,7 @@ class VistaInserisciPrenotazione(QWidget):
         stringa_servizio = self.info["Reparto"].text().split()
         tipo_ricovero = self.info["Tipo di ricovero"].text()
         servizio = controller_servizi.get_servizio_by_reparto_and_tipo(stringa_servizio[len(stringa_servizio)-1], tipo_ricovero, self.controller, datainizio, datafine)
-        if self.check_prenotazione(paziente.cf, datainizio, datafine) == False:
+        if self.check_prenotazione(paziente.cf, datainizio, datafine) == True:
                 QMessageBox.critical(self, 'Errore', 'Il paziente ' + paziente.nome + ' ' + paziente.cognome + ' è già presente nella lista ricoveri', QMessageBox.Ok, QMessageBox.Ok)
         elif datainizio == "" or paziente == "":
                 QMessageBox.critical(self, 'Errore', 'Per favore, inserisci tutte le informazioni richieste', QMessageBox.Ok, QMessageBox.Ok)
