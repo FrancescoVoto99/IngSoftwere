@@ -78,7 +78,7 @@ class VistaPrenotazione(QWidget):
             QMessageBox.critical(self, 'Errore', 'Non è possibile liberare il posto letto, perché il servizio è già disponibile',
                                  QMessageBox.Ok, QMessageBox.Ok)
         else:
-           self.controller.set_data_fine(date.today())
+           self.controller.set_data_fine(date.today().__format__("%d/%m/%Y"))
            archivio=ControlloreListaPrenotazioniArchiviate()
            archivio.aggiungi_prenotazione(self.prenotazione)
            archivio.save_data()

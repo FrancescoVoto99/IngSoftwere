@@ -36,5 +36,8 @@ class ControlloreServizio():
     def prenota(self, data):
         return self.model.prenota(data)
 
+    def prenotato(self):
+        return self.model.prenotato
+
     def set_disponibile(self):
         return self.model.set_disponibile

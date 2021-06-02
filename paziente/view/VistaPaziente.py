@@ -5,15 +5,13 @@ from PyQt5.QtWidgets import QWidget, QVBoxLayout, QLabel, QSpacerItem, QSizePoli
 from listaprenotazioni.controller.ControlloreListaPrenotazioni import ControlloreListaPrenotazioni
 from paziente.Controller.ControllorePaziente import ControllorePaziente
 from paziente.view.VistaModificaPaziente import VistaModificaPaziente
-from ricovero.view.VistaRicovero import VistaRicovero
 
 
 class VistaPaziente(QWidget):
-    def __init__(self, paziente, bool, modifica_paziente = None, elimina_callback = None, parent=None):
+    def __init__(self, paziente, bool, elimina_callback = None, parent=None):
         super(VistaPaziente, self).__init__(parent)
         self.paziente = paziente
         self.bool = bool
-        self.modifica_paziente = modifica_paziente
         self.controller = ControllorePaziente(paziente)
         self.elimina_callback = elimina_callback
 

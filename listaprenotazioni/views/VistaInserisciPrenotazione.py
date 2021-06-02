@@ -57,7 +57,7 @@ class VistaInserisciPrenotazione(QWidget):
         lbl.setFont(font_lbl)
         self.grid_layout.addWidget(lbl, 2, 0)
         combo_pazienti = QComboBox()
-        combo_pazienti.setStyleSheet("background-color: white")
+        combo_pazienti.setStyleSheet("background-color: white; color: black ")
         for paziente in self.controller_pazienti.get_lista_pazienti():
             combo_pazienti.addItem(paziente.cf)
         self.grid_layout.addWidget(combo_pazienti, 3, 0)
@@ -69,14 +69,13 @@ class VistaInserisciPrenotazione(QWidget):
         self.label_paziente.setText(text)
 
     def get_data_fine(self,tipo):
-        lbl = QLabel(tipo+" (opzionale)")
+        lbl = QLabel(tipo)
         font_lbl = lbl.font()
         font_lbl.setPointSize(17)
         font_lbl.setBold(True)
         lbl.setFont(font_lbl)
         self.grid_layout.addWidget(lbl, 0, 1)
         dateedit = QDateEdit(calendarPopup=True)
-        dateedit.setStyleSheet("background-color: white")
         dateedit.setDateTime(QtCore.QDateTime.currentDateTime())
         dateedit.setDisplayFormat('dd/MM/yyyy')
         self.grid_layout.addWidget(dateedit, 1, 1)
@@ -90,7 +89,7 @@ class VistaInserisciPrenotazione(QWidget):
         lbl.setFont(font_lbl)
         self.grid_layout.addWidget(lbl, 0, 0)
         dateedit = QDateEdit(calendarPopup=True)
-        dateedit.setStyleSheet("background-color: white")
+        dateedit.setStyleSheet(" background-color: white")
         dateedit.setDateTime(QtCore.QDateTime.currentDateTime())
         dateedit.setDisplayFormat('dd/MM/yyyy')
         self.grid_layout.addWidget(dateedit, 1, 0)
@@ -134,7 +133,7 @@ class VistaInserisciPrenotazione(QWidget):
         lbl.setFont(font_lbl)
         self.grid_layout.addWidget(lbl, 2, 1)
         combo_ricoveri = QComboBox()
-        combo_ricoveri.setStyleSheet("background-color: white")
+        combo_ricoveri.setStyleSheet("background-color: white; color: black ")
         for ricovero in self.lista_tipi:
             combo_ricoveri.addItem(ricovero)
         self.grid_layout.addWidget(combo_ricoveri, 3, 1)
@@ -146,9 +145,15 @@ class VistaInserisciPrenotazione(QWidget):
         self.label_tipo.setText(text)
 
     def check_prenotazione(self, cf, datainizio, datafine):
+        self.bool = True
         for element in self.controller.get_lista_delle_prenotazioni():
-            if element.paziente.cf == cf and (datetime.strptime(element.datafine,'%d/%m/%Y') > datetime.strptime(datainizio,'%d/%m/%Y') or datetime.strptime(datafine,'%d/%m/%Y') < datetime.strptime(element.data,'%d/%m/%Y')):
-                return True
+            if element.paziente.cf.lower() == cf.lower():
+                return False
+                #if (datetime.strptime(element.datafine,'%d/%m/%Y') > datetime.strptime(datainizio,'%d/%m/%Y') or datetime.strptime(datafine,'%d/%m/%Y') < datetime.strptime(element.data,'%d/%m/%Y')):
+                  #self.bool = True
+                #else:
+                  #return False
+        return True
 
     def add_prenotazione(self):
         controller_servizi = ControlloreListaServizi()
@@ -161,8 +166,8 @@ class VistaInserisciPrenotazione(QWidget):
         stringa_servizio = self.info["Reparto"].text().split()
         tipo_ricovero = self.info["Tipo di ricovero"].text()
         servizio = controller_servizi.get_servizio_by_reparto_and_tipo(stringa_servizio[len(stringa_servizio)-1], tipo_ricovero, self.controller, datainizio, datafine)
-        if self.check_prenotazione(paziente.cf, datainizio, datafine) == True:
-                QMessageBox.critical(self, 'Errore', 'Il paziente ' + paziente.nome + ' ' + paziente.cognome + ' è già ricoverato in quel periodo in un altro reparto', QMessageBox.Ok, QMessageBox.Ok)
+        if self.check_prenotazione(paziente.cf, datainizio, datafine) == False:
+                QMessageBox.critical(self, 'Errore', 'Il paziente ' + paziente.nome + ' ' + paziente.cognome + ' è già presente nella lista ricoveri', QMessageBox.Ok, QMessageBox.Ok)
         elif datainizio == "" or paziente == "":
                 QMessageBox.critical(self, 'Errore', 'Per favore, inserisci tutte le informazioni richieste', QMessageBox.Ok, QMessageBox.Ok)
         elif servizio == None:

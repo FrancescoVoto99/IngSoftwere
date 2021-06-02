@@ -79,7 +79,7 @@ class VistaServizio(QWidget):
             self.elimina_servizio_click()
 
     def elimina_servizio_click(self):
-        if (self.controller.is_disponibile()):
+        if ((self.controller.is_disponibile()) and (self.controller.prenotato() == False)):
             self.elimina_servizio(self.controller.get_nome_servizio())
         else:
             QMessageBox.critical(self, 'Errore', 'Il servizio selezionato è utilizzato in questo momento',

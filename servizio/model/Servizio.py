@@ -19,6 +19,9 @@ class Servizio():
     def is_prenotato(self):
         self.prenotato = True
 
+    def prenotato(self):
+        return self.prenotato
+
     def set_prenotato(self):
         self.prenotato = False
 

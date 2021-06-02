@@ -21,7 +21,10 @@ class ControllorePrenotazione():
         return self.model.data
 
     def get_datafine_prenotazione(self):
-        return self.model.datafine
+        if (self.model.datafine == None):
+            return "Non inserita"
+        else:
+            return self.model.datafine
 
     def set_data_fine(self, datafine):
         self.model.set_data_fine(datafine)

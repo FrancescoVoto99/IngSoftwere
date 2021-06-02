@@ -19,13 +19,6 @@ class ListaPazienti():
             if paziente.cf.upper() == cf:
                 return paziente
 
-    def rimuovi_paziente_by_cf (self, cf):
-        def _is_selected_paziente(paziente):
-            if paziente.cf == cf:
-                return True
-            return False
-        self.lista_pazienti.remove(list(filter(_is_selected_paziente, self.lista_pazienti))[0])
-
     def get_paziente_by_index(self, index):
         return self.lista_pazienti[index]
 
@@ -34,7 +27,7 @@ class ListaPazienti():
 
     def check_cf(self, cf):
         for paziente in self.get_lista_pazienti():
-            if paziente.cf == cf:
+            if paziente.cf.lower() == cf.lower():
                 return True
         return False
 

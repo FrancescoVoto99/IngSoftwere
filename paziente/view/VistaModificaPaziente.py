@@ -6,6 +6,7 @@ from PyQt5.QtWidgets import QWidget, QVBoxLayout, QSpacerItem, QSizePolicy, QLab
     QRadioButton, QDateEdit, QMessageBox, QGridLayout
 from PyQt5 import QtCore
 
+from listapazienti.controller.ControlloreListaPazienti import ControlloreListaPazienti
 from operatore.model.Operatore import Operatore
 from paziente.Controller.ControllorePaziente import ControllorePaziente
 
@@ -97,6 +98,7 @@ class VistaModificaPaziente(QWidget):
         self.info[tipo] = dateedit
 
     def modifica_paziente(self):
+        controller_lista = ControlloreListaPazienti()
         nome = self.info["Nome"].text()
         cognome = self.info["Cognome"].text()
         sesso = self.info["Sesso"].text()
@@ -109,6 +111,8 @@ class VistaModificaPaziente(QWidget):
         newdate = datetime.strptime(datadinascita, '%d/%m/%Y')
         if nome == "" or cognome == "" or sesso == "" or luogodinascita == "" or datadinascita == "" or cf == "" or telefono == "" or email == "":
             QMessageBox.critical(self, 'Errore', 'Per favore inserisci tutte le informazioni', QMessageBox.Ok, QMessageBox.Ok)
+        elif (controller_lista.check_cf(cf)):
+            QMessageBox.critical(self, 'Errore', "Il paziente è già stato inserito nella lista", QMessageBox.Ok, QMessageBox.Ok)
         elif newdate.date() > today:
           QMessageBox.critical(self, 'Errore', 'Per favore inserisci correttamente la data di nascita', QMessageBox.Ok, QMessageBox.Ok)
         else:

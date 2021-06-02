@@ -19,11 +19,8 @@ class ControlloreListaPazienti():
     def get_paziente_by_cf(self, cf):
         return self.model.get_paziente_by_cf(cf)
 
-    def archivia_paziente_by_cf(self, cf):
-        self.model.rimuovi_paziente_by_cf(cf)
-
     def check_cf(self, cf):
-        self.model.check_cf(cf)
+        return self.model.check_cf(cf)
 
     def save_data(self):
         self.model.save_data()
