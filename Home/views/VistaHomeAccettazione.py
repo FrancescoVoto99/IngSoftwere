@@ -7,13 +7,14 @@ from listapazienti.views.VistaListaPazienti import VistaListaPazienti
 from listaprenotazioni.views.VistaListaPrenotazioni import VistaListaPrenotazioni
 from listaservizi.views.VistaListaServizi import VistaListaServizi
 
+# Classe responsabile della gestione dell'interfaccia utente
+# principale dell'amministratore dell'ufficio di
+# accettazione
 
 class VistaHomeAccettazione(QWidget):
     def __init__(self, parent=None):
         super(VistaHomeAccettazione, self).__init__(parent)
         grid_layout = QGridLayout()
-
-        # ricoveri_bottone.clicked.connect()
 
         grid_layout.addWidget(self.get_button("Lista Servizi", self.go_lista_servizi, "background-color: plum"), 0, 0)
         grid_layout.addWidget(self.get_button("Lista Pazienti", self.go_lista_pazienti, "background-color: lightpink"), 0, 1)

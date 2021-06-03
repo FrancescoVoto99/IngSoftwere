@@ -5,6 +5,9 @@ from listapazienti.controller.ControlloreListaPazienti import ControlloreListaPa
 from listapazienti.views.VistaInserisciPaziente import VistaInserisciPaziente
 from paziente.view.VistaPaziente import VistaPaziente
 
+# Classe responsabile della gestione dell'interfaccia utente:
+# permette di visualizzare la lista dei pazienti presenti
+# a sistema
 
 class VistaListaPazienti(QWidget):
 

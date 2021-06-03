@@ -3,6 +3,9 @@ from PyQt5.QtWidgets import QWidget, QVBoxLayout, QLabel, QSpacerItem, QSizePoli
 from operatore.controller.ControlloreOperatore import ControlloreOperatore
 from operatore.views.VistaModificaOperatore import VistaModificaOperatore
 
+# Classe responsabile della gestione dell'interfaccia utente:
+# permette di visualizzare tutti i dati relativi ai dati
+# di un operatore
 
 class VistaOperatore(QWidget):
 

@@ -41,8 +41,5 @@ class TestControlloreListaPrenotazioni(TestCase):
         self.assertListEqual(self.lista_servizi.get_lista_servizi(), [])
         self.lista_servizi.aggiungi_servizio(self.servizio)
         self.lista_prenotazioni.aggiungi_prenotazione(self.prenotazione)
-        #self.assertTrueself.lista_prenotazioni.rimuovi_prenotazione_by_id("bianchigiovanni"))
         self.lista_prenotazioni.rimuovi_prenotazione_by_id("bianchigiovanni")
         self.assertIsNotNone(self.lista_prenotazioni.get_lista_prenotazioni())
-        #self.lista_prenotazioni.rimuovi_prenotazione_by_id("rossimario")
-        #self.assertEquals(self.lista_prenotazioni.get_lista_prenotazioni(), [])

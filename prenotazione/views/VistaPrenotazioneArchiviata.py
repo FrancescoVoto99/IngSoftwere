@@ -5,6 +5,9 @@ from paziente.view.VistaPaziente import VistaPaziente
 from prenotazione.controller.ControllorePrenotazione import ControllorePrenotazione
 from servizio.views.VistaServizio import VistaServizio
 
+# Classe responsabile della gestione dell'interfaccia utente:
+# permette di visualizzare tutte le informazioni di
+# una prenotazioni passate archiviate nel sistema
 
 class VistaPrenotazioneArchiviata(QWidget):
 

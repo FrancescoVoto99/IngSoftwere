@@ -1,3 +1,7 @@
+# Classe responsabile della gestione delle relazioni
+# tra il model Operatore e le view
+# VistaOperatore e VistaModificaOperatore
+
 class ControlloreOperatore():
 
     def __init__(self, operatore):

@@ -1,20 +1,18 @@
-import os
-import pickle
 from datetime import datetime, date, timedelta
 
-from PyQt5.QtGui import QStandardItemModel, QStandardItem, QFont
-from PyQt5.QtWidgets import QVBoxLayout, QLabel, QLineEdit, QComboBox, QSpacerItem, QSizePolicy, QPushButton, QWidget, \
+from PyQt5.QtGui import QFont
+from PyQt5.QtWidgets import QLabel,  QComboBox, QSpacerItem, QSizePolicy, QPushButton, QWidget, \
     QDateEdit, QRadioButton, QMessageBox, QGridLayout
 from PyQt5 import QtCore
 
 from listapazienti.controller.ControlloreListaPazienti import ControlloreListaPazienti
-from listapazienti.views.VistaInserisciPaziente import VistaInserisciPaziente
-from listaprenotazioni.controller.ControlloreListaPrenotazioni import ControlloreListaPrenotazioni
-#from listaricoveri.controller.ControlloreListaRicoveri import ControlloreListaRicoveri
 from listaservizi.controller.ControlloreListaServizi import ControlloreListaServizi
 from prenotazione.model.Prenotazione import Prenotazione
-from servizio.controller.ControlloreServizio import ControlloreServizio
 
+
+ # Classe responsabile della gestione dell'interfaccia utente:
+ # permette all'utente (amministratore dell'ufficio
+ # di accettazione) di inserire una nuova prenotazione a sistema
 
 class VistaInserisciPrenotazione(QWidget):
     def __init__(self, controller, callback):
@@ -146,14 +144,24 @@ class VistaInserisciPrenotazione(QWidget):
         self.label_tipo.setText(text)
 
     def check_prenotazione(self, cf, datainizio, datafine):
+        self.bool = True
         for element in self.controller.get_lista_delle_prenotazioni():
-            if element.paziente.cf.lower() == cf.lower() and ((datetime.strptime(element.datafine,'%d/%m/%Y') > datetime.strptime(datainizio,'%d/%m/%Y') or
-                                                               datetime.strptime(datafine,'%d/%m/%Y') < datetime.strptime(element.data,'%d/%m/%Y')) and
-                                                              (datetime.strptime(element.datafine,'%d/%m/%Y') < datetime.strptime(datainizio,'%d/%m/%Y') or
-                                                                datetime.strptime(datafine,'%d/%m/%Y') < datetime.strptime(element.data,'%d/%m/%Y'))):
-                return True
-            else:
-                return False
+            if element.paziente.cf.lower() == cf.lower():
+                        if ((datetime.strptime(element.datafine,'%d/%m/%Y') <= datetime.strptime(datainizio,'%d/%m/%Y') or
+                                                               datetime.strptime(datafine,'%d/%m/%Y') >= datetime.strptime(element.data,'%d/%m/%Y')) and
+                                                              (datetime.strptime(element.datafine,'%d/%m/%Y') <= datetime.strptime(datainizio,'%d/%m/%Y') or
+                                                                datetime.strptime(datafine,'%d/%m/%Y') <= datetime.strptime(element.data,'%d/%m/%Y'))):
+                            self.bool = True
+                        else:
+                            return False
+        return self.bool
+
+    def check_prenotazione_reparto(self, cf,  reparto):
+        for element in self.controller.get_lista_delle_prenotazioni():
+            if element.paziente.cf.lower() == cf.lower():
+                        if element.servizio.reparto.lower() == reparto.lower():
+                            return True
+        return False
 
     def add_prenotazione(self):
         controller_servizi = ControlloreListaServizi()
@@ -166,8 +174,10 @@ class VistaInserisciPrenotazione(QWidget):
         stringa_servizio = self.info["Reparto"].text().split()
         tipo_ricovero = self.info["Tipo di ricovero"].text()
         servizio = controller_servizi.get_servizio_by_reparto_and_tipo(stringa_servizio[len(stringa_servizio)-1], tipo_ricovero, self.controller, datainizio, datafine)
-        if self.check_prenotazione(paziente.cf, datainizio, datafine) == True:
-                QMessageBox.critical(self, 'Errore', 'Il paziente ' + paziente.nome + ' ' + paziente.cognome + ' è già presente nella lista ricoveri', QMessageBox.Ok, QMessageBox.Ok)
+        if self.check_prenotazione(paziente.cf, datainizio, datafine) == False:
+                QMessageBox.critical(self, 'Errore', 'Il paziente ' + paziente.nome + ' ' + paziente.cognome + ' ha già una prenotazione in quel periodo', QMessageBox.Ok, QMessageBox.Ok)
+        elif self.check_prenotazione_reparto(paziente.cf, servizio.reparto) == True:
+                QMessageBox.critical(self, 'Errore', 'Il paziente ' + paziente.nome + ' ' + paziente.cognome + ' ha già una prenotazione in quel reparto', QMessageBox.Ok, QMessageBox.Ok)
         elif datainizio == "" or paziente == "":
                 QMessageBox.critical(self, 'Errore', 'Per favore, inserisci tutte le informazioni richieste', QMessageBox.Ok, QMessageBox.Ok)
         elif servizio == None:

@@ -1,10 +1,9 @@
-import json
-import os
 import pickle
 
 from listaservizi.controller.ControlloreListaServizi import ControlloreListaServizi
-from prenotazione.model.Prenotazione import Prenotazione
 
+# Classe responsabile della gestione dei dati della
+# lista delle prenotazioni
 
 class ListaPrenotazioni():
     def __init__(self):

@@ -1,11 +1,10 @@
-from PyQt5.QtCore import Qt
-from PyQt5.QtGui import QStandardItem, QStandardItemModel, QPalette
-from PyQt5.QtWidgets import QGridLayout, QPushButton, QSizePolicy, QWidget, QListView, QVBoxLayout, QHBoxLayout
+from PyQt5.QtWidgets import QGridLayout, QPushButton, QSizePolicy, QWidget
 
-from listaprenotazioni.controller.ControlloreListaPrenotazioni import ControlloreListaPrenotazioni
 from listaprenotazioni.views.VistaListaPrenotazioni import VistaListaPrenotazioni
 from listaprenotazioni.views.VistaListaPrenotazioniReparto import VistaListaPrenotazioniReparto
 
+# Classe responsabile della gestione dell'interfaccia utente
+# principale del medico
 
 class VistaHomeMedico(QWidget):
 

@@ -6,6 +6,9 @@ from listaprenotazioni.controller.ControlloreListaPrenotazioni import Controllor
 from paziente.view.VistaPaziente import VistaPaziente
 from paziente.view.VistaRefertoPaziente import VistaRefertoPaziente
 
+# Classe responsabile della gestione dell'interfaccia utente:
+# permette all'utente di visualizzare la lista delle
+# prenotazioni in corso per ogni reparto presente nella struttura
 
 class VistaListaPrenotazioniReparto(QWidget):
 

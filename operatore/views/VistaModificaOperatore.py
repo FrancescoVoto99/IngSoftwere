@@ -2,11 +2,15 @@ import datetime
 from datetime import datetime, date
 
 from PyQt5.QtGui import QFont
-from PyQt5.QtWidgets import QWidget, QVBoxLayout, QSpacerItem, QSizePolicy, \
+from PyQt5.QtWidgets import QWidget, QSpacerItem, QSizePolicy, \
     QPushButton, QLabel, QLineEdit, QMessageBox, \
     QRadioButton, QDateEdit, QGridLayout
 
 from operatore.controller.ControlloreOperatore import ControlloreOperatore
+
+# Classe responsabile della gestione dell'interfaccia utente:
+# permette di modificare i dati relativi ad un operatore
+# presente a sistema
 
 class VistaModificaOperatore(QWidget):
     def __init__(self, operatore, callback):

@@ -1,5 +1,6 @@
-from prenotazione.model.Prenotazione import Prenotazione
-
+# Classe responsabile della gestione delle interazioni tra
+# il model Prenotazione e le view
+# VistaPrenotazione e VistaPrenotazioneArchiviata
 
 class ControllorePrenotazione():
     def __init__(self, prenotazione):

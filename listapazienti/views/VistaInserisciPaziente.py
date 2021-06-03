@@ -4,6 +4,8 @@ from PyQt5.QtWidgets import QWidget, QVBoxLayout, QLabel, QLineEdit, QMessageBox
 from PyQt5 import QtCore
 from paziente.model.Paziente import Paziente
 
+# Classe responsabile della gestione dell'interfaccia utente:
+# permette di inserire un nuovo paziente a sistema
 
 class VistaInserisciPaziente(QWidget):
 

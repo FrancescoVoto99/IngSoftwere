@@ -3,6 +3,8 @@ import pickle
 
 from operatore.controller.ControlloreOperatore import ControlloreOperatore
 
+# Classe responsabile della gestione dei dati
+# relativi alla lista degli operatori
 
 class ListaOperatori():
 

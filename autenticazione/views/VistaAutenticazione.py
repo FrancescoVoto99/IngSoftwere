@@ -1,5 +1,3 @@
-import json
-
 from PyQt5.QtGui import QFont, QPixmap
 from PyQt5.QtWidgets import QWidget, QLabel, QSpacerItem, QSizePolicy, \
     QPushButton, QGridLayout
@@ -7,6 +5,9 @@ from PyQt5.QtCore import Qt
 
 from autenticazione.views.VistaInserisciCredenziali import VistaInserisciCredenziali
 
+# Classe che gestisce l'interfaccia di "benvenuto" nel sistema
+# L'utente può accedere al sistema inserendo sue credenziali
+# altrimenti può uscire dal sistema
 
 class VistaAutenticazione(QWidget):
 
@@ -46,11 +47,8 @@ class VistaAutenticazione(QWidget):
         self.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
         self.setWindowTitle("Benvenuto")
 
-
         self.showMaximized()
         self.setStyleSheet("QWidget{background-color: lightblue}QPushButton{background-color: cornflowerblue}")
-
-
 
     def go_vista_inserisci_credenziali(self):
         self.vista_inserisci_credenziali = VistaInserisciCredenziali()

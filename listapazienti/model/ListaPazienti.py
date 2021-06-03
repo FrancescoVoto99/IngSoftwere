@@ -1,6 +1,8 @@
 import os
 import pickle
 
+# Classe responsabile della gestione dei dati
+# relativi alla lista dei pazienti
 
 class ListaPazienti():
 

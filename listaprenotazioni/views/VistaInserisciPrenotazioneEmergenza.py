@@ -2,12 +2,16 @@ from datetime import datetime, date
 
 from PyQt5.QtGui import QFont
 from PyQt5.QtWidgets import QWidget, QLabel, QVBoxLayout, QSpacerItem, QSizePolicy, QPushButton, QComboBox, QDateEdit, \
-    QRadioButton, QMessageBox, QLineEdit
+    QRadioButton, QMessageBox
 
 from listapazienti.controller.ControlloreListaPazienti import ControlloreListaPazienti
 from listaservizi.controller.ControlloreListaServizi import ControlloreListaServizi
 from prenotazione.model.Prenotazione import Prenotazione
 
+
+# Classe responsabile della gestione dell'interfaccia utente:
+# permette all'utente (amministratore del pronto
+# soccorso) di inserire una nuova prenotazione a sistema
 
 class VistaInserisciPrenotazioneEmergenza(QWidget):
     def __init__(self, controller, callback):

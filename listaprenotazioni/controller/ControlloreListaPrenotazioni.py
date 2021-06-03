@@ -3,6 +3,11 @@ import pickle
 
 from listaprenotazioni.model.ListaPrenotazioni import ListaPrenotazioni
 
+# Classe responsabile della gestione delle relazioni
+# tra il model ListPrenotazioni e le view
+# VistaInserisciPrenotazione, VistaInserisciPrenotazioneEmergenza
+# VistaListaPrenotazioni, VistaListaPrenotazioniEmergenza
+# VistaListaPrenotazioniReparto
 
 class ControlloreListaPrenotazioni():
     def __init__(self):

@@ -1,5 +1,8 @@
 from listaoperatori.model.ListaOperatori import ListaOperatori
 
+# Classe responsabile della gestione delle relazioni
+# tra il model ListaOperatori e le view
+# VistaInserisciOperatore e VistaListaOperatori
 
 class ControlloreListaOperatori():
 

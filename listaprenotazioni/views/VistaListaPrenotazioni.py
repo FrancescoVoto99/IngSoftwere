@@ -9,6 +9,9 @@ from listaservizi.controller.ControlloreListaServizi import ControlloreListaServ
 from prenotazione.views.VistaPrenotazione import VistaPrenotazione
 
 
+# Classe responsabile della gestione dell'interfaccia utente:
+# permette all'utente di visualizzare la lista delle
+# prenotazioni effettuate
 
 class VistaListaPrenotazioni(QWidget):
     def __init__(self, bool1, bool2):

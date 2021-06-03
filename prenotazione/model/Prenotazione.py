@@ -1,3 +1,5 @@
+# Classe responsabile della gestione dei dati
+# relativi all'entità Prenotazione
 
 class Prenotazione():
     def __init__(self, id, paziente, servizio, data, datafine=None):

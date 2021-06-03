@@ -5,6 +5,9 @@ from listaoperatori.controller.ControlloreListaOperatori import ControlloreLista
 from listaoperatori.views.VistaInserisciOperatore import VistaInserisciOperatore
 from operatore.views.VistaOperatore import VistaOperatore
 
+# Classe responsabile della gestione dell'interfaccia utente:
+# permette di visualizzare la lista degli operatori presenti
+# a sistema
 
 class VistaListaOperatori(QWidget):
 

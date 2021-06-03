@@ -6,6 +6,9 @@ from listaprenotazioni.controller.ControlloreListaPrenotazioni import Controllor
 from paziente.Controller.ControllorePaziente import ControllorePaziente
 from paziente.view.VistaModificaPaziente import VistaModificaPaziente
 
+# Classe responsabile della gestione dell'interfaccia utente:
+# permette di visualizzare tutti i dati relativi ai dati
+# di un paziente
 
 class VistaPaziente(QWidget):
     def __init__(self, paziente, bool, elimina_callback = None, parent=None):

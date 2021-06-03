@@ -1,11 +1,11 @@
-from PyQt5.QtCore import Qt
-from PyQt5.QtGui import QPalette
 from PyQt5.QtWidgets import QGridLayout, QPushButton, QSizePolicy, QWidget
 
 from listapazienti.views.VistaListaPazienti import VistaListaPazienti
 from listaprenotazioni.views.VistaListaPrenotazioniEmergenza import VistaListaPrenotazioniEmergenza
 from listaservizi.views.VistaListaServiziEmergenza import VistaListaServiziEmergenza
 
+# Classe responsabile della gestione dell'interfaccia utente
+# principale dell'amministratore del pronto soccorso
 
 class VistaHomeProntoSoccorso(QWidget):
     

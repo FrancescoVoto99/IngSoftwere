@@ -1,15 +1,17 @@
-from datetime import date, datetime
+from datetime import date
 
-from PyQt5.QtWidgets import QWidget, QHBoxLayout, QVBoxLayout, QLabel, QSizePolicy, QSpacerItem, QPushButton, \
+from PyQt5.QtWidgets import QWidget, QVBoxLayout, QLabel, QSizePolicy, QSpacerItem, QPushButton, \
     QMessageBox
 
 from listapazienti.controller.ControlloreListaPazienti import ControlloreListaPazienti
-from listaprenotazioni.controller.ControlloreListaPrenotazioni import ControlloreListaPrenotazioni
 from listaprenotazioni.controller.ControlloreListaPrenotazioniArchiviate import ControlloreListaPrenotazioniArchiviate
 from paziente.view.VistaPaziente import VistaPaziente
 from prenotazione.controller.ControllorePrenotazione import ControllorePrenotazione
 from servizio.views.VistaServizio import VistaServizio
 
+# Classe responsabile della gestione dell'interfaccia utente:
+# permette di visualizzare tutte le informazioni di
+# una prenotazione presente a sistema
 
 class VistaPrenotazione(QWidget):
 

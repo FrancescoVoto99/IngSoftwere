@@ -1,5 +1,8 @@
 from listapazienti.model.ListaPazienti import ListaPazienti
 
+# Classe responsabile della gestione delle relazioni
+# tra il model ListaPazienti e le view
+# VistaInserisciPaziente e VistaListaPazienti
 
 class ControlloreListaPazienti():
 

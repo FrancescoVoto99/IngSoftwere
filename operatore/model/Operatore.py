@@ -1,3 +1,6 @@
+# Classe responsabile della gestione dei dati
+# dell'entità Operatore
+
 class Operatore():
 
     def __init__(self, id, nome, cognome, cf, datanascita, luogonascita, email, ruolo, password):

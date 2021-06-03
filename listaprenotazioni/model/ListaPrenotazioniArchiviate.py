@@ -1,8 +1,7 @@
-import json
-import os
 import pickle
 
-
+# Classe responsabile della gestione dei dati
+# delle prenotazioni passate
 
 class ListaPrenotazioniArchiviate():
     def __init__(self):

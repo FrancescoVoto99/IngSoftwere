@@ -2,9 +2,11 @@ from PyQt5.QtGui import QStandardItemModel, QStandardItem
 from PyQt5.QtWidgets import QWidget, QHBoxLayout, QListView, QVBoxLayout, QPushButton, QMessageBox
 
 from listaprenotazioni.controller.ControlloreListaPrenotazioniArchiviate import ControlloreListaPrenotazioniArchiviate
-from prenotazione.views.VistaPrenotazione import VistaPrenotazione
 from prenotazione.views.VistaPrenotazioneArchiviata import VistaPrenotazioneArchiviata
 
+# Classe responsabile della gestione dell'interfaccia utente:
+# permette di visualizzare le prenotazioni archiviate a
+# sistema, ovvero i ricoveri passati
 
 class VistaListaPrenotazioniArchiviate(QWidget):
 

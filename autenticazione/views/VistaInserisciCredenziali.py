@@ -1,4 +1,3 @@
-import json
 import os
 import pickle
 
@@ -11,6 +10,7 @@ from Home.views.VistaHomeMedico import VistaHomeMedico
 from Home.views.VistaHomeProntoSoccorso import VistaHomeProntoSoccorso
 from operatore.controller.ControlloreOperatore import ControlloreOperatore
 
+# Classe che gestisce l'interfaccia di inserimento credenziali
 
 class VistaInserisciCredenziali(QWidget):
 

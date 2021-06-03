@@ -5,6 +5,9 @@ from listaprenotazioni.controller.ControlloreListaPrenotazioni import Controllor
 from listaprenotazioni.views.VistaInserisciPrenotazioneEmergenza import VistaInserisciPrenotazioneEmergenza
 from prenotazione.views.VistaPrenotazione import VistaPrenotazione
 
+# Classe responsabile della gestione dell'interfaccia utente:
+# permette all'utente (amministratore del pronto soccorso)
+# di visualizzare la lista delle prenotazioni effettuate
 
 class VistaListaPrenotazioniEmergenza(QWidget):
 
