@@ -2,9 +2,11 @@ from datetime import datetime, date
 from PyQt5.QtWidgets import QWidget, QHBoxLayout, QVBoxLayout, QLabel, QSpacerItem, QSizePolicy, QPushButton, \
     QMessageBox
 
-from prenotazione.controller.ControllorePrenotazione import ControllorePrenotazione
 from servizio.controller.ControlloreServizio import ControlloreServizio
 
+# Classe responsabile della gestione dell'interfaccia utente:
+# permette di visualizzare tutti i dati relativi ai dati
+# di un pservizio
 
 class VistaServizio(QWidget):
 

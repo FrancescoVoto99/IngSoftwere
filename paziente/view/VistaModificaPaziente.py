@@ -2,14 +2,17 @@ import datetime
 from datetime import datetime, date
 
 from PyQt5.QtGui import QFont
-from PyQt5.QtWidgets import QWidget, QVBoxLayout, QSpacerItem, QSizePolicy, QLabel, QPushButton, QLineEdit, \
+from PyQt5.QtWidgets import QWidget, QSpacerItem, QSizePolicy, QLabel, QPushButton, QLineEdit, \
     QRadioButton, QDateEdit, QMessageBox, QGridLayout
-from PyQt5 import QtCore
+
 
 from listapazienti.controller.ControlloreListaPazienti import ControlloreListaPazienti
-from operatore.model.Operatore import Operatore
+
 from paziente.Controller.ControllorePaziente import ControllorePaziente
 
+# Classe responsabile della gestione dell'interfaccia utente:
+# permette di modificare i dati relativi ad un paziente
+# presente a sistema
 
 class VistaModificaPaziente(QWidget):
     def __init__(self, paziente, callback):

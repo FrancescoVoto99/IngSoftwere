@@ -1,3 +1,6 @@
+# Classe responsabile della gestione delle relazioni
+# tra il model Servizio e le view VistaServizio
+
 class ControlloreServizio():
 
     def __init__(self, servizio):

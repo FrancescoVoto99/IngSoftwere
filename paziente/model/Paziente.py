@@ -1,5 +1,7 @@
 from datetime import date
 
+# Classe responsabile della gestione dei dati
+# dell'entità Paziente
 
 class Paziente():
 

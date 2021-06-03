@@ -4,6 +4,8 @@ from PyQt5.QtWidgets import QWidget, QVBoxLayout, QLabel, QLineEdit, QPushButton
 from listapazienti.controller.ControlloreListaPazienti import ControlloreListaPazienti
 from paziente.Controller.ControllorePaziente import ControllorePaziente
 
+# Classe responsabile della gestione dell'interfaccia utente:
+# permette di inserire un referto di un paziente nella sua cartella clinica
 
 class VistaRefertoPaziente(QWidget):
 

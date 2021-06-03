@@ -1,10 +1,11 @@
-from PyQt5 import QtCore
 from PyQt5.QtGui import QFont
 from PyQt5.QtWidgets import QWidget, QVBoxLayout, QLabel, QLineEdit, QSpacerItem, QSizePolicy, QPushButton, \
-    QRadioButton, QMessageBox, QCheckBox, QGridLayout, QComboBox
+    QRadioButton, QMessageBox, QComboBox
 
 from servizio.model.Servizio import Servizio
 
+# Classe responsabile della gestione dell'interfaccia utente:
+# permette di inserire un nuovo servizio a sistema
 
 class VistaInserisciServizio(QWidget):
 

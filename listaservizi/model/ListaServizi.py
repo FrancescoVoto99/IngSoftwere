@@ -1,8 +1,9 @@
 from datetime import datetime
-import json
 import pickle
 import os.path
 
+#Classe responsabile della gestione dei dati
+# relativi alla lista dei servizi
 
 class ListaServizi():
 

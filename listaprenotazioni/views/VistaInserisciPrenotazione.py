@@ -147,7 +147,7 @@ class VistaInserisciPrenotazione(QWidget):
         self.bool = True
         for element in self.controller.get_lista_delle_prenotazioni():
             if element.paziente.cf.lower() == cf.lower():
-                        if ((datetime.strptime(element.datafine,'%d/%m/%Y') <= datetime.strptime(datainizio,'%d/%m/%Y') or
+                        if (((datetime.strptime(element.datafine, '%d/%m/%Y')) <= (datetime.strptime(datainizio, '%d/%m/%Y')) or
                                                                datetime.strptime(datafine,'%d/%m/%Y') >= datetime.strptime(element.data,'%d/%m/%Y')) and
                                                               (datetime.strptime(element.datafine,'%d/%m/%Y') <= datetime.strptime(datainizio,'%d/%m/%Y') or
                                                                 datetime.strptime(datafine,'%d/%m/%Y') <= datetime.strptime(element.data,'%d/%m/%Y'))):

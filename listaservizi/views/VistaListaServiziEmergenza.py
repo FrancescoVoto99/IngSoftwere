@@ -4,6 +4,8 @@ from PyQt5.QtWidgets import QWidget, QHBoxLayout, QListView, QVBoxLayout, QPushB
 from listaservizi.controller.ControlloreListaServizi import ControlloreListaServizi
 from servizio.views.VistaServizio import VistaServizio
 
+# Classe responsabile della gestione dell'interfaccia utente:
+# permette di visualizzare i servizi di emergenza della struttura
 
 class VistaListaServiziEmergenza(QWidget):
 

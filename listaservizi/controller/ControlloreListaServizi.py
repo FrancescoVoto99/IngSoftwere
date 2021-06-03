@@ -1,5 +1,8 @@
 from listaservizi.model.ListaServizi import ListaServizi
 
+# Classe responsabile della gestione delle relazioni
+# tra il model ListaServizi e le view
+# VistaInserisciServizio e VistaListaServizi
 
 class ControlloreListaServizi():
 

@@ -1,3 +1,7 @@
+# Classe responsabile della gestione delle relazioni
+# tra il model Paziente e le view
+# VistaPaziente e VistaModificaPaziente
+
 class ControllorePaziente():
    def __init__(self, paziente):
     self.model = paziente

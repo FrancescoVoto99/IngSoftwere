@@ -8,6 +8,8 @@ from listaservizi.controller.ControlloreListaServizi import ControlloreListaServ
 from listaservizi.views.VistaInserisciServizio import VistaInserisciServizio
 from servizio.views.VistaServizio import VistaServizio
 
+# Classe responsabile della gestione dell'interfaccia utente:
+# permette di visualizzare i servizi presenti a sistema
 
 class VistaListaServizi(QWidget):
     def __init__(self,parent=None):
