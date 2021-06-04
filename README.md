@@ -2,6 +2,8 @@
 
 ## Sistema informativo per la gestione di una struttura ospedaliera
 
+![a](https://user-images.githubusercontent.com/75066505/120789261-b115d700-c531-11eb-9a4f-1f0a526ef6d3.jpg)
+
 Il software ha lo scopo di gestire i ricoveri della stuttura ospedaliera *HospItaly*.
 
 Il sistema è in grado di gestire i pazienti, gli operatori sanitari della struttura, i servizi e le varie attività legate ai ricoveri.
